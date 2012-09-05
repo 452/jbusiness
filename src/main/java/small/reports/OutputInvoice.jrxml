@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DataSourceReport" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="26" bottomMargin="26" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="7f397264-d688-4e3a-a69b-d61034f09d4e">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
+	<import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="Arial_Bold" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="Arial_Italic" fontName="Arial" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="Heading" fontSize="14"/>
+	<parameter name="ID" class="java.lang.Long"/>
+	<parameter name="COUNTERPARTY" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="M" class="java.lang.String" isForPrompting="false"/>
+	<field name="nomenclature.id" class="java.lang.Long"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.Integer"/>
+	<field name="price" class="java.lang.Double"/>
+	<variable name="QUANTITY_SUM" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<variable name="PRICE_SUM" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{price}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d9da832a-6bb2-4e32-b855-28e81089608e" x="193" y="87" width="127" height="29"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Видаткова наладна №
+від:
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0f978ce-c398-4bc3-8663-b98b80083d5c" x="0" y="0" width="85" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Постачальник:
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07bcc2df-3c14-4902-bda6-b9361ecc43df" x="17" y="47" width="68" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Одержувач:
+                
+                
+                ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="85c6c42e-b2e3-4e52-a96f-261bbadf3509" x="320" y="88" width="48" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="de455a1f-5b99-4e06-8249-65d6f79e09d2" x="218" y="102" width="150" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8176a23c-c8ea-46db-884f-5a0e0e2533c1" stretchType="RelativeToBandHeight" x="85" y="49" width="450" height="38"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COUNTERPARTY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="deddb841-770a-4893-9b9e-8a5af2516267" stretchType="RelativeToBandHeight" x="85" y="2" width="450" height="45"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{M}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b9d4c42e-4732-4d07-a63e-6ea298bd8ce7" x="42" y="0" width="285" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Повне найменування товару
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9d4c42e-4732-4d07-a63e-6ea298bd8ce7" x="327" y="0" width="46" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Кількість
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9d4c42e-4732-4d07-a63e-6ea298bd8ce7" x="373" y="1" width="82" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Вартість одиниці
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9d4c42e-4732-4d07-a63e-6ea298bd8ce7" x="455" y="0" width="80" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Сума
+                
+                
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9d4c42e-4732-4d07-a63e-6ea298bd8ce7" x="0" y="0" width="42" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[№
+                
+                
+                ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a50be28f-77ec-4fed-b640-13ad83ddf15d" positionType="Float" stretchType="RelativeToBandHeight" x="327" y="0" width="46" height="12"/>
+				<box leftPadding="10" rightPadding="10">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement uuid="a50be28f-77ec-4fed-b640-13ad83ddf15d" positionType="Float" stretchType="RelativeToBandHeight" x="373" y="0" width="82" height="12"/>
+				<box leftPadding="10" rightPadding="10">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}/$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00 грн">
+				<reportElement uuid="a50be28f-77ec-4fed-b640-13ad83ddf15d" positionType="Float" stretchType="RelativeToBandHeight" x="455" y="0" width="80" height="12"/>
+				<box leftPadding="10" rightPadding="10">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a50be28f-77ec-4fed-b640-13ad83ddf15d" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="42" height="12"/>
+				<box leftPadding="10" rightPadding="10">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomenclature.id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a50be28f-77ec-4fed-b640-13ad83ddf15d" positionType="Float" stretchType="RelativeToBandHeight" x="42" y="0" width="285" height="12"/>
+				<box leftPadding="10" rightPadding="10">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e6a0da8a-6b13-4619-8454-20bced9b3402" x="0" y="9" width="180" height="13"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Загальна кількість одиниць товару:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="0" y="30" width="69" height="13"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Відвантажив:
+                ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b000bcb9-4d73-4913-9bf2-c74578083520" x="180" y="9" width="100" height="13"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QUANTITY_SUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="270" y="30" width="50" height="13"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Отримав:
+                ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="17623fc9-3a7d-438c-a859-fb09abda9c74" x="320" y="39" width="193" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="19b0302e-4aa4-407f-9433-7894eff965dd" x="69" y="39" width="188" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e6a0da8a-6b13-4619-8454-20bced9b3402" x="373" y="9" width="82" height="13"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Всього на суму:
+                ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 грн">
+				<reportElement uuid="b000bcb9-4d73-4913-9bf2-c74578083520" x="455" y="9" width="80" height="13"/>
+				<textElement>
+					<font size="10" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PRICE_SUM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

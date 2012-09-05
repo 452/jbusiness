@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="1a9c8f15-e811-40a8-9df3-2efc78020f3d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="[1]" class="java.lang.String"/>
+	<field name="[2]" class="java.lang.Number"/>
+	<field name="[3]" class="java.lang.Number"/>
+	<variable name="QUANTITY" class="java.lang.Number" resetType="None" calculation="Highest">
+		<variableExpression><![CDATA[$F{[2]}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="555" splitType="Stretch">
+			<stackedBar3DChart>
+				<chart renderType="draw">
+					<reportElement uuid="711d82be-42df-407f-818b-18ae63cabc04" stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="555"/>
+					<chartTitle>
+						<font fontName="DejaVu Sans" isBold="true" pdfFontName="Courier" pdfEncoding="Cp1251"/>
+						<titleExpression><![CDATA["Графік продаж"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[DateFormat.getDateInstance(DateFormat.FULL).format(new SimpleDateFormat("yyyy-MM-dd").parse($F{[1]}))]]></seriesExpression>
+						<categoryExpression><![CDATA[$V{QUANTITY}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{[3]}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="DejaVu Sans" size="8" pdfEncoding="Cp1251" isPdfEmbedded="false"/>
+					</itemLabel>
+					<categoryAxisLabelExpression><![CDATA["Продана кількість товару"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="DejaVu Sans" size="8" pdfFontName="Courier" pdfEncoding="Cp1251"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="DejaVu Sans" size="5" pdfEncoding="Cp1251" isPdfEmbedded="false"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["Вторговано"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="DejaVu Sans" size="8" pdfEncoding="Cp1251" isPdfEmbedded="false"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="DejaVu Sans" size="8" pdfEncoding="Cp1251" isPdfEmbedded="false"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+		</band>
+	</summary>
+</jasperReport>

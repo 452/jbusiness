@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="db.dbPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>small.business.dao.entity.Settings</class>
+    <class>small.business.dao.entity.CounterParties</class>
+    <class>small.business.dao.entity.Nomenclature</class>
+    <class>small.business.dao.entity.Pictures</class>
+    <class>small.business.dao.entity.ComingsInvoice</class>
+    <class>small.business.dao.entity.StoreHouse</class>
+    <class>small.business.dao.entity.ComingsGoods</class>
+    <class>small.business.dao.entity.GoodsOnStoreHouses</class>
+    <class>small.business.dao.entity.OutputInvoice</class>
+    <class>small.business.dao.entity.OutputGoods</class>
+    <class>small.business.dao.entity.History</class>
+    <class>small.business.dao.entity.ReturnedGoods</class>
+    <class>small.business.dao.entity.ReturnsOfGoodsInvoice</class>
+    <properties>
+      <property name="eclipselink.logging.level" value="WARNING"/>
+      <property name="eclipselink.weaving" value="false"/>
+      <property name="eclipselink.weaving.fetch-groups" value="false"/>
+      <property name="showSql" value="false"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:db.db"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+      <property name="javax.persistence.jdbc.user" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>
