@@ -7,7 +7,7 @@
 	<version>light</version>
 	<packaging>jar</packaging>
 
-	<name>business</name>
+	<name>jbusiness</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

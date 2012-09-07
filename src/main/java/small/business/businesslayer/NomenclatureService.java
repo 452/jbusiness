@@ -41,6 +41,10 @@ public class NomenclatureService {
 		return nomenclatureDAO.getHierarchicalDataList(groupSelector.getNavigationGroupId());
 	}
 
+	public List<Nomenclature> getSearchDataList(Long id, String title, String factorySerialArticul, String additionalArticul) {
+		return nomenclatureDAO.getNomenclatureSearchDataList(id, title, factorySerialArticul, additionalArticul);
+	}
+
 	public void saveUpdate() {
 		currentElement.setParentid(groupSelector.getNavigationGroupId());
 		try {

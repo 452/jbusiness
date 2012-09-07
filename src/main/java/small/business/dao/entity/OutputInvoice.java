@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +26,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+
 import org.eclipse.persistence.annotations.Cache;
+
 import small.business.domainmodel.interfaces.IElement;
 
 /**
@@ -95,7 +98,6 @@ public class OutputInvoice implements Serializable, IElement<OutputInvoice> {
 		try {
 			if (createdDate != null) {
 				result = df.parse(createdDate);
-
 			}
 		}
 		catch (ParseException ex) {

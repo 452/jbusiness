@@ -80,7 +80,7 @@ public class OutputInvoicesService {
 			if (currentElement.getId() == null) {
 				setCanSelectCounterParty(true);
 				setCanSelectStoreHouse(true);
-				if (((currentElement != null) && (currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
+				if (((currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
 					setCanEditGoods(true);
 					setCanRemoveGoods(true);
 				}
@@ -98,52 +98,54 @@ public class OutputInvoicesService {
 	@Transactional
 	public OutputInvoice saveOrUpdate() throws Exception {
 		try {
-			if (currentElement != null && currentElement.getId() == null) {
-				currentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
-				updateGoodsQuantityOnStoreHouses();
-				historyService.saveActionOfAdd(HistoryService.OUTPUT_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
-			} else {
-				if (outputGoodsToRemove.size() > 0) {
-					for (OutputGoods goods : outputGoodsToRemove) {
-						if (goods.getId() != null) {
-							GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
-							if (goods.getInitialQuantity() == null) {
-								goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getQuantity()));
-								goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getQuantity()));
-							} else {
-								goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
-								goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
+			if (currentElement != null) {
+				if (currentElement.getId() == null) {
+					currentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
+					updateGoodsQuantityOnStoreHouses();
+					historyService.saveActionOfAdd(HistoryService.OUTPUT_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+				} else {
+					if (outputGoodsToRemove.size() > 0) {
+						for (OutputGoods goods : outputGoodsToRemove) {
+							if (goods.getId() != null) {
+								GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
+								if (goods.getInitialQuantity() == null) {
+									goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getQuantity()));
+									goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getQuantity()));
+								} else {
+									goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
+									goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
+								}
+								storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
+								historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
 							}
-							storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
-							historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
 						}
 					}
-				}
-				// /////////////////
-				OutputInvoice tmpCurrentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
-				for (OutputGoods goods : currentElement.getGoods()) {
-					Integer quantity = null;
-					Integer nomenclatureQuantity = null;
-					if (goods.getInitialQuantity() != null) {
-						if (!goods.getQuantity().equals(goods.getInitialQuantity())) {
-							GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
-							if (goods.getQuantity() > goods.getInitialQuantity()) {
-								quantity = goodsOnStoreHouses.getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
-								nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
+					// /////////////////
+					OutputInvoice tmpCurrentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
+					for (OutputGoods goods : currentElement.getGoods()) {
+						Integer quantity = null;
+						Integer nomenclatureQuantity = null;
+						if (goods.getInitialQuantity() != null) {
+							if (!goods.getQuantity().equals(goods.getInitialQuantity())) {
+								GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
+								if (goods.getQuantity() > goods.getInitialQuantity()) {
+									quantity = goodsOnStoreHouses.getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
+									nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
+								}
+								if (goods.getQuantity() < goods.getInitialQuantity()) {
+									quantity = goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
+									nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
+								}
+								goods.setInitialQuantity(null);
+								goodsOnStoreHouses.setQuantity(quantity);
+								goodsOnStoreHouses.getNomenclature().setQuantity(nomenclatureQuantity);
+								storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
 							}
-							if (goods.getQuantity() < goods.getInitialQuantity()) {
-								quantity = goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
-								nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
-							}
-							goods.setInitialQuantity(null);
-							goodsOnStoreHouses.setQuantity(quantity);
-							goodsOnStoreHouses.getNomenclature().setQuantity(nomenclatureQuantity);
-							storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
 						}
 					}
+					currentElement = tmpCurrentElement;
+					historyService.saveActionOfChange(HistoryService.OUTPUT_INVOICE, " №" + currentElement.getId().toString());
 				}
-				currentElement = tmpCurrentElement;
-				historyService.saveActionOfChange(HistoryService.OUTPUT_INVOICE, " №" + currentElement.getId().toString());
 			}
 			return currentElement;
 		}

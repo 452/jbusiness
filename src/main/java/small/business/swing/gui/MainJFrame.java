@@ -313,7 +313,6 @@ public class MainJFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButtonTradeActionPerformed
 
 	private void jButtonRepairActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRepairActionPerformed
-		// TODO add your handling code here:
 	}// GEN-LAST:event_jButtonRepairActionPerformed
 
 	private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonReportsActionPerformed
@@ -323,7 +322,6 @@ public class MainJFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButtonReportsActionPerformed
 
 	private void jButtonSiteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSiteActionPerformed
-		// TODO add your handling code here:
 	}// GEN-LAST:event_jButtonSiteActionPerformed
 
 	private void jButtonNomenclatureActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNomenclatureActionPerformed
@@ -345,7 +343,6 @@ public class MainJFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButtonCounterPartiesActionPerformed
 
 	private void jButtonCashRegisterActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCashRegisterActionPerformed
-		// TODO add your handling code here:
 	}// GEN-LAST:event_jButtonCashRegisterActionPerformed
 
 	private void jButtonAboutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonAboutActionPerformed
@@ -441,7 +438,7 @@ public class MainJFrame extends javax.swing.JFrame {
 							trayMessage.showTrayMessageInfo("Ініціалізація програми");
 						}
 						catch (AWTException ex) {
-							System.err.println("Can't add to tray" + ex);
+							System.err.println("Can't add to tray>> " + ex);
 						}
 					} else {
 						System.err.println("Tray unavailable");
