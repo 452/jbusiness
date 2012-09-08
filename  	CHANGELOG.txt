@@ -1,0 +1,8 @@
+*********************
+07.09.2012	1.0.15
+*********************
+- Migrate from Lazarus(FPC) to Java
+- Add Search in Select Nomenclature
+- Add Search in Nomenclature List
+- Migrate is continue
+- Enable possibility change quantity of goods in Output Invoices

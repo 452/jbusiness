@@ -1,0 +1,1 @@
+Fix OutputInvoices goods changes = 0 and goods quantity = 0

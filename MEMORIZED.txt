@@ -1,0 +1,1 @@
+Select * from nomenclature, nomenclatureonstorehouses WHERE nomenclature.id = nomenclatureonstorehouses.nomenclatureid and nomenclature.quantity <0 GROUP BY nomenclatureonstorehouses.nomenclatureid

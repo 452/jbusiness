@@ -96,13 +96,13 @@ public abstract class GenericDAO<E extends IElement<?>> {
                     predicateList.add(cb.equal(from.get("id"), id));
                 }
                 if (!title.isEmpty()) {
-                    predicateList.add(cb.like(cb.upper(from.<String>get("title")), "%" + title.toUpperCase() + "%"));
+                    predicateList.add(cb.like(cb.upper(from.<String>get("title")), "%" + title + "%"));
                 }
                 if (!factorySerialArticul.isEmpty()) {
-                    predicateList.add(cb.like(cb.upper(from.<String>get("articleofgoods")), "%" + factorySerialArticul.toUpperCase() + "%"));
+                    predicateList.add(cb.like(cb.upper(from.<String>get("articleofgoods")), "%" + factorySerialArticul + "%"));
                 }
                 if (!additionalArticul.isEmpty()) {
-                    predicateList.add(cb.like(cb.upper(from.<String>get("articleinside")), "%" + additionalArticul.toUpperCase() + "%"));
+                    predicateList.add(cb.like(cb.upper(from.<String>get("articleinside")), "%" + additionalArticul + "%"));
                 }
                 criteriaQuery.where(predicateList.toArray(new Predicate[0]));
                 result = entityManager.createQuery(criteriaQuery).getResultList();
