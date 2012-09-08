@@ -71,7 +71,7 @@ public class OutputInvoicesService {
 		setCanEditInvoice(false);
 		setCanEditGoods(false);
 		setCanRemoveInvoice(false);
-		setCanRemoveGoods(true);
+		setCanRemoveGoods(false);
 		setCanSave(false);
 		setCanPrint(false);
 		setCanSelectCounterParty(false);
@@ -89,6 +89,7 @@ public class OutputInvoicesService {
 				setCanEditInvoice(true);
 				setCanEditGoods(true);
 				setCanSave(true);
+				setCanRemoveGoods(true);
 				setCanRemoveInvoice(true);
 				setCanPrint(true);
 			}
