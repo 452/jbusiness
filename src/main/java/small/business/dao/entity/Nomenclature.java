@@ -227,12 +227,15 @@ public class Nomenclature implements Serializable, IElement<Nomenclature>, IGrou
         changeSupport.firePropertyChange("pricebigwholesale", oldPricebigwholesale, pricebigwholesale);
     }
 
-    public Integer getQuantity() {
-        if (quantity == null) {// && isGroup().equals(NOMENCLATURE)
-            quantity = 0;
-        }
-        return quantity;
-    }
+	public Integer getQuantity() {
+		if (quantity == null) {// &&
+			quantity = 0;
+		}
+		if (isGroup().equals(GROUP)) {
+			quantity = null;
+		}
+		return quantity;
+	}
 
     public void setQuantity(Integer quantity) {
         Integer oldQuantity = this.quantity;
@@ -295,26 +298,35 @@ public class Nomenclature implements Serializable, IElement<Nomenclature>, IGrou
     }
 
     public Double getRetailPrice() {
-        Double result = price * ((getPriceretail() * 0.01) + 1);
-        if (getPriceretail().equals(0)) {
-            result = 0.0;
-        }
+		Double result = null;
+		if (isGroup().equals(NOMENCLATURE)) {
+			result = price * ((getPriceretail() * 0.01) + 1);
+			if (getPriceretail().equals(0)) {
+				result = 0.0;
+			}
+		}
         return result;
     }
 
     public Double getSmallWholeSalePrice() {
-        Double result = price * ((getPricesmallwholesale() * 0.01) + 1);
-        if (getPricesmallwholesale().equals(0)) {
-            result = 0.0;
-        }
+		Double result = null;
+		if (isGroup().equals(NOMENCLATURE)) {
+			result = price * ((getPricesmallwholesale() * 0.01) + 1);
+			if (getPricesmallwholesale().equals(0)) {
+				result = 0.0;
+			}
+		}
         return result;
     }
 
     public Double getBigWholeSalePrice() {
-        Double result = price * ((getPricebigwholesale() * 0.01) + 1);
-        if (getPricebigwholesale().equals(0)) {
-            result = 0.0;
-        }
+		Double result = null;
+		if (isGroup().equals(NOMENCLATURE)) {
+			result = price * ((getPricebigwholesale() * 0.01) + 1);
+			if (getPricebigwholesale().equals(0)) {
+				result = 0.0;
+			}
+		}
         return result;
     }
 

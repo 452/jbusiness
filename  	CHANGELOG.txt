@@ -1,8 +1,12 @@
 *********************
+next		1.0.16
+*********************
+- Added checkBox for show calculated prices in select nomenclature
+*********************
 07.09.2012	1.0.15
 *********************
 - Migrate from Lazarus(FPC) to Java
-- Add Search in Select Nomenclature
-- Add Search in Nomenclature List
+- Added Search in Select Nomenclature
+- Added Search in Nomenclature List
 - Migrate is continue
 - Enable possibility change quantity of goods in Output Invoices
