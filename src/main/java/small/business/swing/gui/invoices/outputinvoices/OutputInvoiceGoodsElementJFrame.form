@@ -42,7 +42,7 @@
                   <Component id="jPanel" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanelButtons" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,30 +118,25 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelSum" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNomenclature" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelTypeOfPrice" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelQuantity" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPrice" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSum" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelRetail" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSmallWholeSale" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelBigWholeSale" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabelNomenclatureTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButtonNomenclatureSelect" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jSpinnerQuantity" pref="287" max="32767" attributes="0"/>
+                      <Component id="jSpinnerQuantity" pref="311" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jComboBoxTypeOfPrice" min="-2" max="-2" attributes="0"/>
@@ -162,26 +157,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonNomenclatureSelect" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jLabelNomenclatureTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="jLabelNomenclatureTitle" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNomenclature" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonNomenclatureSelect" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jComboBoxTypeOfPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelTypeOfPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jSpinnerQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jSpinnerPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -191,17 +184,17 @@
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelRetail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelRetailPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSmallWholeSale" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelSmallWholeSalePrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelBigWholeSale" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelBigWholeSalePrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -210,17 +203,17 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabelQuantity">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41a;&#x456;&#x43b;&#x44c;&#x43a;&#x456;&#x441;&#x442;&#x44c;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="jLabelSmallWholeSale">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x414;&#x440;&#x456;&#x431;&#x43d;&#x438;&#x439; &#x43e;&#x43f;&#x442; &#x433;&#x440;&#x43d;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabelNomenclature">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x43c;&#x435;&#x43d;&#x43a;&#x43b;&#x430;&#x442;&#x443;&#x440;&#x430;:"/>
           </Properties>
@@ -249,17 +242,17 @@
             <Property name="text" type="java.lang.String" value="&#x421;&#x443;&#x43c;&#x430;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="jLabelBigWholeSale">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41a;&#x440;&#x443;&#x43f;&#x43d;&#x438;&#x439; &#x43e;&#x43f;&#x442; &#x433;&#x440;&#x43d;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="jLabelRetail">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x434;&#x440;&#x456;&#x431; &#x433;&#x440;&#x43d;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLabelPrice">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x426;&#x456;&#x43d;&#x430;:"/>
           </Properties>
@@ -300,7 +293,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxTypeOfPriceActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="jLabelTypeOfPrice">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x412;&#x438;&#x434; &#x446;&#x456;&#x43d;&#x438;:"/>
           </Properties>

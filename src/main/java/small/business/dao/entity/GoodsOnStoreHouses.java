@@ -14,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.eclipse.persistence.annotations.Cache;
 
@@ -40,12 +41,14 @@ public class GoodsOnStoreHouses implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     @Column(name = "storehouseid", nullable = false)
-    private Long storehouseid;
+    private Long storehouseid = 1L;
     @JoinColumn(name = "nomenclatureid", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Nomenclature nomenclatureid;
     @Column(name = "quantity", nullable = false)
     private Integer quantity = 0;
+    @Transient
+    private Integer initialQuantity = null;
 
     public GoodsOnStoreHouses() {
     }
@@ -75,6 +78,13 @@ public class GoodsOnStoreHouses implements Serializable {
     }
 
     public void setQuantity(Integer quantity) {
+        if (initialQuantity == null) {
+            if (id == null) {
+                setInitialQuantity(0);
+            } else {
+                setInitialQuantity(this.quantity);
+            }
+        }
         this.quantity = quantity;
     }
 
@@ -109,5 +119,16 @@ public class GoodsOnStoreHouses implements Serializable {
 
     public void setNomenclature(Nomenclature nomenclature) {
         this.nomenclatureid = nomenclature;
+    }
+
+    /**
+     * @return Initial value quantity of goods
+     */
+    public Integer getInitialQuantity() {
+        return initialQuantity;
+    }
+
+    public void setInitialQuantity(Integer initialQuantity) {
+        this.initialQuantity = initialQuantity;
     }
 }

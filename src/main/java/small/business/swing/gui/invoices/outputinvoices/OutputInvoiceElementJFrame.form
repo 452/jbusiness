@@ -377,15 +377,17 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jButtonRemoveGoods" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonEditGoods" alignment="2" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jButtonAddGoods" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButtonAddGoods" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonRemoveGoods" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonEditGoods" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane" pref="117" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="2" attributes="0">
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="125" pref="125" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
