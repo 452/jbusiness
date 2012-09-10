@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a8016c4-cc4e-4046-ad01-83cb001edf9a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="583"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id" class="java.lang.Number">
+		<fieldDescription><![CDATA[[0]]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[[1]]]></fieldDescription>
+	</field>
+	<field name="articleofgoods" class="java.lang.String">
+		<fieldDescription><![CDATA[[2]]]></fieldDescription>
+	</field>
+	<field name="articleinside" class="java.lang.String">
+		<fieldDescription><![CDATA[[3]]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[[4]]]></fieldDescription>
+	</field>
+	<field name="minQuantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[[5]]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<fieldDescription><![CDATA[[6]]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="479ae256-ff34-4ff3-8e01-5adf97df978e" x="144" y="0" width="267" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Звіт по потрібним закупкам товарів на склад]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="66f67c79-8628-4730-b793-f5c1a960fd2c" stretchType="RelativeToTallestObject" x="0" y="0" width="35" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f14d4f28-a34b-40f9-bab3-0ff7f608c272" stretchType="RelativeToTallestObject" x="35" y="0" width="196" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Найменування]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9654109-f56a-484f-a942-6bd4ba326f01" stretchType="RelativeToTallestObject" x="409" y="0" width="59" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Ціна]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60e85cd0-7c8f-414d-abd0-492e143e3a1f" stretchType="RelativeToTallestObject" x="468" y="0" width="41" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[П.К-сть]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c3af3c5-d1da-43b8-9dfc-18ca96f7d2ec" stretchType="RelativeToTallestObject" x="325" y="0" width="84" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Артикул на складі]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8767c8ff-4bc2-46db-97f9-d65035996a78" stretchType="RelativeToTallestObject" x="231" y="0" width="94" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Заводський артикул]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60e85cd0-7c8f-414d-abd0-492e143e3a1f" stretchType="RelativeToTallestObject" x="509" y="0" width="46" height="11"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfEncoding="Cp1251"/>
+				</textElement>
+				<text><![CDATA[Мін.К-сть]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern="#,##0;#,##0-">
+				<reportElement uuid="685b202b-c50c-4c40-a46c-98c6b3c60a4e" stretchType="RelativeToTallestObject" x="0" y="0" width="35" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="8b78b776-48f9-4eb7-8487-053c7512cf73" stretchType="RelativeToTallestObject" x="409" y="0" width="59" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement uuid="ab4d2869-0317-4015-8d40-fb441616a29b" stretchType="RelativeToTallestObject" x="468" y="0" width="41" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[Integer.valueOf($F{minQuantity})-Integer.valueOf($F{quantity})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="90da4521-400b-47db-ab5e-f9b73baef5bb" stretchType="RelativeToTallestObject" x="325" y="0" width="84" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{articleinside}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="345226e2-ec2c-4375-94b0-ac73f399e435" stretchType="RelativeToTallestObject" x="231" y="0" width="94" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{articleofgoods}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ca011f09-0544-4577-97ea-f517fa4163ea" stretchType="RelativeToTallestObject" x="35" y="0" width="196" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement uuid="ab4d2869-0317-4015-8d40-fb441616a29b" stretchType="RelativeToTallestObject" x="509" y="0" width="46" height="13"/>
+				<box leftPadding="1" rightPadding="1">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{minQuantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement uuid="375647f4-c7f7-432b-991d-474127cca838" x="468" y="6" width="16" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="9e391604-d58c-4bfd-875a-a9a9e8d6a542" x="500" y="6" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" pdfEncoding="Cp1251"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement uuid="ced12518-b7bb-4f8a-a076-4066df45c71a" x="0" y="6" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="661f86b3-91f8-4eaa-9d84-1724e700339a" x="414" y="6" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Сторінка]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff0b36de-cbb6-4713-9a8c-a07b283ac73c" x="483" y="6" width="18" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[з]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

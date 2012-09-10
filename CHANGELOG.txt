@@ -3,6 +3,7 @@ next		1.0.16
 *********************
 - Added checkBox for show calculated prices in select nomenclature
 - Added on Storehouse possibility add and change quantity of goods
+- Added report for needed buy goods to storehouse
 - Fixed bugs
 *********************
 07.09.2012	1.0.15

@@ -182,10 +182,6 @@
 							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>
-                                        <includes>
-                                            <include>**/**.png</include>
-                                            <include>**/**.gif</include>
-                                        </includes>
 					<excludes>
 						<exclude>**/**.form</exclude>
 						<exclude>**/**.dbschema</exclude>
