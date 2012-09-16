@@ -25,16 +25,16 @@ public class NomenclatureService {
     private Nomenclature selectedElement;
     private GroupSelector groupSelector = new GroupSelector();
     private Pictures currentPicture;
-    private Boolean canSave = false;
-    private Boolean canSaveGroup = false;
-    private Boolean canSavePicture = false;
-    private Boolean canRemove = false;
-    private Boolean canMove = false;
-    private Boolean canEdit = false;
-    private Boolean canEditPicture = false;
-    private Boolean canRemovePicture = false;
-    private Boolean canSelect = false;
-    private Boolean selected = false;
+    private boolean canSave = false;
+    private boolean canSaveGroup = false;
+    private boolean canSavePicture = false;
+    private boolean canRemove = false;
+    private boolean canMove = false;
+    private boolean canEdit = false;
+    private boolean canEditPicture = false;
+    private boolean canRemovePicture = false;
+    private boolean canSelect = false;
+    private boolean selected = false;
     private String selectType;
 
     public List<Nomenclature> getDataList() {
@@ -139,43 +139,43 @@ public class NomenclatureService {
         this.selectedElement = selectedElement;
     }
 
-    public Boolean isCanSave() {
+    public boolean isCanSave() {
         return canSave;
     }
 
-    private void setCanSave(Boolean canSave) {
+    private void setCanSave(boolean canSave) {
         this.canSave = canSave;
     }
 
-    public Boolean isCanRemove() {
+    public boolean isCanRemove() {
         return canRemove;
     }
 
-    private void setCanRemove(Boolean canRemove) {
+    private void setCanRemove(boolean canRemove) {
         this.canRemove = canRemove;
     }
 
-    public Boolean isCanMove() {
+    public boolean isCanMove() {
         return canMove;
     }
 
-    private void setCanMove(Boolean canMove) {
+    private void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
 
-    public Boolean isCanEdit() {
+    public boolean isCanEdit() {
         return canEdit;
     }
 
-    private void setCanEdit(Boolean canEdit) {
+    private void setCanEdit(boolean canEdit) {
         this.canEdit = canEdit;
     }
 
-    public Boolean isCanSaveGroup() {
+    public boolean isCanSaveGroup() {
         return canSaveGroup;
     }
 
-    private void setCanSaveGroup(Boolean canSaveGroup) {
+    private void setCanSaveGroup(boolean canSaveGroup) {
         this.canSaveGroup = canSaveGroup;
     }
 
@@ -195,43 +195,43 @@ public class NomenclatureService {
         this.currentPicture = selectedPicture;
     }
 
-    public Boolean isCanEditPicture() {
+    public boolean isCanEditPicture() {
         return canEditPicture;
     }
 
-    private void setCanEditPicture(Boolean canEditPicture) {
+    private void setCanEditPicture(boolean canEditPicture) {
         this.canEditPicture = canEditPicture;
     }
 
-    public Boolean isCanRemovePicture() {
+    public boolean isCanRemovePicture() {
         return canRemovePicture;
     }
 
-    private void setCanRemovePicture(Boolean canRemovePicture) {
+    private void setCanRemovePicture(boolean canRemovePicture) {
         this.canRemovePicture = canRemovePicture;
     }
 
-    public Boolean isCanSavePicture() {
+    public boolean isCanSavePicture() {
         return canSavePicture;
     }
 
-    public void setCanSavePicture(Boolean canSavePicture) {
+    public void setCanSavePicture(boolean canSavePicture) {
         this.canSavePicture = canSavePicture;
     }
 
-    public Boolean isCanSelect() {
+    public boolean isCanSelect() {
         return canSelect;
     }
 
-    private void setCanSelect(Boolean canSelect) {
+    private void setCanSelect(boolean canSelect) {
         this.canSelect = canSelect;
     }
 
-    public Boolean isSelected() {
+    public boolean isSelected() {
         return selected;
     }
 
-    public void setSelected(Boolean selected) {
+    public void setSelected(boolean selected) {
         this.selected = selected;
     }
 }
