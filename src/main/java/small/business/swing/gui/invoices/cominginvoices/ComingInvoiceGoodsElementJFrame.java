@@ -29,12 +29,18 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
 	 */
 	public ComingInvoiceGoodsElementJFrame() {
 		initComponents();
+		updateData();
+		svalidate();
+	}
+
+	private void svalidate() {
+		сomingsInvoicesService.validate();
+		jButtonNomenclatureSelect.setEnabled(сomingsInvoicesService.isCanChangeNomenclature());
 		if (сomingsInvoicesService.getCurrentGoodsElement().getNomenclature() == null) {
 			jButtonSave.setEnabled(false);
 		} else {
 			jButtonSave.setEnabled(true);
 		}
-		updateData();
 	}
 
 	/**

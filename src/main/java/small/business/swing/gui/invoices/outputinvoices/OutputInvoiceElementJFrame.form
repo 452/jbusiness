@@ -13,6 +13,7 @@
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -386,7 +387,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane" pref="121" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="113" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

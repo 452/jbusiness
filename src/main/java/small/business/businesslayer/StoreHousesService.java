@@ -3,12 +3,16 @@ package small.business.businesslayer;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import small.business.dao.StoreHousesDAO;
 import small.business.dao.entity.GoodsOnStoreHouses;
 import small.business.dao.entity.StoreHouse;
+import small.business.domainmodel.interfaces.IGoods;
 
 /**
  *
@@ -32,36 +36,84 @@ public class StoreHousesService {
     public void saveOrUpdate() {
         if (currentElement != null) {
             if (currentElement.getId() == null) {
-                try {
-                    currentElement.getNomenclature().setQuantity(currentElement.getNomenclature().getQuantity() + currentElement.getQuantity());
-                    currentElement = storeHousesDAO.saveOrUpdate(currentElement);
+                currentElement = updateGoodsQuantityOnStorehouse(currentElement);
+                if (currentElement != null) {
                     historyService.saveActionOfAdd(HistoryService.STOREHOUSE, currentElement.getNomenclature().getTitle() + " №" + currentElement.getId().toString());
-                } catch (Exception ex) {
-                    Logger.getLogger(StoreHousesService.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                if (currentElement.getInitialQuantity() != null) {
-                    if (!currentElement.getQuantity().equals(currentElement.getInitialQuantity())) {
-                        Integer nomenclatureQuantity = currentElement.getNomenclature().getQuantity();
-
-                        if (currentElement.getQuantity() > currentElement.getInitialQuantity()) {
-                            nomenclatureQuantity -= (currentElement.getInitialQuantity() - currentElement.getQuantity());
-                        }
-                        if (currentElement.getQuantity() < currentElement.getInitialQuantity()) {
-                            nomenclatureQuantity += (currentElement.getQuantity() - currentElement.getInitialQuantity());
-                        }
-                        currentElement.setInitialQuantity(null);
-                        currentElement.getNomenclature().setQuantity(nomenclatureQuantity);
-                        try {
-                            currentElement = storeHousesDAO.saveOrUpdate(currentElement);
-                        } catch (Exception ex) {
-                            Logger.getLogger(StoreHousesService.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        historyService.saveActionOfChange(HistoryService.STOREHOUSE, " №" + currentElement.getId().toString() + " " + currentElement.getNomenclature().getTitle());
-                    }
+                currentElement = updateGoodsQuantityOnStorehouse(currentElement);
+                if (currentElement != null) {
+                    historyService.saveActionOfChange(HistoryService.STOREHOUSE, " №" + currentElement.getId().toString() + " " + currentElement.getNomenclature().getTitle());
                 }
             }
         }
+    }
+
+    public IGoods changeIncreaseGoodsQuantityOnStorehouse(IGoods goods, StoreHouse storeHouse) {
+        GoodsOnStoreHouses goodsOnStoreHouses = storeHousesDAO.getGoodsFromStoreHouse(goods, storeHouse);
+        if (goods.getInitialQuantity() != null) {
+            if (!goods.getQuantity().equals(goods.getInitialQuantity())) {
+                goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getQuantity() - goods.getInitialQuantity()));
+                goods.setInitialQuantity(null);
+                updateGoodsQuantityOnStorehouse(goodsOnStoreHouses);
+            }
+        }
+        return goods;
+    }
+
+    public IGoods increaseGoodsQuantityOnStorehouse(IGoods goods, StoreHouse storeHouse) {
+        GoodsOnStoreHouses goodsOnStoreHouses = storeHousesDAO.getGoodsFromStoreHouse(goods, storeHouse);
+        goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + goods.getQuantity());
+        goods.setInitialQuantity(null);
+        updateGoodsQuantityOnStorehouse(goodsOnStoreHouses);
+        return goods;
+    }
+
+    public IGoods changeReduceGoodsQuantityOnStorehouse(IGoods goods, StoreHouse storeHouse) {
+        GoodsOnStoreHouses goodsOnStoreHouses = storeHousesDAO.getGoodsFromStoreHouse(goods, storeHouse);
+        if (goods.getInitialQuantity() != null) {
+            if (!goods.getQuantity().equals(goods.getInitialQuantity())) {
+                goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
+                goods.setInitialQuantity(null);
+                updateGoodsQuantityOnStorehouse(goodsOnStoreHouses);
+            }
+        }
+        return goods;
+    }
+
+    public IGoods reduceGoodsQuantityOnStorehouse(IGoods goods, StoreHouse storeHouse) {
+        GoodsOnStoreHouses goodsOnStoreHouses = storeHousesDAO.getGoodsFromStoreHouse(goods, storeHouse);
+        goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() - goods.getQuantity());
+        goods.setInitialQuantity(null);
+        updateGoodsQuantityOnStorehouse(goodsOnStoreHouses);
+        return goods;
+    }
+
+    public GoodsOnStoreHouses updateGoodsQuantityOnStorehouse(GoodsOnStoreHouses goodsOnStoreHouse) {
+        GoodsOnStoreHouses result = null;
+        if (goodsOnStoreHouse.getId() == null) {
+            goodsOnStoreHouse.getNomenclature().setQuantity(goodsOnStoreHouse.getNomenclature().getQuantity() + goodsOnStoreHouse.getQuantity());
+        } else {
+            if (goodsOnStoreHouse.getInitialQuantity() != null) {
+                if (!goodsOnStoreHouse.getQuantity().equals(goodsOnStoreHouse.getInitialQuantity())) {
+                    int nomenclatureQuantity = goodsOnStoreHouse.getNomenclature().getQuantity();
+                    if (goodsOnStoreHouse.getQuantity() > goodsOnStoreHouse.getInitialQuantity()) {
+                        nomenclatureQuantity += goodsOnStoreHouse.getQuantity() - goodsOnStoreHouse.getInitialQuantity();
+                    }
+                    if (goodsOnStoreHouse.getQuantity() < goodsOnStoreHouse.getInitialQuantity()) {
+                        nomenclatureQuantity -= (goodsOnStoreHouse.getInitialQuantity() - goodsOnStoreHouse.getQuantity());
+                    }
+                    goodsOnStoreHouse.setInitialQuantity(null);
+                    goodsOnStoreHouse.getNomenclature().setQuantity(nomenclatureQuantity);
+                }
+            }
+        }
+        try {
+            result = storeHousesDAO.saveOrUpdate(goodsOnStoreHouse);
+        } catch (Exception ex) {
+            Logger.getLogger(StoreHousesService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public void validate() {

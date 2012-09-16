@@ -396,6 +396,7 @@ public class OutputInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinnerPrice;
     private javax.swing.JSpinner jSpinnerQuantity;
     // End of variables declaration//GEN-END:variables
+
     private Double getPrice() {
         Double result = 0.0;
         if (outputInvoicesService.getCurrentGoodsElement().getNomenclature() != null) {
@@ -435,12 +436,12 @@ public class OutputInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     }
 
     private void svalidate() {
-		outputInvoicesService.validate();
-		jButtonNomenclatureSelect.setEnabled(outputInvoicesService.isCanChangeNomenclature());
-		if (outputInvoicesService.getCurrentGoodsElement().getNomenclature() != null) {
-			Integer quantity = (Integer) jSpinnerQuantity.getValue();
+        outputInvoicesService.validate();
+        jButtonNomenclatureSelect.setEnabled(outputInvoicesService.isCanChangeNomenclature());
+        if (outputInvoicesService.getCurrentGoodsElement().getNomenclature() != null) {
+            Integer quantity = (Integer) jSpinnerQuantity.getValue();
             Integer q = initialValue + (outputInvoicesService.getCurrentGoodsElement().getNomenclature().getQuantity() - quantity);
-            if (q < 0) {
+            if (q <= 0) {
                 jButtonSave.setEnabled(false);
             } else {
                 jButtonSave.setEnabled(true);

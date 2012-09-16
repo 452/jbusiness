@@ -25,15 +25,13 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import small.business.dao.OutputInvoicesDAO;
-import small.business.dao.StoreHousesDAO;
 import small.business.dao.entity.CounterParties;
-import small.business.dao.entity.GoodsOnStoreHouses;
 import small.business.dao.entity.OutputGoods;
 import small.business.dao.entity.OutputInvoice;
 import small.business.dao.entity.StoreHouse;
+import small.business.domainmodel.interfaces.IGoods;
 
 /**
  *
@@ -45,23 +43,23 @@ public class OutputInvoicesService {
     static Logger log = Logger.getLogger(OutputInvoicesService.class.getName());
     @Autowired
     private OutputInvoicesDAO outputInvoicesDAO;
-    @Autowired
-    private StoreHousesDAO storeHouseDAO;
     @Resource
     private HistoryService historyService;
+    @Resource
+    private StoreHousesService storeHousesService;
     private OutputInvoice currentElement;
     private OutputGoods currentGoodsElement;
-    private Boolean canSave = false;
-    private Boolean canPrint = false;
-    private Boolean canAddGoods = false;
-    private Boolean canRemoveGoods = false;
-    private Boolean canRemoveInvoice = false;
-    private Boolean canEditInvoice = false;
-    private Boolean canEditGoods = false;
+    private boolean canSave = false;
+    private boolean canPrint = false;
+    private boolean canAddGoods = false;
+    private boolean canRemoveGoods = false;
+    private boolean canRemoveInvoice = false;
+    private boolean canEditInvoice = false;
+    private boolean canEditGoods = false;
     private boolean canChangeNomenclature = false;
-    private Boolean canSelectCounterParty = false;
-    private Boolean canSelectStoreHouse = false;
-    private Set<OutputGoods> outputGoodsToRemove = new HashSet<OutputGoods>();
+    private boolean canSelectCounterParty = false;
+    private boolean canSelectStoreHouse = false;
+    private Set<OutputGoods> goodsToRemove = new HashSet<OutputGoods>();
 
     public List<OutputInvoice> getDataList() {
         return outputInvoicesDAO.getInvoicesList();
@@ -80,7 +78,7 @@ public class OutputInvoicesService {
         setCanSelectStoreHouse(false);
         if (currentElement != null) {
             if (currentElement.getId() == null) {
-            	setCanChangeNomenclature(true);
+                setCanChangeNomenclature(true);
                 setCanSelectCounterParty(true);
                 setCanSelectStoreHouse(true);
                 if (((currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
@@ -95,57 +93,28 @@ public class OutputInvoicesService {
                 setCanRemoveGoods(true);
                 setCanRemoveInvoice(true);
                 setCanPrint(true);
+                if (currentGoodsElement != null && currentGoodsElement.getId() == null) {
+                    setCanChangeNomenclature(true);
+                }
             }
         }
     }
 
-    @Transactional
     public OutputInvoice saveOrUpdate() throws Exception {
         try {
             if (currentElement != null) {
                 if (currentElement.getId() == null) {
-                    currentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
-                    updateGoodsQuantityOnStoreHouses();
-                    historyService.saveActionOfAdd(HistoryService.OUTPUT_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
-                } else {
-                    if (outputGoodsToRemove.size() > 0) {
-                        for (OutputGoods goods : outputGoodsToRemove) {
-                            if (goods.getId() != null) {
-                                GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
-                                if (goods.getInitialQuantity() == null) {
-                                    goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getQuantity()));
-                                    goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getQuantity()));
-                                } else {
-                                    goodsOnStoreHouses.setQuantity(goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
-                                    goodsOnStoreHouses.getNomenclature().setQuantity(goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity()));
-                                }
-                                storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
-                                historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
-                            }
-                        }
-                    }
-                    // /////////////////
                     OutputInvoice tmpCurrentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
                     for (OutputGoods goods : currentElement.getGoods()) {
-                        Integer quantity = null;
-                        Integer nomenclatureQuantity = null;
-                        if (goods.getInitialQuantity() != null) {
-                            if (!goods.getQuantity().equals(goods.getInitialQuantity())) {
-                                GoodsOnStoreHouses goodsOnStoreHouses = storeHouseDAO.getGoodsFromStoreHouse(goods, currentElement.getStoreHouse());
-                                if (goods.getQuantity() > goods.getInitialQuantity()) {
-                                    quantity = goodsOnStoreHouses.getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
-                                    nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() - (goods.getQuantity() - goods.getInitialQuantity());
-                                }
-                                if (goods.getQuantity() < goods.getInitialQuantity()) {
-                                    quantity = goodsOnStoreHouses.getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
-                                    nomenclatureQuantity = goodsOnStoreHouses.getNomenclature().getQuantity() + (goods.getInitialQuantity() - goods.getQuantity());
-                                }
-                                goods.setInitialQuantity(null);
-                                goodsOnStoreHouses.setQuantity(quantity);
-                                goodsOnStoreHouses.getNomenclature().setQuantity(nomenclatureQuantity);
-                                storeHouseDAO.saveOrUpdate(goodsOnStoreHouses);
-                            }
-                        }
+                        storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                    }
+                    currentElement = tmpCurrentElement;
+                    historyService.saveActionOfAdd(HistoryService.OUTPUT_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+                } else {
+                    removeGoodsIfMarked();
+                    OutputInvoice tmpCurrentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
+                    for (OutputGoods goods : currentElement.getGoods()) {
+                        storeHousesService.changeReduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
                     }
                     currentElement = tmpCurrentElement;
                     historyService.saveActionOfChange(HistoryService.OUTPUT_INVOICE, " №" + currentElement.getId().toString());
@@ -158,27 +127,34 @@ public class OutputInvoicesService {
         }
     }
 
-    private void updateGoodsQuantityOnStoreHouses() {
-        for (OutputGoods goods : currentElement.getGoods()) {
-            storeHouseDAO.updateQuantityReduce(goods, currentElement.getStoreHouse());
+    private void removeGoodsIfMarked() {
+        if (goodsToRemove.size() > 0) {
+            for (OutputGoods goods : goodsToRemove) {
+                if (goods.getId() != null) {
+                    storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                    historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
+                }
+            }
+            goodsToRemove.clear();
         }
     }
 
-    private void updateGoodsQuantityOnStoreHousesRemoval() {
-        for (OutputGoods goods : currentElement.getGoods()) {
-            storeHouseDAO.updateQuantityIncrease(goods, currentElement.getStoreHouse());
-        }
-    }
-
-    @Transactional
-    public void removeCurrentElement(OutputInvoice selectedObject) {
+    public void removeCurrentElement(OutputInvoice selectedObject, boolean alsoChangeQuantityOfGoods) {
         outputInvoicesDAO.remove(selectedObject);
-        updateGoodsQuantityOnStoreHousesRemoval();
+        if (alsoChangeQuantityOfGoods) {
+            updateGoodsQuantityOnStoreHousesRemoval();
+        }
         historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, currentElement.getId().toString());
     }
 
+    private void updateGoodsQuantityOnStoreHousesRemoval() {
+        for (IGoods goods : currentElement.getGoods()) {
+            storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+        }
+    }
+
     public void removeGoods(OutputGoods selectedObject) {
-        outputGoodsToRemove.add(selectedObject);
+        goodsToRemove.add(selectedObject);
         currentElement.getGoods().remove(selectedObject);
     }
 
@@ -190,59 +166,59 @@ public class OutputInvoicesService {
         this.currentElement = currentElement;
     }
 
-    public Boolean isCanRemoveInvoice() {
+    public boolean isCanRemoveInvoice() {
         return canRemoveInvoice;
     }
 
-    private void setCanRemoveInvoice(Boolean canRemove) {
+    private void setCanRemoveInvoice(boolean canRemove) {
         this.canRemoveInvoice = canRemove;
     }
 
-    public Boolean isCanRemoveGoods() {
+    public boolean isCanRemoveGoods() {
         return canRemoveGoods;
     }
 
-    private void setCanRemoveGoods(Boolean canRemove) {
+    private void setCanRemoveGoods(boolean canRemove) {
         this.canRemoveGoods = canRemove;
     }
 
-    public Boolean isCanEditInvoice() {
+    public boolean isCanEditInvoice() {
         return canEditInvoice;
     }
 
-    private void setCanEditInvoice(Boolean canEditInvoice) {
+    private void setCanEditInvoice(boolean canEditInvoice) {
         this.canEditInvoice = canEditInvoice;
     }
 
-    public Boolean isCanEditGoods() {
+    public boolean isCanEditGoods() {
         return canEditGoods;
     }
 
-    private void setCanEditGoods(Boolean canEditGoods) {
+    private void setCanEditGoods(boolean canEditGoods) {
         this.canEditGoods = canEditGoods;
     }
 
-    public Boolean isCanSelectCounterParty() {
+    public boolean isCanSelectCounterParty() {
         return canSelectCounterParty;
     }
 
-    private void setCanSelectCounterParty(Boolean canSelectCounterParty) {
+    private void setCanSelectCounterParty(boolean canSelectCounterParty) {
         this.canSelectCounterParty = canSelectCounterParty;
     }
 
-    public Boolean isCanSelectStoreHouse() {
+    public boolean isCanSelectStoreHouse() {
         return canSelectStoreHouse;
     }
 
-    private void setCanSelectStoreHouse(Boolean canSelectStoreHouse) {
+    private void setCanSelectStoreHouse(boolean canSelectStoreHouse) {
         this.canSelectStoreHouse = canSelectStoreHouse;
     }
 
-    public Boolean isCanSave() {
+    public boolean isCanSave() {
         return canSave;
     }
 
-    private void setCanSave(Boolean canSave) {
+    private void setCanSave(boolean canSave) {
         this.canSave = canSave;
     }
 
@@ -254,19 +230,19 @@ public class OutputInvoicesService {
         this.currentGoodsElement = currentGoodsElement;
     }
 
-    public Boolean isCanAddGoods() {
+    public boolean isCanAddGoods() {
         return canAddGoods;
     }
 
-    private void setCanAddGoods(Boolean canAddGoods) {
+    private void setCanAddGoods(boolean canAddGoods) {
         this.canAddGoods = canAddGoods;
     }
 
-    public Boolean isCanPrint() {
+    public boolean isCanPrint() {
         return canPrint;
     }
 
-    private void setCanPrint(Boolean canPrint) {
+    private void setCanPrint(boolean canPrint) {
         this.canPrint = canPrint;
     }
 
@@ -292,11 +268,11 @@ public class OutputInvoicesService {
         currentElement.setStoreHouse(storeHouse);
     }
 
-	public boolean isCanChangeNomenclature() {
-		return canChangeNomenclature;
-	}
+    public boolean isCanChangeNomenclature() {
+        return canChangeNomenclature;
+    }
 
-	private void setCanChangeNomenclature(boolean canChangeNomenclature) {
-		this.canChangeNomenclature = canChangeNomenclature;
-	}
+    private void setCanChangeNomenclature(boolean canChangeNomenclature) {
+        this.canChangeNomenclature = canChangeNomenclature;
+    }
 }

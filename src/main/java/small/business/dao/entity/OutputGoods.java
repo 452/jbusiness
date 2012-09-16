@@ -67,6 +67,7 @@ public class OutputGoods implements Serializable, IGoods {
         this.invoiceid = invoiceid;
         this.nomenclature = nomenclature;
         this.quantity = quantity;
+        this.initialQuantity = 0;
     }
 
     @Override
@@ -129,7 +130,7 @@ public class OutputGoods implements Serializable, IGoods {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (this.getNomenclature().getId() != null ? this.getNomenclature().getId().hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +142,7 @@ public class OutputGoods implements Serializable, IGoods {
             return false;
         }
         OutputGoods other = (OutputGoods) object;
-        if ((this.nomenclature.getId() == null && other.getNomenclature().getId() != null) || (this.getNomenclature().getId() != null && !this.getNomenclature().getId().equals(other.getNomenclature().getId()))) {
+        if (!this.getNomenclature().getId().equals(other.getNomenclature().getId())) {
             return false;
         }
         return true;

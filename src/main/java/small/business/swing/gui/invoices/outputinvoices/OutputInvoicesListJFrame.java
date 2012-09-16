@@ -213,15 +213,26 @@ public class OutputInvoicesListJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableMouseClicked
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(null, "Дійсно видалити запис?", "", JOptionPane.YES_NO_OPTION);
-        if ((jTable.getSelectedRow() >= 0) && (confirm == JOptionPane.YES_OPTION)) {
-            OutputInvoice selectedObject = (OutputInvoice) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-            try {
-                outputInvoicesService.removeCurrentElement(selectedObject);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Помилка при видаленні накладної:\nінформація про помилку знаходиться в logJ.txt", null, JOptionPane.ERROR_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(this, "Так - Повернути товари на склад\nНі - Видалити без повернення товарів на склад", "Видалення запису", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (jTable.getSelectedRow() >= 0) {
+            if (confirm == JOptionPane.YES_OPTION) {
+                OutputInvoice selectedObject = (OutputInvoice) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+                try {
+                    outputInvoicesService.removeCurrentElement(selectedObject, true);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Помилка при видаленні накладної:\nінформація про помилку знаходиться в logJ.txt", null, JOptionPane.ERROR_MESSAGE);
+                }
+                getList();
             }
-            getList();
+            if (confirm == JOptionPane.NO_OPTION) {
+                OutputInvoice selectedObject = (OutputInvoice) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+                try {
+                    outputInvoicesService.removeCurrentElement(selectedObject, false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Помилка при видаленні накладної:\nінформація про помилку знаходиться в logJ.txt", null, JOptionPane.ERROR_MESSAGE);
+                }
+                getList();
+            }
         }
     }//GEN-LAST:event_jButtonRemoveActionPerformed
 
@@ -274,6 +285,7 @@ public class OutputInvoicesListJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
+
     private void svalidate() {
         OutputInvoice validateElement = null;
         if (jTable.getSelectedRow() >= 0) {

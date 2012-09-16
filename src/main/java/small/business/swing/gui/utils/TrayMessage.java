@@ -15,12 +15,12 @@ public final class TrayMessage {
 
     public TrayMessage() {
     }
-    
-    public void showTrayMessageInfo(String message){
-        showTrayMessage(message,TrayIcon.MessageType.INFO);
+
+    public void showTrayMessageInfo(String message) {
+        showTrayMessage(message, TrayIcon.MessageType.INFO);
     }
 
-    private void showTrayMessage(String message,TrayIcon.MessageType messageType) {
+    private void showTrayMessage(String message, TrayIcon.MessageType messageType) {
         if (SystemTray.isSupported()) {
             final SystemTray tray = SystemTray.getSystemTray();
             TrayIcon[] trayIcons = tray.getTrayIcons();

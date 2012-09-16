@@ -16,14 +16,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import small.business.businesslayer.OutputInvoicesService;
+import small.business.businesslayer.ComingsInvoicesService;
+import small.business.dao.ComingInvoicesDAO;
 import small.business.dao.NomenclatureDAO;
-import small.business.dao.OutputInvoicesDAO;
+import small.business.dao.entity.ComingsGoods;
+import small.business.dao.entity.ComingsInvoice;
 import small.business.dao.entity.CounterParties;
 import small.business.dao.entity.Nomenclature;
-import small.business.dao.entity.OutputGoods;
-import small.business.dao.entity.OutputInvoice;
 import small.business.dao.entity.StoreHouse;
+import small.business.domainmodel.interfaces.IGoods;
 import config.ApplicationConfig;
 
 /**
@@ -33,17 +34,17 @@ import config.ApplicationConfig;
  * @author 452
  */
 @ContextConfiguration(classes = ApplicationConfig.class)
-public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
+public class ComingInvoiceNGTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    public OutputInvoicesService outputInvoicesService;
+    public ComingsInvoicesService comingInvoicesService;
     @Autowired
-    public OutputInvoicesDAO outputInvoicesDAO;
+    public ComingInvoicesDAO comingInvoicesDAO;
     @Autowired
     public NomenclatureDAO nomenclatureDAO;
     @Resource
     EntityManagerFactory entityManagerFactory;
-    final static Integer CREATED_QUANTITY = 1;
+    final static Integer CREATED_QUANTITY = 5;
     final static Integer CHANGE_QUANTITY = 3;
     final static Long NOMENCLATURE_ID = 3100L;
     final static Long NOMENCLATURE_PARENT_ID = 3100L;
@@ -56,15 +57,15 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
      *
      * @return OutputInvoice
      */
-    private OutputInvoice getTestInvoice() {
-        OutputInvoice outInvoice = new OutputInvoice();
-        OutputGoods OutputGoods = new OutputGoods(452L, new Nomenclature(NOMENCLATURE_ID, NOMENCLATURE_PARENT_ID, NOMENCLATURE_TITLE), CREATED_QUANTITY);
-        outInvoice.setPaidAmount(452.678);
-        outInvoice.setInfo("452_2");
-        outInvoice.setStoreHouse(new StoreHouse(1L));
-        outInvoice.setCounterParty(new CounterParties(4L));
-        outInvoice.addGoods(OutputGoods);
-        return outInvoice;
+    private ComingsInvoice getTestInvoice() {
+        ComingsInvoice comingsInvoice = new ComingsInvoice();
+        ComingsGoods comingsGoods = new ComingsGoods(452L, new Nomenclature(NOMENCLATURE_ID, NOMENCLATURE_PARENT_ID, NOMENCLATURE_TITLE), CREATED_QUANTITY);
+        comingsInvoice.setPaidAmount(452.678);
+        comingsInvoice.setInfo("452_2");
+        comingsInvoice.setStoreHouse(new StoreHouse(1L));
+        comingsInvoice.setCounterParty(new CounterParties(4L));
+        comingsInvoice.addGoods(comingsGoods);
+        return comingsInvoice;
     }
 
     /**
@@ -75,7 +76,7 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
     public void memNomenclatureQuantityTest() {
         Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
         memorizedNomenclatureInitialQuantity = n.getQuantity();
-        System.out.println("1. Memorized quantity: " + memorizedNomenclatureInitialQuantity + " Step UP: " + ((memorizedNomenclatureInitialQuantity - CREATED_QUANTITY) + CHANGE_QUANTITY) + " Step Down: " + (memorizedNomenclatureInitialQuantity - CREATED_QUANTITY - CHANGE_QUANTITY));
+        System.out.println("1. Memorized quantity: " + memorizedNomenclatureInitialQuantity + " Step UP: " + ((memorizedNomenclatureInitialQuantity + CREATED_QUANTITY) + CHANGE_QUANTITY) + " Step Down: " + ((memorizedNomenclatureInitialQuantity + CREATED_QUANTITY) - CHANGE_QUANTITY));
         assertNotNull(n);
     }
 
@@ -84,16 +85,16 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test(priority = 1)
     public void createInvoiceTest() {
-        OutputInvoice outputInvoice = getTestInvoice();
-        outputInvoicesService.setCurrentElement(outputInvoice);
+        ComingsInvoice comingsInvoice = getTestInvoice();
+        comingInvoicesService.setCurrentElement(comingsInvoice);
         try {
-            outputInvoice = outputInvoicesService.saveOrUpdate();
-            memorizedCreatedInvoiceID = outputInvoice.getId();
+            comingsInvoice = comingInvoicesService.saveOrUpdate();
+            memorizedCreatedInvoiceID = comingsInvoice.getId();
             System.out.println("2. created invoice ID: " + memorizedCreatedInvoiceID);
         } catch (Exception ex) {
-            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComingInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assertNotNull(outputInvoice);
+        assertNotNull(comingsInvoice);
     }
 
     /**
@@ -101,8 +102,8 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test(priority = 2, description = "check for created invoiced")
     public void readCreatedInvoiceTest() {
-        OutputInvoice oi = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        assertNotNull(oi);
+        ComingsInvoice ci = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNotNull(ci);
     }
 
     /**
@@ -112,7 +113,7 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
     @Test(priority = 3)
     public void readNomenclatureQuantityTest() {
         Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
-        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity - CREATED_QUANTITY));
+        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity + CREATED_QUANTITY));
     }
 
     /**
@@ -121,26 +122,26 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test(priority = 4, description = "change quantity to UP")
     public void changeInvoiceGoodsQuantityUPTest() {
-        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        assertNotNull(outputInvoice);
-        outputInvoicesService.setCurrentElement(outputInvoice);
-        for (OutputGoods g : outputInvoice.getGoods()) {
+        ComingsInvoice comingsInvoice = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNotNull(comingsInvoice);
+        comingInvoicesService.setCurrentElement(comingsInvoice);
+        for (IGoods g : comingsInvoice.getGoods()) {
             g.setQuantity(CREATED_QUANTITY + CHANGE_QUANTITY);
         }
         try {
-            outputInvoice = outputInvoicesService.saveOrUpdate();
-            for (OutputGoods g : outputInvoice.getGoods()) {
+            comingsInvoice = comingInvoicesService.saveOrUpdate();
+            for (IGoods g : comingsInvoice.getGoods()) {
                 assertEquals(g.getQuantity(), Integer.valueOf(CREATED_QUANTITY + CHANGE_QUANTITY));
             }
         } catch (Exception ex) {
-            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComingInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Test(priority = 5, description = "check changes quantity of goods")
     public void checkChangesInvoiceGoodsQuantityUPTest() {
-        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        for (OutputGoods g : outputInvoice.getGoods()) {
+        ComingsInvoice comingsInvoice = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        for (IGoods g : comingsInvoice.getGoods()) {
             assertEquals(g.getQuantity(), Integer.valueOf(CREATED_QUANTITY + CHANGE_QUANTITY));
         }
     }
@@ -148,35 +149,35 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
     @Test(priority = 6, description = "check changes quantity of nomenclature")
     public void readNomenclatureQuantityWitchChangesTest() {
         Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
-        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity - CREATED_QUANTITY - CHANGE_QUANTITY));
+        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity + CREATED_QUANTITY + CHANGE_QUANTITY));
     }
 
     @Test(priority = 7, description = "change quantity to down")
     public void changeInvoiceGoodsQuantityDownTest() {
-        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        outputInvoicesService.setCurrentElement(outputInvoice);
-        for (OutputGoods g : outputInvoice.getGoods()) {
+        ComingsInvoice comingsInvoice = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        comingInvoicesService.setCurrentElement(comingsInvoice);
+        for (IGoods g : comingsInvoice.getGoods()) {
             g.setQuantity(CREATED_QUANTITY - CHANGE_QUANTITY);
         }
         try {
-            outputInvoicesService.saveOrUpdate();
+            comingInvoicesService.saveOrUpdate();
         } catch (Exception ex) {
-            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ComingInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Test(priority = 8, description = "check changes quantity of goods")
     public void checkChangesInvoiceGoodsQuantityDownTest() {
-        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        for (OutputGoods g : outputInvoice.getGoods()) {
+        ComingsInvoice comingsInvoice = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        for (IGoods g : comingsInvoice.getGoods()) {
             assertEquals(g.getQuantity(), Integer.valueOf(CREATED_QUANTITY - CHANGE_QUANTITY));
         }
     }
 
-    @Test(priority = 9, description = "check changes quantity of nomenclature")
+    @Test(priority = 9, enabled = true, description = "check changes quantity of nomenclature")
     public void readNomenclatureQuantityChangesBackTest() {
         Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
-        assertEquals(n.getQuantity(), Integer.valueOf((memorizedNomenclatureInitialQuantity - CREATED_QUANTITY) + CHANGE_QUANTITY));
+        assertEquals(n.getQuantity(), Integer.valueOf((memorizedNomenclatureInitialQuantity + CREATED_QUANTITY) - CHANGE_QUANTITY));
     }
 
     @Test(priority = 10)
@@ -187,21 +188,21 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
 
     @Test(priority = 11, description = "remove invoice")
     public void removeInvoiceTest() {
-        outputInvoicesService.removeCurrentElement(outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID), true);
+        comingInvoicesService.removeCurrentElement(comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID), true);
     }
 
     @Test(priority = 12, description = "check invoice on remove")
     public void readRemovedInvoiceTest() {
-        OutputInvoice oi = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
-        assertNull(oi);
+        ComingsInvoice ci = comingInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNull(ci);
     }
 
-    @Test(priority = 13, description = "check quantity of nomenclature")
+    @Test(priority = 13, enabled = true, description = "check quantity of nomenclature")
     public void finalCheckNomenclatureQuantityTest() {
         Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
         assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity));
     }
 
-    public OutputInvoiceNGTest() {
+    public ComingInvoiceNGTest() {
     }
 }

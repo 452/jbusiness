@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+
 import small.business.domainmodel.interfaces.IGoods;
 
 /**
@@ -36,6 +38,8 @@ public class ReturnedGoods implements Serializable, IGoods {
     @JoinColumn(name = "nomenclature")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Nomenclature nomenclature;
+    @Transient
+    private Integer initialQuantity = null;
 
     @Override
     public Long getId() {
@@ -49,7 +53,7 @@ public class ReturnedGoods implements Serializable, IGoods {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (this.getNomenclature().getId() != null ? this.getNomenclature().getId().hashCode() : 0);
         return hash;
     }
 
@@ -89,6 +93,13 @@ public class ReturnedGoods implements Serializable, IGoods {
 
     @Override
     public void setQuantity(Integer quantity) {
+        if (initialQuantity == null) {
+            if (id == null) {
+                setInitialQuantity(0);
+            } else {
+                setInitialQuantity(this.quantity);
+            }
+        }
         this.quantity = quantity;
     }
 
@@ -116,5 +127,13 @@ public class ReturnedGoods implements Serializable, IGoods {
     @Override
     public void setNomenclature(Nomenclature nomenclature) {
         this.nomenclature = nomenclature;
+    }
+
+    public Integer getInitialQuantity() {
+        return initialQuantity;
+    }
+
+    public void setInitialQuantity(Integer initialQuantity) {
+        this.initialQuantity = initialQuantity;
     }
 }

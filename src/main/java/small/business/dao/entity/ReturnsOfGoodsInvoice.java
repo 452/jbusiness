@@ -48,11 +48,10 @@ public class ReturnsOfGoodsInvoice implements Serializable, IElement<ReturnsOfGo
     private Integer typeOfReturns = 0;
     @Column(nullable = false)
     private String returningDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    @Basic(fetch= FetchType.LAZY)
+    @Basic(fetch = FetchType.LAZY)
     @Column(nullable = true)
     private String info;
     @JoinColumn(name = "counterParty")
-    //@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY, orphanRemoval = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CounterParties counterParty;
     @JoinColumn(name = "storeHouse")

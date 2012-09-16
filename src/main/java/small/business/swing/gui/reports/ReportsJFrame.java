@@ -63,6 +63,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
         setTitle("Звіти");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("reports"); // NOI18N
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         jButton1.setText("Графік по торгівлі загальний");

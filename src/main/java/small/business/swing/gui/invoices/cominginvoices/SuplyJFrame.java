@@ -32,53 +32,70 @@ public class SuplyJFrame extends javax.swing.JFrame {
 	 */
 
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jButtonNewInvoice = new javax.swing.JButton();
-		jButtonInvoicesList = new javax.swing.JButton();
+        jButtonNewInvoice = new javax.swing.JButton();
+        jButtonInvoicesList = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("Постачання");
-		setLocationByPlatform(true);
-		setName("frameSuply"); // NOI18N
-		setType(java.awt.Window.Type.UTILITY);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Постачання");
+        setLocationByPlatform(true);
+        setName("frameSuply"); // NOI18N
+        setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
-		jButtonNewInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/invoice.png"))); // NOI18N
-		jButtonNewInvoice.setText("Нова прихідна накладна");
-		jButtonNewInvoice.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonNewInvoice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonNewInvoice.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonNewInvoice.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonNewInvoice.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonNewInvoice.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonNewInvoice.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonNewInvoiceActionPerformed(evt);
-			}
-		});
+        jButtonNewInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/invoice.png"))); // NOI18N
+        jButtonNewInvoice.setText("Нова прихідна накладна");
+        jButtonNewInvoice.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonNewInvoice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonNewInvoice.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonNewInvoice.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonNewInvoice.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonNewInvoice.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonNewInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewInvoiceActionPerformed(evt);
+            }
+        });
 
-		jButtonInvoicesList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/invoiceslist.png"))); // NOI18N
-		jButtonInvoicesList.setText("Список прихідних накладних");
-		jButtonInvoicesList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonInvoicesList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonInvoicesList.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonInvoicesList.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonInvoicesList.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonInvoicesList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonInvoicesList.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonInvoicesListActionPerformed(evt);
-			}
-		});
+        jButtonInvoicesList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/invoiceslist.png"))); // NOI18N
+        jButtonInvoicesList.setText("Список прихідних накладних");
+        jButtonInvoicesList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonInvoicesList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonInvoicesList.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonInvoicesList.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonInvoicesList.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonInvoicesList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonInvoicesList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInvoicesListActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jButtonNewInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonInvoicesList, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jButtonInvoicesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonNewInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addContainerGap()));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonNewInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonInvoicesList, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonInvoicesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNewInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewInvoiceActionPerformed
 		ComingsInvoice c = new ComingsInvoice();
@@ -141,8 +158,8 @@ public class SuplyJFrame extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton	jButtonInvoicesList;
-	private javax.swing.JButton	jButtonNewInvoice;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonInvoicesList;
+    private javax.swing.JButton jButtonNewInvoice;
+    // End of variables declaration//GEN-END:variables
 }

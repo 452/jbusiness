@@ -26,24 +26,19 @@ import small.business.domainmodel.interfaces.IGoods;
 @NamedQueries({
     @NamedQuery(name = "ComingsInvoice.findAll", query = "SELECT c FROM ComingsInvoice c ORDER BY c.createdDate DESC"),
     @NamedQuery(name = "ComingsInvoice.findById", query = "SELECT c FROM ComingsInvoice c WHERE c.id = :id"),
-    //@NamedQuery(name = "ComingsInvoice.findByDate", query = "SELECT c FROM ComingsInvoice c WHERE c.date = :date"),
-    @NamedQuery(name = "ComingsInvoice.findByInvoiceid", query = "SELECT c FROM ComingsInvoice c WHERE c.invoiceid = :invoiceid" //@NamedQuery(name = "ComingsInvoice.findByCounterpartyid", query = "SELECT c FROM ComingsInvoice c WHERE c.counterpartyid = :counterpartyid"),
-    //@NamedQuery(name = "ComingsInvoice.findByStorehouse", query = "SELECT c FROM ComingsInvoice c WHERE c.storehouse = :storehouse"
-    )})
+    @NamedQuery(name = "ComingsInvoice.findByInvoiceid", query = "SELECT c FROM ComingsInvoice c WHERE c.invoiceid = :invoiceid")})
 public class ComingsInvoice implements Serializable, IElement<ComingsInvoice> {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    //@SequenceGenerator(sequenceName="comingsofinvoicesongoods",name="sqlite_sequence")
     @TableGenerator(name = "comingsofinvoicesongoods", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", allocationSize = 1, initialValue = 0)
     @GeneratedValue(generator = "comingsofinvoicesongoods", strategy = GenerationType.TABLE)
-    //@GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @Column(name = "date", nullable = false)
-    //@Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.DATE)
     private String createdDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     @Column(name = "statusofpayment")
     private Integer statusOfPayment;
@@ -56,7 +51,6 @@ public class ComingsInvoice implements Serializable, IElement<ComingsInvoice> {
     @Column(name = "info")
     private String info;
     @JoinColumn(name = "counterpartyid")
-    //@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY, orphanRemoval = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CounterParties counterParty;
     @JoinColumn(name = "storehouse")
@@ -64,9 +58,9 @@ public class ComingsInvoice implements Serializable, IElement<ComingsInvoice> {
     private StoreHouse storeHouse = new StoreHouse(1L, "Основний склад");
     @JoinColumn(name = "invoiceid", referencedColumnName = "id", insertable = true, updatable = true)
     @OneToMany(targetEntity = ComingsGoods.class, cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    //@MapsId("invoiceid")
-    //@OneToMany(targetEntity = ComingsGoods.class,mappedBy="invoiceid")
-    //@OrderBy("quantity ASC")
+    // @MapsId("invoiceid")
+    // @OneToMany(targetEntity = ComingsGoods.class,mappedBy="invoiceid")
+    // @OrderBy("quantity ASC")
     private Set<IGoods> goods = new HashSet<IGoods>();
 
     public CounterParties getCounterParty() {
@@ -128,7 +122,8 @@ public class ComingsInvoice implements Serializable, IElement<ComingsInvoice> {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the id fields are
+        // not set
         if (!(object instanceof ComingsInvoice)) {
             return false;
         }
@@ -188,5 +183,9 @@ public class ComingsInvoice implements Serializable, IElement<ComingsInvoice> {
 
     public void setPaidAmount(Double paidAmount) {
         this.paidAmount = paidAmount;
+    }
+
+    public boolean addGoods(IGoods goods) {
+        return this.goods.add(goods);
     }
 }

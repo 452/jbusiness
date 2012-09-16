@@ -83,11 +83,11 @@ public class ReturnsOfGoodsJFrame extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewInvoiceActionPerformed
-		ReturnsOfGoodsInvoice c = new ReturnsOfGoodsInvoice();
-		returnsOfGoodsService.setCurrentElement(c);
+		returnsOfGoodsService.setCurrentElement(new ReturnsOfGoodsInvoice());
 		ReturnsElementJFrame re = new ReturnsElementJFrame();
 		re.pack();
 		ModalFrameUtil.showAsModal(re, this);
+		this.dispose();
 	}// GEN-LAST:event_jButtonNewInvoiceActionPerformed
 
 	private void jButtonInvoicesListActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonInvoicesListActionPerformed

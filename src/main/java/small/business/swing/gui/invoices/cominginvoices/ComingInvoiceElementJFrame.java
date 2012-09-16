@@ -285,7 +285,7 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         comingsInvoicesService.getCurrentElement().setInvoiceid(jTextFieldComingInvoice.getText());
         comingsInvoicesService.getCurrentElement().setPaidAmount((Double) jSpinnerPaidAmount.getValue());
         comingsInvoicesService.getCurrentElement().setStatusOfPayment(jComboBoxStatusOfPayment.getSelectedIndex());
@@ -296,25 +296,25 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Помилка збереження накладної:\nінформація про помилку знаходиться в logJ.txt", null, JOptionPane.ERROR_MESSAGE);
         }
-    }// GEN-LAST:event_jButtonSaveActionPerformed
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
-    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonExitActionPerformed
+    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         dispose();
-    }// GEN-LAST:event_jButtonExitActionPerformed
+    }//GEN-LAST:event_jButtonExitActionPerformed
 
-    private void jButtonAddGoodsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonAddGoodsActionPerformed
+    private void jButtonAddGoodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddGoodsActionPerformed
         comingsInvoicesService.setCurrentGoodsElement(new ComingsGoods());
         ComingInvoiceGoodsElementJFrame comingInvoiceGoods = new ComingInvoiceGoodsElementJFrame();
         comingInvoiceGoods.pack();
         ModalFrameUtil.showAsModal(comingInvoiceGoods, this);
         getGoodsList();
-    }// GEN-LAST:event_jButtonAddGoodsActionPerformed
+    }//GEN-LAST:event_jButtonAddGoodsActionPerformed
 
-    private void jButtonEditGoodsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonEditGoodsActionPerformed
+    private void jButtonEditGoodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditGoodsActionPerformed
         edit();
-    }// GEN-LAST:event_jButtonEditGoodsActionPerformed
+    }//GEN-LAST:event_jButtonEditGoodsActionPerformed
 
-    private void jButtonCounterPartySelectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCounterPartySelectActionPerformed
+    private void jButtonCounterPartySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCounterPartySelectActionPerformed
         counterPartiesService.setSelectType(CounterParties.COUNTERPARTY);
         CounterPartiesSelectJFrame counterPartiesSelect = new CounterPartiesSelectJFrame();
         counterPartiesSelect.pack();
@@ -323,9 +323,10 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
         if (comingsInvoicesService.getCurrentElement().getCounterParty() != null) {
             jLabelCounterParty.setText(comingsInvoicesService.getCurrentElement().getCounterParty().getTitle());
         }
-    }// GEN-LAST:event_jButtonCounterPartySelectActionPerformed
+        svalidate();
+    }//GEN-LAST:event_jButtonCounterPartySelectActionPerformed
 
-    private void jButtonStoreHouseSelectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonStoreHouseSelectActionPerformed
+    private void jButtonStoreHouseSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreHouseSelectActionPerformed
         StoreHouseSelectJFrame storeHouseSelect = new StoreHouseSelectJFrame();
         storeHouseSelect.pack();
         ModalFrameUtil.showAsModal(storeHouseSelect, this);
@@ -333,22 +334,24 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
         if (comingsInvoicesService.getCurrentElement().getStoreHouse() != null) {
             jLabelStoreHouse.setText(comingsInvoicesService.getCurrentElement().getStoreHouse().getTitle());
         }
-    }// GEN-LAST:event_jButtonStoreHouseSelectActionPerformed
+        svalidate();
+    }//GEN-LAST:event_jButtonStoreHouseSelectActionPerformed
 
-    private void jButtonRemoveGoodsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRemoveGoodsActionPerformed
+    private void jButtonRemoveGoodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveGoodsActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Дійсно видалити запис?", "", JOptionPane.YES_NO_OPTION);
         if ((jTableGoods.getSelectedRow() >= 0) && (confirm == JOptionPane.YES_OPTION)) {
             ComingsGoods selectedObject = (ComingsGoods) jTableGoods.getValueAt(jTableGoods.getSelectedRow(), OBJECT_COLUMN);
-            comingsInvoicesService.getCurrentElement().getGoods().remove(selectedObject);
+            comingsInvoicesService.removeGoods(selectedObject);
             getGoodsList();
         }
-    }// GEN-LAST:event_jButtonRemoveGoodsActionPerformed
+    }//GEN-LAST:event_jButtonRemoveGoodsActionPerformed
 
-    private void jTableGoodsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTableGoodsMouseClicked
+    private void jTableGoodsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGoodsMouseClicked
+        svalidate();
         if (evt.getClickCount() == 2) {
             edit();
         }
-    }// GEN-LAST:event_jTableGoodsMouseClicked
+    }//GEN-LAST:event_jTableGoodsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -357,8 +360,8 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
         /*
          * Set the Nimbus look and feel
          */
-        // <editor-fold defaultstate="collapsed"
-        // desc=" Look and feel setting code (optional) ">
+        //<editor-fold defaultstate="collapsed"
+        //desc=" Look and feel setting code (optional) ">
 		/*
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
          * default look and feel. For details see
@@ -380,7 +383,7 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ComingInvoiceElementJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        // </editor-fold>
+        //</editor-fold>
 
         /*
          * Create and display the form
@@ -432,8 +435,13 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
     private void svalidate() {
         comingsInvoicesService.validate();
         jButtonAddGoods.setEnabled(comingsInvoicesService.isCanAddGoods());
-        jButtonEditGoods.setEnabled(comingsInvoicesService.isCanEditGoods());
-        jButtonRemoveGoods.setEnabled(comingsInvoicesService.isCanRemove());
+        if (jTableGoods.getSelectedRow() >= 0) {
+            jButtonEditGoods.setEnabled(comingsInvoicesService.isCanEditGoods());
+            jButtonRemoveGoods.setEnabled(comingsInvoicesService.isCanRemoveGoods());
+        } else {
+            jButtonEditGoods.setEnabled(false);
+            jButtonRemoveGoods.setEnabled(false);
+        }
         jButtonSave.setEnabled(comingsInvoicesService.isCanSave());
         jButtonCounterPartySelect.setEnabled(comingsInvoicesService.isCanSelectCounterParty());
         jButtonStoreHouseSelect.setEnabled(comingsInvoicesService.isCanSelectStoreHouse());
