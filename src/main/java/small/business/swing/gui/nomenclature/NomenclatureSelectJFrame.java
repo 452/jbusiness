@@ -373,12 +373,18 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         if (jTable.getSelectedRow() >= 0) {
             Nomenclature selectedObject = (Nomenclature) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-            if (evt.getClickCount() == 2) {
-                nomenclatureService.setCurrentCategory(selectedObject);
-                getList();
-            }
+			if (evt.getClickCount() == 2) {
+				svalidate();
+				if (nomenclatureService.isCanSelect()) {
+					nomenclatureService.setSelectedElement(selectedObject);
+					nomenclatureService.setSelected(true);
+					dispose();
+				} else {
+					nomenclatureService.setCurrentCategory(selectedObject);
+					getList();
+				}
+			}
         }
-        svalidate();
     }//GEN-LAST:event_jTableMouseClicked
 
     private void jButtonCreateGroupNomenclatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateGroupNomenclatureActionPerformed

@@ -66,9 +66,6 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
                 "Група", "Найменування"
             }
         ) {
-            /**
-			 * 
-			 */
 			private static final long	serialVersionUID	= 1L;
 			boolean[] canEdit = new boolean [] {
                 false, false
@@ -168,17 +165,22 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        jButtonSelect.setEnabled(false);
-        if (jTable.getSelectedRow() >= 0) {
-            CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-            if (counterPartiesService.getSelectType().equals(selectedObject.getIsgroup())) {
-                jButtonSelect.setEnabled(true);
-            }
-            if (evt.getClickCount() == 2) {
-                counterPartiesService.setCurrentCategory(selectedObject);
-                getList();
-            }
-        }
+		jButtonSelect.setEnabled(false);
+		if (jTable.getSelectedRow() >= 0) {
+			CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+			if (counterPartiesService.getSelectType().equals(selectedObject.getIsgroup())) {
+				jButtonSelect.setEnabled(true);
+			}
+			if (evt.getClickCount() == 2) {
+				if (counterPartiesService.getSelectType().equals(selectedObject.getIsgroup())) {
+					counterPartiesService.setSelectedElement(selectedObject);
+					dispose();
+				} else {
+					counterPartiesService.setCurrentCategory(selectedObject);
+					getList();
+				}
+			}
+		}
     }//GEN-LAST:event_jTableMouseClicked
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
