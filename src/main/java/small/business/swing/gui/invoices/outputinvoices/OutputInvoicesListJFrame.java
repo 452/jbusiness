@@ -51,7 +51,8 @@ public class OutputInvoicesListJFrame extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    @SuppressWarnings({"serial","rawtypes","unchecked"})
+	private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
@@ -74,14 +75,14 @@ public class OutputInvoicesListJFrame extends javax.swing.JFrame {
                 "id", "Статус оплати", "Дата створення", "Контрагент/Постачальник", "Склад"
             }
         ) {
-            Class[] types = new Class [] {
+			Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 

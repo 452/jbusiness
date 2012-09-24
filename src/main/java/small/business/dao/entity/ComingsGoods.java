@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PostLoad;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -59,19 +61,23 @@ public class ComingsGoods implements Serializable, IGoods {
     @Column(name = "price")
     private Double price;
     @Transient
-    private Integer initialQuantity = null;
+    private int initialQuantity = 0;
 
     @Override
-    public Integer getInitialQuantity() {
+    public int getInitialQuantity() {
         return initialQuantity;
     }
 
     @Override
-    public void setInitialQuantity(Integer initialQuantity) {
+    public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
     }
 
     public ComingsGoods() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        }
     }
 
     public ComingsGoods(Long id) {
@@ -82,7 +88,6 @@ public class ComingsGoods implements Serializable, IGoods {
         this.invoiceid = invoiceid;
         this.nomenclature = nomenclature;
         this.quantity = quantity;
-        this.initialQuantity = 0;
     }
 
     @Override
@@ -104,21 +109,11 @@ public class ComingsGoods implements Serializable, IGoods {
 
     @Override
     public Integer getQuantity() {
-        if (quantity == null) {
-            quantity = 1;
-        }
         return quantity;
     }
 
     @Override
     public void setQuantity(Integer quantity) {
-        if (initialQuantity == null) {
-            if (id == null) {
-                setInitialQuantity(0);
-            } else {
-                setInitialQuantity(this.quantity);
-            }
-        }
         this.quantity = quantity;
     }
 
@@ -174,5 +169,23 @@ public class ComingsGoods implements Serializable, IGoods {
     @Override
     public void setNomenclature(Nomenclature nomenclature) {
         this.nomenclature = nomenclature;
+    }
+
+    @PostLoad
+    public void PostLoad() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        } else {
+            this.initialQuantity = this.quantity;
+        }
+        if (this.id == null) {
+            this.quantity = 1;
+        }
+    }
+
+    @PostUpdate
+    public void PostUpdate() {
+        this.initialQuantity = this.quantity;
     }
 }

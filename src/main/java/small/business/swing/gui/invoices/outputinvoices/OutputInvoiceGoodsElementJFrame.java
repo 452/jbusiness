@@ -20,24 +20,14 @@ public class OutputInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     private OutputInvoicesService outputInvoicesService = (OutputInvoicesService) ctx.getBean("outputInvoicesService");
     private SettingsService settingsService = (SettingsService) ctx.getBean("settingsService");
     private NomenclatureService nomenclatureService = (NomenclatureService) ctx.getBean("nomenclatureService");
-    private Integer initialValue;
 
     /**
      * Creates new form ComingInvoiceGoodsElementJFrame
      */
     public OutputInvoiceGoodsElementJFrame() {
         initComponents();
-        initialValue = outputInvoicesService.getCurrentGoodsElement().getQuantity();
-        if (initialValue == null) {
-            initialValue = 0;
-        }
-        if (outputInvoicesService.getCurrentGoodsElement().getInitialQuantity() != null) {
-            initialValue = outputInvoicesService.getCurrentGoodsElement().getInitialQuantity();
-        }
         if (outputInvoicesService.getCurrentGoodsElement().getNomenclature() != null) {
-            if (outputInvoicesService.getCurrentGoodsElement().getNomenclature().getQuantity() > 0) {
-                jSpinnerQuantity.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), Integer.valueOf(initialValue + outputInvoicesService.getCurrentGoodsElement().getNomenclature().getQuantity()), Integer.valueOf(1)));
-            }
+            jSpinnerQuantity.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), Integer.valueOf(outputInvoicesService.getCurrentGoodsElement().getInitialQuantity() + outputInvoicesService.getCurrentGoodsElement().getNomenclature().getQuantity()), Integer.valueOf(1)));
         }
         updateData();
         calcData();
@@ -377,7 +367,8 @@ public class OutputInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonNomenclatureSelect;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JComboBox jComboBoxTypeOfPrice;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox jComboBoxTypeOfPrice;
     private javax.swing.JLabel jLabelBigWholeSale;
     private javax.swing.JLabel jLabelBigWholeSalePrice;
     private javax.swing.JLabel jLabelNomenclature;
@@ -436,19 +427,9 @@ public class OutputInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     }
 
     private void svalidate() {
+        outputInvoicesService.setValidateQuantityOfGoods((Integer) jSpinnerQuantity.getValue());
         outputInvoicesService.validate();
+        jButtonSave.setEnabled(outputInvoicesService.isCanSaveGoods());
         jButtonNomenclatureSelect.setEnabled(outputInvoicesService.isCanChangeNomenclature());
-        if (outputInvoicesService.getCurrentGoodsElement().getNomenclature() != null) {
-            Integer quantity = (Integer) jSpinnerQuantity.getValue();
-            Integer q = initialValue + (outputInvoicesService.getCurrentGoodsElement().getNomenclature().getQuantity() - quantity);
-            if (q <= 0) {
-                jButtonSave.setEnabled(false);
-            } else {
-                jButtonSave.setEnabled(true);
-            }
-            if (initialValue - quantity > 0) {
-                jButtonSave.setEnabled(true);
-            }
-        }
     }
 }

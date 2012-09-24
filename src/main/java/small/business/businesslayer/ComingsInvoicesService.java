@@ -16,13 +16,8 @@
  */
 package small.business.businesslayer;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,27 +30,12 @@ import small.business.domainmodel.interfaces.IGoods;
  * @author root
  */
 @Service
-public class ComingsInvoicesService {
+public class ComingsInvoicesService extends Invoices<ComingsInvoicesService> {
 
-    static Logger log = Logger.getLogger(ComingsInvoicesService.class.getName());
     @Autowired
     private ComingInvoicesDAO comingInvoicesDAO;
-    @Resource
-    private StoreHousesService storeHousesService;
-    @Resource
-    private HistoryService historyService;
     private ComingsInvoice currentElement;
     private IGoods currentGoodsElement;
-    private boolean canSave = false;
-    private boolean canAddGoods = false;
-    private boolean canRemove = false;
-    private boolean canRemoveGoods = false;
-    private boolean canEditInvoice = false;
-    private boolean canEditGoods = false;
-    private boolean canChangeNomenclature = false;
-    private boolean canSelectCounterParty = false;
-    private boolean canSelectStoreHouse = false;
-    private Set<IGoods> goodsToRemove = new HashSet<IGoods>();
 
     public List<ComingsInvoice> getDataList() {
         return comingInvoicesDAO.getInvoicesList();
@@ -65,9 +45,10 @@ public class ComingsInvoicesService {
         setCanAddGoods(true);
         setCanEditGoods(false);
         setCanEditInvoice(false);
-        setCanRemove(false);
+        setCanRemoveInvoice(false);
         setCanRemoveGoods(false);
         setCanSave(false);
+        setCanSaveGoods(false);
         setCanChangeNomenclature(false);
         setCanSelectCounterParty(false);
         setCanSelectStoreHouse(false);
@@ -78,19 +59,29 @@ public class ComingsInvoicesService {
                 setCanSelectStoreHouse(true);
                 if (((currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
                     setCanEditGoods(true);
-                    setCanRemove(true);
+                    setCanRemoveInvoice(true);
                 }
             }
             if ((currentElement.getStoreHouse() != null) && (currentElement.getCounterParty() != null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0)) {
                 setCanEditInvoice(true);
                 setCanEditGoods(true);
-                setCanRemove(true);
+                setCanRemoveInvoice(true);
                 setCanRemoveGoods(true);
                 setCanSave(true);
                 if (currentGoodsElement != null && currentGoodsElement.getId() == null) {
                     setCanChangeNomenclature(true);
                 }
             }
+			if (currentGoodsElement != null && currentGoodsElement.getNomenclature() != null) {
+				if (getValidateQuantityOfGoods() > 0) {
+					//  5
+					// 15
+					// 16
+					if (getValidateQuantityOfGoods() >= (currentGoodsElement.getInitialQuantity()-currentGoodsElement.getNomenclature().getQuantity())) {
+						setCanSaveGoods(true);
+					}
+				}
+			}
         }
     }
 
@@ -160,83 +151,11 @@ public class ComingsInvoicesService {
         this.currentElement = currentElement;
     }
 
-    public boolean isCanRemove() {
-        return canRemove;
-    }
-
-    private void setCanRemove(boolean canRemove) {
-        this.canRemove = canRemove;
-    }
-
-    public boolean isCanEditInvoice() {
-        return canEditInvoice;
-    }
-
-    private void setCanEditInvoice(boolean canEditInvoice) {
-        this.canEditInvoice = canEditInvoice;
-    }
-
-    public boolean isCanEditGoods() {
-        return canEditGoods;
-    }
-
-    private void setCanEditGoods(boolean canEditGoods) {
-        this.canEditGoods = canEditGoods;
-    }
-
-    public boolean isCanSelectCounterParty() {
-        return canSelectCounterParty;
-    }
-
-    private void setCanSelectCounterParty(boolean canSelectCounterParty) {
-        this.canSelectCounterParty = canSelectCounterParty;
-    }
-
-    public boolean isCanSelectStoreHouse() {
-        return canSelectStoreHouse;
-    }
-
-    private void setCanSelectStoreHouse(boolean canSelectStoreHouse) {
-        this.canSelectStoreHouse = canSelectStoreHouse;
-    }
-
-    public boolean isCanSave() {
-        return canSave;
-    }
-
-    private void setCanSave(boolean canSave) {
-        this.canSave = canSave;
-    }
-
     public IGoods getCurrentGoodsElement() {
-        return currentGoodsElement;
+        return this.currentGoodsElement;
     }
 
     public void setCurrentGoodsElement(IGoods currentGoodsElement) {
         this.currentGoodsElement = currentGoodsElement;
-    }
-
-    public boolean isCanAddGoods() {
-        return canAddGoods;
-    }
-
-    private void setCanAddGoods(boolean canAddGoods) {
-        this.canAddGoods = canAddGoods;
-    }
-
-    public boolean isCanRemoveGoods() {
-        return canRemoveGoods;
-    }
-
-    private void setCanRemoveGoods(boolean canRemoveGoods) {
-        this.canRemoveGoods = canRemoveGoods;
-    }
-
-    public boolean isCanChangeNomenclature() {
-        return canChangeNomenclature;
-    }
-
-    private void setCanChangeNomenclature(boolean canChangeNomenclature) {
-        this.canChangeNomenclature = canChangeNomenclature;
     }
 }

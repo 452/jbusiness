@@ -1,6 +1,5 @@
 package small.business.swing.gui;
 
-import config.ApplicationConfig;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -10,10 +9,13 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import small.business.businesslayer.SettingsService;
 import small.business.swing.gui.counterparties.CounterPartiesListJFrame;
 import small.business.swing.gui.history.HistoryJFrame;
@@ -25,6 +27,8 @@ import small.business.swing.gui.reports.ReportsJFrame;
 import small.business.swing.gui.storehouses.StoreHousesJFrame;
 import small.business.swing.gui.utils.ModalFrameUtil;
 import small.business.swing.gui.utils.TrayMessage;
+import small.business.u18n.Languages;
+import config.ApplicationConfig;
 
 /**
  *
@@ -40,6 +44,9 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     public MainJFrame() {
         initComponents();
+        //System.out.println(Locale.getDefault().getDisplayName());
+        //System.out.println(Locale.getDefault().getLanguage());
+        //System.out.println(Locale.getDefault().getCountry());
     }
 
     /**
@@ -49,246 +56,315 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings({"deprecation"})
     // <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jPanel = new javax.swing.JPanel();
-		jButtonHistory = new javax.swing.JButton();
-		jButtonTrade = new javax.swing.JButton();
-		jButtonCounterParties = new javax.swing.JButton();
-		jButtonAbout = new javax.swing.JButton();
-		jButtonNomenclature = new javax.swing.JButton();
-		jButtonStoreHouses = new javax.swing.JButton();
-		jButtonReports = new javax.swing.JButton();
-		jButtonPriceList = new javax.swing.JButton();
-		jButtonRepair = new javax.swing.JButton();
-		jButtonSuply = new javax.swing.JButton();
-		jButtonSettings = new javax.swing.JButton();
-		jButtonCashRegister = new javax.swing.JButton();
-		jButtonSite = new javax.swing.JButton();
-		jButtonReturnsOfGoods = new javax.swing.JButton();
+        jPanel = new javax.swing.JPanel();
+        jButtonHistory = new javax.swing.JButton();
+        jButtonTrade = new javax.swing.JButton();
+        jButtonCounterParties = new javax.swing.JButton();
+        jButtonAbout = new javax.swing.JButton();
+        jButtonNomenclature = new javax.swing.JButton();
+        jButtonStoreHouses = new javax.swing.JButton();
+        jButtonReports = new javax.swing.JButton();
+        jButtonPriceList = new javax.swing.JButton();
+        jButtonRepair = new javax.swing.JButton();
+        jButtonSuply = new javax.swing.JButton();
+        jButtonSettings = new javax.swing.JButton();
+        jButtonCashRegister = new javax.swing.JButton();
+        jButtonSite = new javax.swing.JButton();
+        jButtonReturnsOfGoods = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Small Business");
-		setExtendedState(6);
-		setIconImages(null);
-		setName("frameMain"); // NOI18N
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosed(java.awt.event.WindowEvent evt) {
-				formWindowClosed(evt);
-			}
-		});
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Small Business");
+        setExtendedState(6);
+        setIconImages(null);
+        setName("frameMain"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-		jButtonHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/history.png"))); // NOI18N
-		jButtonHistory.setText("Історія");
-		jButtonHistory.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonHistory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonHistory.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonHistory.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonHistory.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonHistory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonHistory.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonHistoryActionPerformed(evt);
-			}
-		});
+        jButtonHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/history.png"))); // NOI18N
+        jButtonHistory.setText(Languages.getTranslatedText("history"));
+        jButtonHistory.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonHistory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonHistory.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonHistory.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonHistory.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonHistory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistoryActionPerformed(evt);
+            }
+        });
 
-		jButtonTrade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/trade.png"))); // NOI18N
-		jButtonTrade.setText("Торгівля");
-		jButtonTrade.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonTrade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonTrade.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonTrade.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonTrade.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonTrade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonTrade.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonTradeActionPerformed(evt);
-			}
-		});
+        jButtonTrade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/trade.png"))); // NOI18N
+        jButtonTrade.setText("Торгівля");
+        jButtonTrade.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonTrade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonTrade.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonTrade.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonTrade.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonTrade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonTrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTradeActionPerformed(evt);
+            }
+        });
 
-		jButtonCounterParties.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/counterparties.png"))); // NOI18N
-		jButtonCounterParties.setText("Контрагенти");
-		jButtonCounterParties.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonCounterParties.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonCounterParties.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonCounterParties.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonCounterParties.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonCounterParties.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonCounterParties.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonCounterPartiesActionPerformed(evt);
-			}
-		});
+        jButtonCounterParties.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/counterparties.png"))); // NOI18N
+        jButtonCounterParties.setText("Контрагенти");
+        jButtonCounterParties.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonCounterParties.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCounterParties.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonCounterParties.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonCounterParties.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonCounterParties.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCounterParties.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCounterPartiesActionPerformed(evt);
+            }
+        });
 
-		jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/about.png"))); // NOI18N
-		jButtonAbout.setText("Про програму");
-		jButtonAbout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonAbout.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonAbout.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonAbout.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonAboutActionPerformed(evt);
-			}
-		});
+        jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/about.png"))); // NOI18N
+        jButtonAbout.setText("Про програму");
+        jButtonAbout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAbout.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonAbout.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonAbout.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAboutActionPerformed(evt);
+            }
+        });
 
-		jButtonNomenclature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/nomenclature.png"))); // NOI18N
-		jButtonNomenclature.setText("Номенклатура товарів");
-		jButtonNomenclature.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonNomenclature.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonNomenclature.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonNomenclature.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonNomenclature.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonNomenclature.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonNomenclature.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonNomenclatureActionPerformed(evt);
-			}
-		});
+        jButtonNomenclature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/nomenclature.png"))); // NOI18N
+        jButtonNomenclature.setText("Номенклатура товарів");
+        jButtonNomenclature.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonNomenclature.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonNomenclature.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonNomenclature.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonNomenclature.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonNomenclature.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonNomenclature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNomenclatureActionPerformed(evt);
+            }
+        });
 
-		jButtonStoreHouses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/storehouses.png"))); // NOI18N
-		jButtonStoreHouses.setText("Склади та запаси в них");
-		jButtonStoreHouses.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonStoreHouses.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonStoreHouses.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonStoreHouses.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonStoreHousesActionPerformed(evt);
-			}
-		});
+        jButtonStoreHouses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/storehouses.png"))); // NOI18N
+        jButtonStoreHouses.setText("Склади та запаси в них");
+        jButtonStoreHouses.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonStoreHouses.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonStoreHouses.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonStoreHouses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStoreHousesActionPerformed(evt);
+            }
+        });
 
-		jButtonReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/reports.png"))); // NOI18N
-		jButtonReports.setText("Звіти");
-		jButtonReports.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonReports.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonReports.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonReports.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonReportsActionPerformed(evt);
-			}
-		});
+        jButtonReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/reports.png"))); // NOI18N
+        jButtonReports.setText("Звіти");
+        jButtonReports.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonReports.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonReports.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReportsActionPerformed(evt);
+            }
+        });
 
-		jButtonPriceList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/xls.png"))); // NOI18N
-		jButtonPriceList.setEnabled(false);
-		jButtonPriceList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonPriceList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonPriceList.setLabel("Прайс лист");
-		jButtonPriceList.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonPriceList.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonPriceList.setName(""); // NOI18N
-		jButtonPriceList.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonPriceList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonPriceList.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonPriceListActionPerformed(evt);
-			}
-		});
+        jButtonPriceList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/xls.png"))); // NOI18N
+        jButtonPriceList.setEnabled(false);
+        jButtonPriceList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonPriceList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonPriceList.setLabel("Прайс лист");
+        jButtonPriceList.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonPriceList.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonPriceList.setName(""); // NOI18N
+        jButtonPriceList.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonPriceList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonPriceList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPriceListActionPerformed(evt);
+            }
+        });
 
-		jButtonRepair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/repair.png"))); // NOI18N
-		jButtonRepair.setText("Ремонт");
-		jButtonRepair.setEnabled(false);
-		jButtonRepair.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonRepair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonRepair.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonRepair.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonRepair.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonRepair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonRepair.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonRepairActionPerformed(evt);
-			}
-		});
+        jButtonRepair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/repair.png"))); // NOI18N
+        jButtonRepair.setText("Ремонт");
+        jButtonRepair.setEnabled(false);
+        jButtonRepair.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonRepair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRepair.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonRepair.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonRepair.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonRepair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRepair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRepairActionPerformed(evt);
+            }
+        });
 
-		jButtonSuply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/suply.png"))); // NOI18N
-		jButtonSuply.setText("Закупки");
-		jButtonSuply.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonSuply.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonSuply.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonSuply.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonSuply.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonSuply.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonSuply.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonSuplyActionPerformed(evt);
-			}
-		});
+        jButtonSuply.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/suply.png"))); // NOI18N
+        jButtonSuply.setText("Закупки");
+        jButtonSuply.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonSuply.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSuply.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonSuply.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonSuply.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonSuply.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSuply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuplyActionPerformed(evt);
+            }
+        });
 
-		jButtonSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/settings.png"))); // NOI18N
-		jButtonSettings.setText("Налаштування");
-		jButtonSettings.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonSettings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonSettings.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonSettings.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonSettings.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonSettings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonSettings.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonSettingsActionPerformed(evt);
-			}
-		});
+        jButtonSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/settings.png"))); // NOI18N
+        jButtonSettings.setText("Налаштування");
+        jButtonSettings.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonSettings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSettings.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonSettings.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonSettings.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonSettings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSettingsActionPerformed(evt);
+            }
+        });
 
-		jButtonCashRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/cashregister.png"))); // NOI18N
-		jButtonCashRegister.setText("Каса");
-		jButtonCashRegister.setEnabled(false);
-		jButtonCashRegister.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonCashRegister.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonCashRegister.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonCashRegister.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonCashRegister.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonCashRegister.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonCashRegister.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonCashRegisterActionPerformed(evt);
-			}
-		});
+        jButtonCashRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/cashregister.png"))); // NOI18N
+        jButtonCashRegister.setText("Каса");
+        jButtonCashRegister.setEnabled(false);
+        jButtonCashRegister.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonCashRegister.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCashRegister.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonCashRegister.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonCashRegister.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonCashRegister.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCashRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCashRegisterActionPerformed(evt);
+            }
+        });
 
-		jButtonSite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/site.png"))); // NOI18N
-		jButtonSite.setText("Сайт");
-		jButtonSite.setEnabled(false);
-		jButtonSite.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonSite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonSite.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonSite.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonSite.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonSite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonSite.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonSiteActionPerformed(evt);
-			}
-		});
+        jButtonSite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/site.png"))); // NOI18N
+        jButtonSite.setText("Сайт");
+        jButtonSite.setEnabled(false);
+        jButtonSite.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonSite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSite.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonSite.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonSite.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonSite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiteActionPerformed(evt);
+            }
+        });
 
-		jButtonReturnsOfGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/returnsofgoods.png"))); // NOI18N
-		jButtonReturnsOfGoods.setText("Повернення товарів");
-		jButtonReturnsOfGoods.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		jButtonReturnsOfGoods.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonReturnsOfGoods.setMaximumSize(new java.awt.Dimension(175, 161));
-		jButtonReturnsOfGoods.setMinimumSize(new java.awt.Dimension(175, 161));
-		jButtonReturnsOfGoods.setPreferredSize(new java.awt.Dimension(175, 161));
-		jButtonReturnsOfGoods.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonReturnsOfGoods.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonReturnsOfGoodsActionPerformed(evt);
-			}
-		});
+        jButtonReturnsOfGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/returnsofgoods.png"))); // NOI18N
+        jButtonReturnsOfGoods.setText("Повернення товарів");
+        jButtonReturnsOfGoods.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonReturnsOfGoods.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonReturnsOfGoods.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonReturnsOfGoods.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonReturnsOfGoods.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonReturnsOfGoods.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonReturnsOfGoods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReturnsOfGoodsActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
-		jPanel.setLayout(jPanelLayout);
-		jPanelLayout.setHorizontalGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLayout.createSequentialGroup().addContainerGap().addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonSuply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonNomenclature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonReturnsOfGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButtonAbout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButtonStoreHouses, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButtonTrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLayout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jButtonSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jButtonHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup().addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false).addComponent(jButtonCounterParties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))).addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButtonCashRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButtonSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap()));
-		jPanelLayout.setVerticalGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLayout.createSequentialGroup().addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonRepair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonTrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonSuply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonReports, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGap(10, 10, 10).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonNomenclature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonCounterParties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonCashRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonStoreHouses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonAbout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonReturnsOfGoods, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addContainerGap()));
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonSuply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNomenclature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonReturnsOfGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAbout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonStoreHouses, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonTrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonCounterParties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(10, 10, 10)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCashRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRepair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonTrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSuply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonReports, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNomenclature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCounterParties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCashRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonStoreHouses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAbout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonReturnsOfGoods, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap(38, Short.MAX_VALUE).addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(38, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap(38, Short.MAX_VALUE).addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(38, Short.MAX_VALUE)));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
 
-		getAccessibleContext().setAccessibleDescription("");
-		getAccessibleContext().setAccessibleParent(this);
+        getAccessibleContext().setAccessibleDescription("");
+        getAccessibleContext().setAccessibleParent(this);
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettingsActionPerformed
         SettingsJDialog sf = new SettingsJDialog(this, true);
@@ -437,6 +513,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     } else {
                         System.err.println("Tray unavailable");
                     }
+                    long end = System.currentTimeMillis();
+                    log.debug("Time initialize tray: " + (end - start) + " ms");
+                    start = System.currentTimeMillis();
                     try {
                         ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
                         SettingsService settingsService = (SettingsService) ctx.getBean("settingsService");
@@ -447,7 +526,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         log.error("Start Error: " + e);
                         System.exit(0);
                     }
-                    long end = System.currentTimeMillis();
+                    end = System.currentTimeMillis();
                     log.debug("Time initialize spring: " + (end - start) + " ms");
                     new MainJFrame().setVisible(true);
                 } catch (Exception e) {
@@ -456,21 +535,21 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
     }
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton	jButtonAbout;
-	private javax.swing.JButton	jButtonCashRegister;
-	private javax.swing.JButton	jButtonCounterParties;
-	private javax.swing.JButton	jButtonHistory;
-	private javax.swing.JButton	jButtonNomenclature;
-	private javax.swing.JButton	jButtonPriceList;
-	private javax.swing.JButton	jButtonRepair;
-	private javax.swing.JButton	jButtonReports;
-	private javax.swing.JButton	jButtonReturnsOfGoods;
-	private javax.swing.JButton	jButtonSettings;
-	private javax.swing.JButton	jButtonSite;
-	private javax.swing.JButton	jButtonStoreHouses;
-	private javax.swing.JButton	jButtonSuply;
-	private javax.swing.JButton	jButtonTrade;
-	private javax.swing.JPanel	jPanel;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAbout;
+    private javax.swing.JButton jButtonCashRegister;
+    private javax.swing.JButton jButtonCounterParties;
+    private javax.swing.JButton jButtonHistory;
+    private javax.swing.JButton jButtonNomenclature;
+    private javax.swing.JButton jButtonPriceList;
+    private javax.swing.JButton jButtonRepair;
+    private javax.swing.JButton jButtonReports;
+    private javax.swing.JButton jButtonReturnsOfGoods;
+    private javax.swing.JButton jButtonSettings;
+    private javax.swing.JButton jButtonSite;
+    private javax.swing.JButton jButtonStoreHouses;
+    private javax.swing.JButton jButtonSuply;
+    private javax.swing.JButton jButtonTrade;
+    private javax.swing.JPanel jPanel;
+    // End of variables declaration//GEN-END:variables
 }

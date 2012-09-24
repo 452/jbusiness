@@ -202,6 +202,278 @@ public class OutputInvoiceNGTest extends AbstractTestNGSpringContextTests {
         assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity));
     }
 
+    // ////////////////////
+    @Test(priority = 14)
+    public void createInvoiceTest2() {
+        OutputInvoice outputInvoice = getTestInvoice();
+        for (OutputGoods g : outputInvoice.getGoods()) {
+            g.setQuantity(memorizedNomenclatureInitialQuantity);
+        }
+        outputInvoicesService.setCurrentElement(outputInvoice);
+        try {
+            outputInvoice = outputInvoicesService.saveOrUpdate();
+            memorizedCreatedInvoiceID = outputInvoice.getId();
+        } catch (Exception ex) {
+            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertNotNull(outputInvoice);
+    }
+
+    /**
+     * try to read created invoice from db
+     */
+    @Test(priority = 15, description = "check for created invoiced")
+    public void readCreatedInvoiceTest2() {
+        OutputInvoice oi = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNotNull(oi);
+    }
+
+    /**
+     * test business logic, if invoice created must change quantity of
+     * nomenclature. Checks changes of quantity.
+     */
+    @Test(priority = 16)
+    public void readNomenclatureQuantityTest2() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        assertEquals(n.getQuantity(), Integer.valueOf(0));
+    }
+
+    /**
+     * try change quantity of goods in invoice. BLogic - must be: change
+     * quantity in goods and nomenclature and on storehouse
+     */
+    @Test(priority = 17, description = "change quantity to Down")
+    public void changeInvoiceGoodsQuantityUPTest2() {
+        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNotNull(outputInvoice);
+        outputInvoicesService.setCurrentElement(outputInvoice);
+        for (OutputGoods g : outputInvoice.getGoods()) {
+            g.setQuantity(CHANGE_QUANTITY);
+        }
+        try {
+            outputInvoice = outputInvoicesService.saveOrUpdate();
+            for (OutputGoods g : outputInvoice.getGoods()) {
+                assertEquals(g.getQuantity(), Integer.valueOf(CHANGE_QUANTITY));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test(priority = 18, description = "check changes quantity of goods")
+    public void checkChangesInvoiceGoodsQuantityUPTest2() {
+        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        for (OutputGoods g : outputInvoice.getGoods()) {
+            assertEquals(g.getQuantity(), Integer.valueOf(CHANGE_QUANTITY));
+        }
+    }
+
+    @Test(priority = 19, description = "check changes quantity of nomenclature")
+    public void readNomenclatureQuantityWitchChangesTest2() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity - CHANGE_QUANTITY));
+    }
+
+    @Test(priority = 20, description = "change quantity to down")
+    public void changeInvoiceGoodsQuantityDownTest2() {
+        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        outputInvoicesService.setCurrentElement(outputInvoice);
+        for (OutputGoods g : outputInvoice.getGoods()) {
+            g.setQuantity(CREATED_QUANTITY + CHANGE_QUANTITY);
+        }
+        try {
+            outputInvoicesService.saveOrUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(OutputInvoiceNGTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test(priority = 21, description = "check changes quantity of goods")
+    public void checkChangesInvoiceGoodsQuantityDownTest2() {
+        OutputInvoice outputInvoice = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        for (OutputGoods g : outputInvoice.getGoods()) {
+            assertEquals(g.getQuantity(), Integer.valueOf(CREATED_QUANTITY + CHANGE_QUANTITY));
+        }
+    }
+
+    @Test(priority = 22, description = "check changes quantity of nomenclature")
+    public void readNomenclatureQuantityChangesBackTest2() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        assertEquals(n.getQuantity(), Integer.valueOf((memorizedNomenclatureInitialQuantity - CHANGE_QUANTITY) - CREATED_QUANTITY));
+    }
+
+    @Test(priority = 23)
+    public void readNomenclatureQuantityNotLesThanZeroTest2() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        assertTrue(n.getQuantity() >= 0 ? true : false);
+    }
+
+    @Test(priority = 24, description = "remove invoice")
+    public void removeInvoiceTest2() {
+        outputInvoicesService.removeCurrentElement(outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID), true);
+    }
+
+    @Test(priority = 25, description = "check invoice on remove")
+    public void readRemovedInvoiceTest2() {
+        OutputInvoice oi = outputInvoicesDAO.getCurrentElement(memorizedCreatedInvoiceID);
+        assertNull(oi);
+    }
+
+    @Test(priority = 26, description = "check quantity of nomenclature")
+    public void finalCheckNomenclatureQuantityTest2() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        assertEquals(n.getQuantity(), Integer.valueOf(memorizedNomenclatureInitialQuantity));
+    }
+
+    // ///////////////////
+    @Test(priority = 27, description = "check try create 0 quantity of goods in invoice, test 1")
+    public void checkNomenclatureQuantityTest1Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(0);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(1);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 28, description = "check try create 0 quantity of goods in invoice, test 2")
+    public void checkNomenclatureQuantityTest2Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(0);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(5);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 29, enabled = false, description = "check try create goods with max quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest3Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(0);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputGoods.setId(452L);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(1);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 30, enabled = false, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest4Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(0);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputGoods.setId(452L);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(5);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    //
+    @Test(priority = 31, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest5Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(1);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputGoods.setId(452L);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(1);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 32, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest6Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(1);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(1);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 33, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest7Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(20);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(20);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 34, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest8Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(20);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputGoods.setId(452L);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(20);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 35, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest9Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(2);
+        OutputGoods outputGoods = new OutputGoods(452L, 452L, n, 2, 2);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(4);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 36, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest10Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(2);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(4);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 37, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest11Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(20);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(20);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 38, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest12Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(20);
+        OutputGoods outputGoods = new OutputGoods(452L, n, 1);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(21);
+        outputInvoicesService.validate();
+        assertTrue(!outputInvoicesService.isCanSaveGoods());
+    }
+
+    @Test(priority = 39, description = "check try create goods with max+1 quantity of nomenclature in goods, test 3")
+    public void checkNomenclatureQuantityTest13Test() {
+        Nomenclature n = nomenclatureDAO.getCurrentElement(NOMENCLATURE_ID);
+        n.setQuantity(2);
+        OutputGoods outputGoods = new OutputGoods(452L, 452L, n, 2, 2);
+        outputInvoicesService.setCurrentGoodsElement(outputGoods);
+        outputInvoicesService.setValidateQuantityOfGoods(4);
+        outputInvoicesService.validate();
+        assertTrue(outputInvoicesService.isCanSaveGoods());
+    }
+
     public OutputInvoiceNGTest() {
     }
 }

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -39,7 +41,14 @@ public class ReturnedGoods implements Serializable, IGoods {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Nomenclature nomenclature;
     @Transient
-    private Integer initialQuantity = null;
+    private int initialQuantity = 0;
+
+    public ReturnedGoods() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        }
+    }
 
     @Override
     public Long getId() {
@@ -59,7 +68,8 @@ public class ReturnedGoods implements Serializable, IGoods {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the id fields are
+        // not set
         if (!(object instanceof ReturnedGoods)) {
             return false;
         }
@@ -93,13 +103,6 @@ public class ReturnedGoods implements Serializable, IGoods {
 
     @Override
     public void setQuantity(Integer quantity) {
-        if (initialQuantity == null) {
-            if (id == null) {
-                setInitialQuantity(0);
-            } else {
-                setInitialQuantity(this.quantity);
-            }
-        }
         this.quantity = quantity;
     }
 
@@ -129,11 +132,29 @@ public class ReturnedGoods implements Serializable, IGoods {
         this.nomenclature = nomenclature;
     }
 
-    public Integer getInitialQuantity() {
+    public int getInitialQuantity() {
         return initialQuantity;
     }
 
-    public void setInitialQuantity(Integer initialQuantity) {
+    public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
+    }
+
+    @PostLoad
+    public void PostLoad() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        } else {
+            this.initialQuantity = this.quantity;
+        }
+        if (this.id == null) {
+            this.quantity = 1;
+        }
+    }
+
+    @PostUpdate
+    public void PostUpdate() {
+        this.initialQuantity = this.quantity;
     }
 }

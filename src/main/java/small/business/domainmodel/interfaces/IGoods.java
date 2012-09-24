@@ -28,7 +28,7 @@ public interface IGoods extends Serializable {
     /**
      * @return Initial value quantity of goods
      */
-    public Integer getInitialQuantity();
+    public int getInitialQuantity();
 
-    public void setInitialQuantity(Integer initialQuantity);
+    public void setInitialQuantity(int initialQuantity);
 }

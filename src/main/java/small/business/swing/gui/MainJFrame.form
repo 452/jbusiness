@@ -140,7 +140,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/small/business/swing/gui/images/history.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x406;&#x441;&#x442;&#x43e;&#x440;&#x456;&#x44f;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="Languages.getTranslatedText(&quot;history&quot;)" type="code"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

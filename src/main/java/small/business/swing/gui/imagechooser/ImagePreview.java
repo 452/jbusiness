@@ -28,7 +28,6 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package small.business.swing.gui.imagechooser;
 
 import java.awt.*;
@@ -38,75 +37,76 @@ import javax.swing.*;
 
 /* ImagePreview.java by FileChooserDemo2.java. */
 public class ImagePreview extends JComponent implements PropertyChangeListener {
-	private static final long	serialVersionUID	= 1L;
-	ImageIcon					thumbnail			= null;
-	File						file				= null;
 
-	public ImagePreview(JFileChooser fc) {
-		setPreferredSize(new Dimension(100, 50));
-		fc.addPropertyChangeListener(this);
-	}
+    private static final long serialVersionUID = 1L;
+    ImageIcon thumbnail = null;
+    File file = null;
 
-	public void loadImage() {
-		if (file == null) {
-			thumbnail = null;
-			return;
-		}
+    public ImagePreview(JFileChooser fc) {
+        setPreferredSize(new Dimension(100, 50));
+        fc.addPropertyChangeListener(this);
+    }
 
-		// Don't use createImageIcon (which is a wrapper for getResource)
-		// because the image we're trying to load is probably not one
-		// of this program's own resources.
-		ImageIcon tmpIcon = new ImageIcon(file.getPath());
-		if (tmpIcon != null) {
-			if (tmpIcon.getIconWidth() > 90) {
-				thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(90, -1, Image.SCALE_DEFAULT));
-			} else { // no need to miniaturize
-				thumbnail = tmpIcon;
-			}
-		}
-	}
+    public void loadImage() {
+        if (file == null) {
+            thumbnail = null;
+            return;
+        }
 
-	public void propertyChange(PropertyChangeEvent e) {
-		boolean update = false;
-		String prop = e.getPropertyName();
+        // Don't use createImageIcon (which is a wrapper for getResource)
+        // because the image we're trying to load is probably not one
+        // of this program's own resources.
+        ImageIcon tmpIcon = new ImageIcon(file.getPath());
+        if (tmpIcon != null) {
+            if (tmpIcon.getIconWidth() > 90) {
+                thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(90, -1, Image.SCALE_DEFAULT));
+            } else { // no need to miniaturize
+                thumbnail = tmpIcon;
+            }
+        }
+    }
 
-		// If the directory changed, don't show an image.
-		if (JFileChooser.DIRECTORY_CHANGED_PROPERTY.equals(prop)) {
-			file = null;
-			update = true;
+    public void propertyChange(PropertyChangeEvent e) {
+        boolean update = false;
+        String prop = e.getPropertyName();
 
-			// If a file became selected, find out which one.
-		} else if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(prop)) {
-			file = (File) e.getNewValue();
-			update = true;
-		}
+        // If the directory changed, don't show an image.
+        if (JFileChooser.DIRECTORY_CHANGED_PROPERTY.equals(prop)) {
+            file = null;
+            update = true;
 
-		// Update the preview accordingly.
-		if (update) {
-			thumbnail = null;
-			if (isShowing()) {
-				loadImage();
-				repaint();
-			}
-		}
-	}
+            // If a file became selected, find out which one.
+        } else if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(prop)) {
+            file = (File) e.getNewValue();
+            update = true;
+        }
 
-	protected void paintComponent(Graphics g) {
-		if (thumbnail == null) {
-			loadImage();
-		}
-		if (thumbnail != null) {
-			int x = getWidth() / 2 - thumbnail.getIconWidth() / 2;
-			int y = getHeight() / 2 - thumbnail.getIconHeight() / 2;
+        // Update the preview accordingly.
+        if (update) {
+            thumbnail = null;
+            if (isShowing()) {
+                loadImage();
+                repaint();
+            }
+        }
+    }
 
-			if (y < 0) {
-				y = 0;
-			}
+    protected void paintComponent(Graphics g) {
+        if (thumbnail == null) {
+            loadImage();
+        }
+        if (thumbnail != null) {
+            int x = getWidth() / 2 - thumbnail.getIconWidth() / 2;
+            int y = getHeight() / 2 - thumbnail.getIconHeight() / 2;
 
-			if (x < 5) {
-				x = 5;
-			}
-			thumbnail.paintIcon(this, g, x, y);
-		}
-	}
+            if (y < 0) {
+                y = 0;
+            }
+
+            if (x < 5) {
+                x = 5;
+            }
+            thumbnail.paintIcon(this, g, x, y);
+        }
+    }
 }

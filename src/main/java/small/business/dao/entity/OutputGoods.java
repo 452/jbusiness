@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -42,14 +43,18 @@ public class OutputGoods implements Serializable, IGoods {
     private Integer typeOfPrice = 1;
     @Basic(optional = false)
     @Column(name = "quantity", nullable = false, updatable = true)
-    private Integer quantity = 1;
+    private Integer quantity = null;
     @Basic(optional = false)
     @Column(name = "price", nullable = false)
     private Double price = 0.01;
     @Transient
-    private Integer initialQuantity = null;
+    private int initialQuantity = 0;
 
     public OutputGoods() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        }
     }
 
     public OutputGoods(Long id) {
@@ -67,7 +72,15 @@ public class OutputGoods implements Serializable, IGoods {
         this.invoiceid = invoiceid;
         this.nomenclature = nomenclature;
         this.quantity = quantity;
-        this.initialQuantity = 0;
+        // this.initialQuantity = 0;
+    }
+
+    public OutputGoods(Long id, Long invoiceid, Nomenclature nomenclature, Integer quantity, int initialQuantity) {
+        this.id = id;
+        this.invoiceid = invoiceid;
+        this.nomenclature = nomenclature;
+        this.quantity = quantity;
+        this.initialQuantity = initialQuantity;
     }
 
     @Override
@@ -102,13 +115,6 @@ public class OutputGoods implements Serializable, IGoods {
 
     @Override
     public void setQuantity(Integer quantity) {
-        if (initialQuantity == null) {
-            if (id == null) {
-                setInitialQuantity(0);
-            } else {
-                setInitialQuantity(this.quantity);
-            }
-        }
         this.quantity = quantity;
     }
 
@@ -170,17 +176,30 @@ public class OutputGoods implements Serializable, IGoods {
     /**
      * @return Initial value quantity of goods
      */
-    public Integer getInitialQuantity() {
+    public int getInitialQuantity() {
         return initialQuantity;
     }
 
-    public void setInitialQuantity(Integer initialQuantity) {
+    public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
+    }
+
+    @PostLoad
+    public void PostLoad() {
+        if (quantity == null) {
+            this.initialQuantity = 0;
+            this.quantity = 1;
+        } else {
+            this.initialQuantity = this.quantity;
+        }
+        if (this.id == null) {
+            this.quantity = 1;
+        }
     }
 
     @PostUpdate
     public void PostUpdate() {
-        this.initialQuantity = null;
+        this.initialQuantity = this.quantity;
     }
 
     public Long getInvoiceid() {

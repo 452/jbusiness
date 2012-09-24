@@ -16,11 +16,7 @@
  */
 package small.business.businesslayer;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,28 +34,13 @@ import small.business.domainmodel.interfaces.IGoods;
  * @author root
  */
 @Service
-public class OutputInvoicesService {
+public class OutputInvoicesService extends Invoices<OutputInvoicesService> {
 
     static Logger log = Logger.getLogger(OutputInvoicesService.class.getName());
     @Autowired
     private OutputInvoicesDAO outputInvoicesDAO;
-    @Resource
-    private HistoryService historyService;
-    @Resource
-    private StoreHousesService storeHousesService;
     private OutputInvoice currentElement;
     private OutputGoods currentGoodsElement;
-    private boolean canSave = false;
-    private boolean canPrint = false;
-    private boolean canAddGoods = false;
-    private boolean canRemoveGoods = false;
-    private boolean canRemoveInvoice = false;
-    private boolean canEditInvoice = false;
-    private boolean canEditGoods = false;
-    private boolean canChangeNomenclature = false;
-    private boolean canSelectCounterParty = false;
-    private boolean canSelectStoreHouse = false;
-    private Set<OutputGoods> goodsToRemove = new HashSet<OutputGoods>();
 
     public List<OutputInvoice> getDataList() {
         return outputInvoicesDAO.getInvoicesList();
@@ -72,6 +53,7 @@ public class OutputInvoicesService {
         setCanRemoveInvoice(false);
         setCanRemoveGoods(false);
         setCanSave(false);
+        setCanSaveGoods(false);
         setCanPrint(false);
         setCanChangeNomenclature(false);
         setCanSelectCounterParty(false);
@@ -95,6 +77,20 @@ public class OutputInvoicesService {
                 setCanPrint(true);
                 if (currentGoodsElement != null && currentGoodsElement.getId() == null) {
                     setCanChangeNomenclature(true);
+                }
+            }
+            if (currentGoodsElement != null && currentGoodsElement.getNomenclature() != null) {
+                if (getValidateQuantityOfGoods() > 0) {
+                    if (currentGoodsElement.getNomenclature().getQuantity() != 0) {
+                        int q = currentGoodsElement.getNomenclature().getQuantity() - (getValidateQuantityOfGoods() - currentGoodsElement.getInitialQuantity());
+                        if (q >= 0) {
+                            setCanSaveGoods(true);
+                        }
+                    } else {
+                        if (getValidateQuantityOfGoods() <= currentGoodsElement.getInitialQuantity()) {
+                            setCanSaveGoods(true);
+                        }
+                    }
                 }
             }
         }
@@ -129,7 +125,7 @@ public class OutputInvoicesService {
 
     private void removeGoodsIfMarked() {
         if (goodsToRemove.size() > 0) {
-            for (OutputGoods goods : goodsToRemove) {
+            for (IGoods goods : goodsToRemove) {
                 if (goods.getId() != null) {
                     storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
                     historyService.saveActionOfRemoval(HistoryService.OUTPUT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
@@ -153,7 +149,7 @@ public class OutputInvoicesService {
         }
     }
 
-    public void removeGoods(OutputGoods selectedObject) {
+    public void removeGoods(IGoods selectedObject) {
         goodsToRemove.add(selectedObject);
         currentElement.getGoods().remove(selectedObject);
     }
@@ -166,84 +162,12 @@ public class OutputInvoicesService {
         this.currentElement = currentElement;
     }
 
-    public boolean isCanRemoveInvoice() {
-        return canRemoveInvoice;
-    }
-
-    private void setCanRemoveInvoice(boolean canRemove) {
-        this.canRemoveInvoice = canRemove;
-    }
-
-    public boolean isCanRemoveGoods() {
-        return canRemoveGoods;
-    }
-
-    private void setCanRemoveGoods(boolean canRemove) {
-        this.canRemoveGoods = canRemove;
-    }
-
-    public boolean isCanEditInvoice() {
-        return canEditInvoice;
-    }
-
-    private void setCanEditInvoice(boolean canEditInvoice) {
-        this.canEditInvoice = canEditInvoice;
-    }
-
-    public boolean isCanEditGoods() {
-        return canEditGoods;
-    }
-
-    private void setCanEditGoods(boolean canEditGoods) {
-        this.canEditGoods = canEditGoods;
-    }
-
-    public boolean isCanSelectCounterParty() {
-        return canSelectCounterParty;
-    }
-
-    private void setCanSelectCounterParty(boolean canSelectCounterParty) {
-        this.canSelectCounterParty = canSelectCounterParty;
-    }
-
-    public boolean isCanSelectStoreHouse() {
-        return canSelectStoreHouse;
-    }
-
-    private void setCanSelectStoreHouse(boolean canSelectStoreHouse) {
-        this.canSelectStoreHouse = canSelectStoreHouse;
-    }
-
-    public boolean isCanSave() {
-        return canSave;
-    }
-
-    private void setCanSave(boolean canSave) {
-        this.canSave = canSave;
-    }
-
     public OutputGoods getCurrentGoodsElement() {
         return currentGoodsElement;
     }
 
     public void setCurrentGoodsElement(OutputGoods currentGoodsElement) {
         this.currentGoodsElement = currentGoodsElement;
-    }
-
-    public boolean isCanAddGoods() {
-        return canAddGoods;
-    }
-
-    private void setCanAddGoods(boolean canAddGoods) {
-        this.canAddGoods = canAddGoods;
-    }
-
-    public boolean isCanPrint() {
-        return canPrint;
-    }
-
-    private void setCanPrint(boolean canPrint) {
-        this.canPrint = canPrint;
     }
 
     public String getCounterPartyTitle() {
@@ -266,13 +190,5 @@ public class OutputInvoicesService {
 
     public void setStoreHouse(StoreHouse storeHouse) {
         currentElement.setStoreHouse(storeHouse);
-    }
-
-    public boolean isCanChangeNomenclature() {
-        return canChangeNomenclature;
-    }
-
-    private void setCanChangeNomenclature(boolean canChangeNomenclature) {
-        this.canChangeNomenclature = canChangeNomenclature;
     }
 }

@@ -10,6 +10,7 @@
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -242,6 +243,9 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="&#x412;&#x456;&#x434;&#x43e;&#x43c;&#x43e;&#x441;&#x442;&#x456; &#x43f;&#x440;&#x43e; &#x442;&#x43e;&#x432;&#x430;&#x440;"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerQuantityStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelSum">
           <Properties>

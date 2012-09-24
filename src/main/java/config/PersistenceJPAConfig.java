@@ -1,70 +1,59 @@
 package config;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 
 /**
- * 
+ *
  * @author ihor
  */
 @Configuration
+@ComponentScan("small.business.*")
 public class PersistenceJPAConfig {
 
-	/*
-	 * @Bean
-	 * public JpaVendorAdapter jpaVendorAdapter() {
-	 * EclipseLinkJpaVendorAdapter vendorAdapter = new
-	 * EclipseLinkJpaVendorAdapter();
-	 * vendorAdapter.setShowSql(false);
-	 * vendorAdapter.setGenerateDdl(true);
-	 * //vendorAdapter.setDatabase(Database.H2);
-	 * return vendorAdapter;
-	 * }
-	 */
-	/*@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan(new String[] { "small.business.dao.*" });
+    @Bean
+    public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
+        return new PersistenceAnnotationBeanPostProcessor();
+    }
 
-		JpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter() {
-			{
-				// JPA properties ...
-			}
-		};
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setPersistenceXmlLocation("/META-INF/persistence.xml");
+        return factoryBean;
+    }
 
-		factoryBean.setPersistenceUnitName("db.dbPU");
-		factoryBean.setPersistenceXmlLocation("META-INF/persistence.xml");
-		factoryBean.setJpaVendorAdapter(vendorAdapter);
-		// factoryBean.setJpaVendorAdapter(this.jpaVendorAdapter());
-		// factoryBean.setJpaProperties(additionlProperties());
-
-		return factoryBean;
-	}*/
-
-	@Bean
-	// (destroyMethod = "close")
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.sqlite.JDBC");// org.sqlite.JDBC.class.getName()
-		dataSource.setUrl("jdbc:sqlite:db.db");
-		dataSource.setUsername("");
-		dataSource.setPassword("");
-		return dataSource;
-	}
-
-	/*@Bean
-	public PlatformTransactionManager transactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-		return transactionManager;
-	}
-
-	@Bean
-	public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
-		return new PersistenceAnnotationBeanPostProcessor();
-	}*/
+    /*
+     * @Bean
+     * public JpaVendorAdapter jpaVendorAdapter() {
+     * EclipseLinkJpaVendorAdapter vendorAdapter = new
+     * EclipseLinkJpaVendorAdapter();
+     * vendorAdapter.setShowSql(false);
+     * vendorAdapter.setGenerateDdl(false);
+     * return vendorAdapter;
+     * }
+     * 
+     * @Bean
+     * // (destroyMethod = "close")
+     * public DataSource dataSource() {
+     * DriverManagerDataSource dataSource = new DriverManagerDataSource();
+     * dataSource.setDriverClassName("org.sqlite.JDBC");
+     * dataSource.setUrl("jdbc:sqlite:db.db");
+     * dataSource.setUsername("");
+     * dataSource.setPassword("");
+     * return dataSource;
+     * }
+     * 
+     * 
+     * @Bean
+     * public PlatformTransactionManager transactionManager() {
+     * JpaTransactionManager transactionManager = new JpaTransactionManager();
+     * transactionManager.setEntityManagerFactory(entityManagerFactory().getObject
+     * ());
+     * return transactionManager;
+     * }
+     */
 }

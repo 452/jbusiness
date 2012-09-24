@@ -1,1 +1,2 @@
 Select * from nomenclature, nomenclatureonstorehouses WHERE nomenclature.id = nomenclatureonstorehouses.nomenclatureid and nomenclature.quantity <0 GROUP BY nomenclatureonstorehouses.nomenclatureid
+-javaagent:/data/AProjects/Java/Projects/jbusiness/target/dependency/eclipselink-2.4.0.jar

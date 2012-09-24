@@ -174,7 +174,7 @@ public class ComingInvoicesListJFrame extends javax.swing.JFrame {
 
     private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Так - Повернути товари на склад\nНі - Видалити без повернення товарів на склад", "Видалення запису", JOptionPane.YES_NO_CANCEL_OPTION);
-        if (comingsInvoicesService.isCanRemove()) {
+        if (comingsInvoicesService.isCanRemoveInvoice()) {
             if (confirm == JOptionPane.YES_OPTION) {
                 ComingsInvoice selectedObject = (ComingsInvoice) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
                 try {
@@ -262,7 +262,7 @@ public class ComingInvoicesListJFrame extends javax.swing.JFrame {
         comingsInvoicesService.setCurrentElement(validateElement);
         comingsInvoicesService.validate();
         jButtonEdit.setEnabled(comingsInvoicesService.isCanEditInvoice());
-        jButtonRemove.setEnabled(comingsInvoicesService.isCanRemove());
+        jButtonRemove.setEnabled(comingsInvoicesService.isCanRemoveInvoice());
     }
 
     private void edit() {

@@ -27,7 +27,7 @@ public class SettingsDAO {
         try {
             resultsMap = new HashMap<String, Settings>();
             @SuppressWarnings("unchecked")
-			List<Settings> settings = entityManager.createNamedQuery("Settings.findAll").getResultList();
+            List<Settings> settings = entityManager.createNamedQuery("Settings.findAll").getResultList();
             for (Settings s : settings) {
                 resultsMap.put(s.getName(), s);
             }

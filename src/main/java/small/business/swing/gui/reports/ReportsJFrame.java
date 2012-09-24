@@ -24,9 +24,6 @@ import small.business.dao.entity.Nomenclature;
 import small.business.dao.entity.OutputGoods;
 import small.business.dao.entity.OutputInvoice;
 import config.AppContext;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
-import org.eclipse.persistence.jpa.JpaQuery;
 
 /**
  *
