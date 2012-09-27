@@ -76,7 +76,7 @@ public class CounterPartiesService {
         if ((validateElement != null) && (validateElement.getId() != null) && (!validateElement.getId().equals(groupSelector.getNavigationGroupId()))) {
             setCanEdit(true);
             // setCanMove(true);
-            setCanRemove(true);
+            //setCanRemove(true);
         }
         if ((validateElement != null) && (validateElement.getTitle() != null) && (validateElement.getInfo() != null) && (validateElement.getTitle().length() > 0) && !validateElement.getTitle().endsWith(" ") && !validateElement.getInfo().endsWith(" ")) {
             setCanSave(true);

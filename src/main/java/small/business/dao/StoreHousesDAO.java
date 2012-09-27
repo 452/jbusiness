@@ -189,4 +189,24 @@ public class StoreHousesDAO {
         }
         return result;
     }
+    
+	public boolean goodsExist(GoodsOnStoreHouses goodsOnStoreHouses) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		int count = 0;
+		try {
+			Query q = entityManager.createNamedQuery("GoodsOnStoreHouses.findByNomenclatureAndStoreHouse");
+			q.setParameter("nomenclatureid", goodsOnStoreHouses.getNomenclature());
+			q.setParameter("storehouseid", goodsOnStoreHouses.getStorehouseid());
+			count = q.getResultList().size();
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+		finally {
+			if (entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return count > 0 ? true : false;
+	}
 }

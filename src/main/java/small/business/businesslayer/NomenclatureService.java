@@ -94,7 +94,7 @@ public class NomenclatureService {
             if ((currentElement.getId() != null) && (!currentElement.getId().equals(groupSelector.getNavigationGroupId()))) {
                 setCanEdit(true);
                 setCanMove(true);
-                setCanRemove(true);
+                //setCanRemove(true);
             }
             if ((currentElement.getTitle() != null) && (currentElement.getInfo() != null) && (currentElement.getTitle().length() > 0) && !currentElement.getTitle().endsWith(" ") && !currentElement.getInfo().endsWith(" ") && (currentElement.getArticleofgoods() != null) && (currentElement.getArticleinside() != null) && !currentElement.getArticleofgoods().endsWith(" ") && !currentElement.getArticleinside().endsWith(" ")) {
                 setCanSave(true);

@@ -3,7 +3,11 @@ package small.business.swing.gui.storehouses;
 import config.AppContext;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+
+import small.business.businesslayer.ReturnsOfGoodsService;
 import small.business.businesslayer.StoreHousesService;
 import small.business.dao.entity.GoodsOnStoreHouses;
 import small.business.dao.entity.StoreHouse;
@@ -16,6 +20,7 @@ import small.business.swing.gui.utils.ModalFrameUtil;
 public class StoreHousesJFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
+    static Logger log = Logger.getLogger(ReturnsOfGoodsService.class.getName());
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private StoreHousesService storeHousesService = (StoreHousesService) ctx.getBean("storeHousesService");
     private final static int OBJECT_COLUMN = 1;
@@ -23,11 +28,16 @@ public class StoreHousesJFrame extends javax.swing.JFrame {
     /**
      * Creates new form StoreHousesJFrame
      */
-    public StoreHousesJFrame() {
-        initComponents();
-        getStoreHousesList();
-        getGoodsList();
-    }
+	public StoreHousesJFrame() {
+		initComponents();
+		try {
+			getStoreHousesList();
+			getGoodsList();
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.

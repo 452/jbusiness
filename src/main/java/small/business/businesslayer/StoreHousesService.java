@@ -33,21 +33,23 @@ public class StoreHousesService {
     private boolean canRemoveGoods = false;
     private boolean canChangeNomenclature = false;
 
-    public void saveOrUpdate() {
-        if (currentElement != null) {
-            if (currentElement.getId() == null) {
-                currentElement = updateGoodsQuantityOnStorehouse(currentElement);
-                if (currentElement != null) {
-                    historyService.saveActionOfAdd(HistoryService.STOREHOUSE, currentElement.getNomenclature().getTitle() + " №" + currentElement.getId().toString());
-                }
-            } else {
-                currentElement = updateGoodsQuantityOnStorehouse(currentElement);
-                if (currentElement != null) {
-                    historyService.saveActionOfChange(HistoryService.STOREHOUSE, " №" + currentElement.getId().toString() + " " + currentElement.getNomenclature().getTitle());
-                }
-            }
-        }
-    }
+	public void saveOrUpdate() {
+		if (currentElement != null) {
+			if (currentElement.getId() == null) {
+				if (!storeHousesDAO.goodsExist(currentElement)) {
+					currentElement = updateGoodsQuantityOnStorehouse(currentElement);
+					if (currentElement != null) {
+						historyService.saveActionOfAdd(HistoryService.STOREHOUSE, currentElement.getNomenclature().getTitle() + " №" + currentElement.getId().toString());
+					}
+				}
+			} else {
+				currentElement = updateGoodsQuantityOnStorehouse(currentElement);
+				if (currentElement != null) {
+					historyService.saveActionOfChange(HistoryService.STOREHOUSE, " №" + currentElement.getId().toString() + " " + currentElement.getNomenclature().getTitle());
+				}
+			}
+		}
+	}
 
     public IGoods changeIncreaseGoodsQuantityOnStorehouse(IGoods goods, StoreHouse storeHouse) {
         GoodsOnStoreHouses goodsOnStoreHouses = storeHousesDAO.getGoodsFromStoreHouse(goods, storeHouse);
