@@ -369,6 +369,8 @@
                   <Component id="jButtonEditGoods" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonRemoveGoods" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButtonsShowPictures" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -381,13 +383,16 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButtonAddGoods" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonRemoveGoods" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jButtonRemoveGoods" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jButtonsShowPictures" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jButtonEditGoods" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane" pref="113" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="115" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -416,9 +421,11 @@
               <Properties>
                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
+                  <Table columnCount="8" rowCount="0">
                     <Column editable="false" title="id" type="java.lang.Long"/>
                     <Column editable="false" title="&#x41d;&#x43e;&#x43c;&#x435;&#x43d;&#x43a;&#x43b;&#x430;&#x442;&#x443;&#x440;&#x430;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#x417;&#x430;&#x432;&#x43e;&#x434;&#x441;&#x44c;&#x43a;&#x438;&#x439; &#x430;&#x440;&#x442;&#x438;&#x43a;&#x443;&#x43b;" type="java.lang.String"/>
+                    <Column editable="false" title="&#x412;&#x43d;&#x443;&#x442;&#x440;&#x456;&#x448;&#x43d;&#x456;&#x439; &#x430;&#x440;&#x442;&#x438;&#x43a;&#x443;&#x43b;" type="java.lang.String"/>
                     <Column editable="false" title="&#x41a;&#x456;&#x43b;&#x44c;&#x43a;&#x456;&#x441;&#x442;&#x44c;" type="java.lang.Integer"/>
                     <Column editable="false" title="&#x412;&#x438;&#x434; &#x446;&#x456;&#x43d;&#x438;" type="java.lang.String"/>
                     <Column editable="false" title="&#x426;&#x456;&#x43d;&#x430;" type="java.lang.String"/>
@@ -428,6 +435,16 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="60" minWidth="-1" prefWidth="60" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="200" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -553,6 +570,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditGoodsActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonsShowPictures">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x43a;&#x430;&#x437;&#x430;&#x442;&#x438; &#x444;&#x43e;&#x442;&#x43e;"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonsShowPicturesActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

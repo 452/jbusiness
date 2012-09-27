@@ -96,6 +96,7 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
         jLabelAllGoodsQuantity = new javax.swing.JLabel();
         jLabelAllGoodsPrice = new javax.swing.JLabel();
         jButtonEditGoods = new javax.swing.JButton();
+        jButtonsShowPictures = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Видаткова накладна");
@@ -301,14 +302,14 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "Номенклатура", "Кількість", "Вид ціни", "Ціна", "Сума"
+                "id", "Номенклатура", "Заводський артикул", "Внутрішній артикул", "Кількість", "Вид ціни", "Ціна", "Сума"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -328,14 +329,15 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
         jScrollPane.setViewportView(jTableGoods);
         jTableGoods.getColumnModel().getColumn(0).setPreferredWidth(60);
         jTableGoods.getColumnModel().getColumn(0).setMaxWidth(60);
-        jTableGoods.getColumnModel().getColumn(2).setPreferredWidth(70);
-        jTableGoods.getColumnModel().getColumn(2).setMaxWidth(70);
-        jTableGoods.getColumnModel().getColumn(3).setPreferredWidth(120);
-        jTableGoods.getColumnModel().getColumn(3).setMaxWidth(120);
-        jTableGoods.getColumnModel().getColumn(4).setPreferredWidth(60);
-        jTableGoods.getColumnModel().getColumn(4).setMaxWidth(60);
-        jTableGoods.getColumnModel().getColumn(5).setPreferredWidth(60);
-        jTableGoods.getColumnModel().getColumn(5).setMaxWidth(60);
+        jTableGoods.getColumnModel().getColumn(1).setMinWidth(200);
+        jTableGoods.getColumnModel().getColumn(4).setPreferredWidth(70);
+        jTableGoods.getColumnModel().getColumn(4).setMaxWidth(70);
+        jTableGoods.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTableGoods.getColumnModel().getColumn(5).setMaxWidth(120);
+        jTableGoods.getColumnModel().getColumn(6).setPreferredWidth(60);
+        jTableGoods.getColumnModel().getColumn(6).setMaxWidth(60);
+        jTableGoods.getColumnModel().getColumn(7).setPreferredWidth(60);
+        jTableGoods.getColumnModel().getColumn(7).setMaxWidth(60);
 
         jButtonRemoveGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/delete.png"))); // NOI18N
         jButtonRemoveGoods.setText("Видалити");
@@ -390,6 +392,14 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonsShowPictures.setText("Показати фото");
+        jButtonsShowPictures.setEnabled(false);
+        jButtonsShowPictures.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonsShowPicturesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelGoodsLayout = new javax.swing.GroupLayout(jPanelGoods);
         jPanelGoods.setLayout(jPanelGoodsLayout);
         jPanelGoodsLayout.setHorizontalGroup(
@@ -401,6 +411,8 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonEditGoods)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveGoods)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonsShowPictures)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane)
@@ -411,11 +423,13 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButtonAddGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonRemoveGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonRemoveGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonsShowPictures))
                         .addComponent(jButtonEditGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -540,6 +554,10 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPrintActionPerformed
 
+    private void jButtonsShowPicturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonsShowPicturesActionPerformed
+        
+    }//GEN-LAST:event_jButtonsShowPicturesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -591,6 +609,7 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRemoveGoods;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonStoreHouseSelect;
+    private javax.swing.JButton jButtonsShowPictures;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JComboBox jComboBoxStatusOfPayment;
     private javax.swing.JLabel jLabel1;
@@ -651,7 +670,7 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
         long quantity = 0;
         if (outputInvoicesService.getCurrentElement().getGoods() != null) {
             for (OutputGoods goods : outputInvoicesService.getCurrentElement().getGoods()) {
-                Object[] g = new Object[]{goods.getId(), goods, goods.getQuantity(), goods.getTypeOfPrice().equals(1) ? "Роздріб" : goods.getTypeOfPrice().equals(2) ? "Дрібний опт" : "Крупний опт", goods.getSum(), goods.getPrice()};
+                Object[] g = new Object[]{goods.getId(), goods, goods.getNomenclature().getArticleofgoods(), goods.getNomenclature().getArticleinside(), goods.getQuantity(), goods.getTypeOfPrice().equals(1) ? "Роздріб" : goods.getTypeOfPrice().equals(2) ? "Дрібний опт" : "Крупний опт", goods.getSum(), goods.getPrice()};
                 dataModel.addRow(g);
                 quantity += goods.getQuantity();
                 sum += goods.getPrice();

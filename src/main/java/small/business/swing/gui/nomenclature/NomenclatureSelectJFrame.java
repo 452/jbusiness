@@ -10,7 +10,17 @@ import small.business.businesslayer.NomenclatureService;
 import small.business.dao.entity.Nomenclature;
 import small.business.swing.gui.utils.ModalFrameUtil;
 import config.AppContext;
+import java.awt.Component;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import org.apache.log4j.Logger;
 import small.business.businesslayer.SettingsService;
+import small.business.dao.entity.Pictures;
 
 /**
  *
@@ -19,6 +29,7 @@ import small.business.businesslayer.SettingsService;
 public class NomenclatureSelectJFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
+    static Logger log = Logger.getLogger(NomenclatureSelectJFrame.class.getName());
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private NomenclatureService nomenclatureService = (NomenclatureService) ctx.getBean("nomenclatureService");
     private SettingsService settingsService = (SettingsService) ctx.getBean("settingsService");
@@ -66,8 +77,6 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jButtonSelectToRooT = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
@@ -87,60 +96,15 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
         jLabelFactorySerialArticul = new javax.swing.JLabel();
         jButtonClearSearch = new javax.swing.JButton();
         jCheckBoxShowTheCalculationOf = new javax.swing.JCheckBox();
+        jSplitPanel = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePictures = new javax.swing.JTable();
+        jScrollPane = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Вибір номенклатури");
         setExtendedState(6);
-
-        jTable.setAutoCreateRowSorter(true);
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Група", "id", "Найменування", "Заводський Артикул", "Внутрішній Артикул", "Кількість", "Ціна", "Роздріб", "Опт", "Крупний опт"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Long.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable.getTableHeader().setReorderingAllowed(false);
-        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTableMouseReleased(evt);
-            }
-        });
-        jScrollPane.setViewportView(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTable.getColumnModel().getColumn(0).setMaxWidth(50);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTable.getColumnModel().getColumn(1).setMaxWidth(50);
-        jTable.getColumnModel().getColumn(2).setPreferredWidth(267);
-        jTable.getColumnModel().getColumn(5).setPreferredWidth(60);
-        jTable.getColumnModel().getColumn(5).setMaxWidth(60);
-        jTable.getColumnModel().getColumn(6).setPreferredWidth(60);
-        jTable.getColumnModel().getColumn(6).setMaxWidth(60);
-        jTable.getColumnModel().getColumn(7).setPreferredWidth(60);
-        jTable.getColumnModel().getColumn(7).setMaxWidth(60);
-        jTable.getColumnModel().getColumn(8).setPreferredWidth(60);
-        jTable.getColumnModel().getColumn(8).setMaxWidth(60);
-        jTable.getColumnModel().getColumn(9).setPreferredWidth(80);
-        jTable.getColumnModel().getColumn(9).setMaxWidth(80);
 
         jButtonSelectToRooT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/save.png"))); // NOI18N
         jButtonSelectToRooT.setText("В кореневий каталог");
@@ -311,20 +275,113 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
             }
         });
 
+        jSplitPanel.setDividerLocation(769);
+        jSplitPanel.setDividerSize(6);
+
+        jTablePictures.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Зображення", "Опис"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablePictures.setRowHeight(40);
+        jTablePictures.getTableHeader().setReorderingAllowed(false);
+        jTablePictures.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePicturesMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTablePicturesMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTablePictures);
+        jTablePictures.getColumnModel().getColumn(0).setMaxWidth(40);
+
+        jSplitPanel.setRightComponent(jScrollPane1);
+
+        jTable.setAutoCreateRowSorter(true);
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Група", "id", "Найменування", "Заводський Артикул", "Внутрішній Артикул", "Кількість", "Ціна", "Роздріб", "Опт", "Крупний опт"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Long.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.getTableHeader().setReorderingAllowed(false);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableMouseReleased(evt);
+            }
+        });
+        jScrollPane.setViewportView(jTable);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(1).setMaxWidth(50);
+        jTable.getColumnModel().getColumn(2).setPreferredWidth(267);
+        jTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(5).setMaxWidth(60);
+        jTable.getColumnModel().getColumn(6).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(6).setMaxWidth(60);
+        jTable.getColumnModel().getColumn(7).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(7).setMaxWidth(60);
+        jTable.getColumnModel().getColumn(8).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(8).setMaxWidth(60);
+        jTable.getColumnModel().getColumn(9).setPreferredWidth(80);
+        jTable.getColumnModel().getColumn(9).setMaxWidth(80);
+
+        jSplitPanel.setLeftComponent(jScrollPane);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanelSearch, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 167, Short.MAX_VALUE)
                 .add(jCheckBoxShowTheCalculationOf)
                 .addContainerGap())
             .add(layout.createSequentialGroup()
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(0, 0, Short.MAX_VALUE))
+            .add(jSplitPanel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -335,7 +392,7 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
                     .add(jPanelSearch, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jCheckBoxShowTheCalculationOf))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                .add(jSplitPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
         );
 
         pack();
@@ -373,17 +430,17 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         if (jTable.getSelectedRow() >= 0) {
             Nomenclature selectedObject = (Nomenclature) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-			if (evt.getClickCount() == 2) {
-				svalidate();
-				if (nomenclatureService.isCanSelect()) {
-					nomenclatureService.setSelectedElement(selectedObject);
-					nomenclatureService.setSelected(true);
-					dispose();
-				} else {
-					nomenclatureService.setCurrentCategory(selectedObject);
-					getList();
-				}
-			}
+            if (evt.getClickCount() == 2) {
+                svalidate();
+                if (nomenclatureService.isCanSelect()) {
+                    nomenclatureService.setSelectedElement(selectedObject);
+                    nomenclatureService.setSelected(true);
+                    dispose();
+                } else {
+                    nomenclatureService.setCurrentCategory(selectedObject);
+                    getList();
+                }
+            }
         }
     }//GEN-LAST:event_jTableMouseClicked
 
@@ -404,12 +461,21 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCreateNomenclatureActionPerformed
 
     private void jTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseReleased
+        showPictures();
         svalidate();
     }//GEN-LAST:event_jTableMouseReleased
 
     private void jCheckBoxShowTheCalculationOfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxShowTheCalculationOfActionPerformed
         getList();
     }//GEN-LAST:event_jCheckBoxShowTheCalculationOfActionPerformed
+
+    private void jTablePicturesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePicturesMouseClicked
+        //picturesValidate();
+    }//GEN-LAST:event_jTablePicturesMouseClicked
+
+    private void jTablePicturesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePicturesMouseReleased
+        //picturesValidate();
+    }//GEN-LAST:event_jTablePicturesMouseReleased
 
     /**
      * @param args the command line arguments
@@ -468,8 +534,11 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelSearch;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerNomenclatureID;
+    private javax.swing.JSplitPane jSplitPanel;
     private javax.swing.JTable jTable;
+    private javax.swing.JTable jTablePictures;
     private javax.swing.JTextField jTextFieldSearchByAdditionalArticul;
     private javax.swing.JTextField jTextFieldSearchByFactorySerialArticul;
     private javax.swing.JTextField jTextFieldSearchNomenclatureByTitle;
@@ -483,5 +552,43 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
         nomenclatureService.setSelectedElement(selectedObject);
         nomenclatureService.validate();
         jButtonSelect.setEnabled(nomenclatureService.isCanSelect());
+    }
+
+    class ImageRenderer extends DefaultTableCellRenderer {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = new JLabel();
+            if (value != null) {
+                label.setHorizontalAlignment(JLabel.CENTER);
+                //value is parameter which filled by byteOfImage
+                label.setIcon(new ImageIcon((byte[]) value));
+            }
+            return label;
+        }
+    }
+
+    private void showPictures() {
+        if (jTable.getSelectedRow() >= 0) {
+            Nomenclature selectedObject = (Nomenclature) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+            DefaultTableModel dataModel = (DefaultTableModel) jTablePictures.getModel();
+            dataModel.setRowCount(0);
+            jTablePictures.getColumnModel().getColumn(1).setCellRenderer(new NomenclatureSelectJFrame.ImageRenderer());
+            int i = 0;
+            for (Pictures pic : selectedObject.getPictures()) {
+                try {
+                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(pic.getData()));
+                    Object[] g = new Object[]{pic, pic.getData(), pic.getInfo()};
+                    dataModel.addRow(g);
+                    jTablePictures.setRowHeight(i, bufferedImage.getHeight());
+                    i++;
+                } catch (Exception ex) {
+                    log.error(ex);
+                }
+            }
+            jTablePictures.setModel(dataModel);
+        }
     }
 }
