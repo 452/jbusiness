@@ -29,6 +29,7 @@ import small.business.swing.gui.utils.ModalFrameUtil;
 import small.business.swing.gui.utils.TrayMessage;
 import small.business.u18n.Languages;
 import config.ApplicationConfig;
+import small.business.swing.gui.priceslist.PricesListJFrame;
 
 /**
  *
@@ -67,7 +68,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jButtonNomenclature = new javax.swing.JButton();
         jButtonStoreHouses = new javax.swing.JButton();
         jButtonReports = new javax.swing.JButton();
-        jButtonPriceList = new javax.swing.JButton();
+        jButtonPricesList = new javax.swing.JButton();
         jButtonRepair = new javax.swing.JButton();
         jButtonSuply = new javax.swing.JButton();
         jButtonSettings = new javax.swing.JButton();
@@ -178,19 +179,18 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonPriceList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/xls.png"))); // NOI18N
-        jButtonPriceList.setEnabled(false);
-        jButtonPriceList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jButtonPriceList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonPriceList.setLabel("Прайс лист");
-        jButtonPriceList.setMaximumSize(new java.awt.Dimension(175, 161));
-        jButtonPriceList.setMinimumSize(new java.awt.Dimension(175, 161));
-        jButtonPriceList.setName(""); // NOI18N
-        jButtonPriceList.setPreferredSize(new java.awt.Dimension(175, 161));
-        jButtonPriceList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonPriceList.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPricesList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/xls.png"))); // NOI18N
+        jButtonPricesList.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButtonPricesList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonPricesList.setLabel("Прайс лист");
+        jButtonPricesList.setMaximumSize(new java.awt.Dimension(175, 161));
+        jButtonPricesList.setMinimumSize(new java.awt.Dimension(175, 161));
+        jButtonPricesList.setName(""); // NOI18N
+        jButtonPricesList.setPreferredSize(new java.awt.Dimension(175, 161));
+        jButtonPricesList.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonPricesList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPriceListActionPerformed(evt);
+                jButtonPricesListActionPerformed(evt);
             }
         });
 
@@ -310,7 +310,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButtonPricesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(10, 10, 10)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonCashRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,7 +329,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jButtonReports, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonPriceList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonPricesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonNomenclature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCounterParties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCashRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,8 +373,11 @@ public class MainJFrame extends javax.swing.JFrame {
         sf.setVisible(true);
     }//GEN-LAST:event_jButtonSettingsActionPerformed
 
-    private void jButtonPriceListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPriceListActionPerformed
-    }//GEN-LAST:event_jButtonPriceListActionPerformed
+    private void jButtonPricesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPricesListActionPerformed
+        PricesListJFrame pricesList = new PricesListJFrame();
+        pricesList.pack();
+        ModalFrameUtil.showAsModal(pricesList, this);
+    }//GEN-LAST:event_jButtonPricesListActionPerformed
 
     private void jButtonSuplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuplyActionPerformed
         SuplyJFrame suply = new SuplyJFrame();
@@ -541,7 +544,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCounterParties;
     private javax.swing.JButton jButtonHistory;
     private javax.swing.JButton jButtonNomenclature;
-    private javax.swing.JButton jButtonPriceList;
+    private javax.swing.JButton jButtonPricesList;
     private javax.swing.JButton jButtonRepair;
     private javax.swing.JButton jButtonReports;
     private javax.swing.JButton jButtonReturnsOfGoods;

@@ -51,6 +51,25 @@ public abstract class GenericDAO<E extends IElement<?>> {
         return element;
     }
 
+    public boolean isHaveRecordsHierarchicalData(Long parentid) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<E> result = Collections.emptyList();
+        try {
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+            CriteriaQuery<E> criteriaQuery = cb.createQuery(entityClass);
+            Root<E> from = criteriaQuery.from(entityClass);
+            criteriaQuery.where(cb.equal(from.get("parentid"), parentid));
+            result = entityManager.createQuery(criteriaQuery).getResultList();
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+        return result.isEmpty() ? false : true;
+    }
+
     public List<E> getHierarchicalDataList(Long parentid) {
         long start = System.currentTimeMillis();
         EntityManager entityManager = entityManagerFactory.createEntityManager();

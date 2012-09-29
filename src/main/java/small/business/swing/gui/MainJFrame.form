@@ -90,7 +90,7 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButtonReports" max="32767" attributes="0"/>
-                              <Component id="jButtonPriceList" max="32767" attributes="0"/>
+                              <Component id="jButtonPricesList" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -116,7 +116,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButtonPriceList" max="32767" attributes="0"/>
+                      <Component id="jButtonPricesList" max="32767" attributes="0"/>
                       <Component id="jButtonNomenclature" max="32767" attributes="0"/>
                       <Component id="jButtonCounterParties" max="32767" attributes="0"/>
                       <Component id="jButtonCashRegister" max="32767" attributes="0"/>
@@ -280,12 +280,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReportsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonPriceList">
+        <Component class="javax.swing.JButton" name="jButtonPricesList">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/small/business/swing/gui/images/xls.png"/>
             </Property>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="label" type="java.lang.String" value="&#x41f;&#x440;&#x430;&#x439;&#x441; &#x43b;&#x438;&#x441;&#x442;"/>
@@ -302,7 +301,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPriceListActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPricesListActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRepair">
