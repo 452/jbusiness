@@ -1,19 +1,22 @@
 package small.business.swing.gui.nomenclature;
 
-import config.AppContext;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.logging.Level;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
 import org.springframework.context.ApplicationContext;
+
 import small.business.businesslayer.NomenclatureService;
 import small.business.dao.entity.Pictures;
 import small.business.swing.gui.imagechooser.ImageFileView;
 import small.business.swing.gui.imagechooser.ImageFilter;
 import small.business.swing.gui.imagechooser.ImagePreview;
+import config.AppContext;
 
 /**
  *
@@ -153,11 +156,11 @@ public class NomenclaturePictureElementJFrame extends javax.swing.JFrame {
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
         JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new ImageFilter());
+        fc.setFileFilter(new ImageFilter());
         fc.setAcceptAllFileFilterUsed(false);
         fc.setFileView(new ImageFileView());
         fc.setAccessory(new ImagePreview(fc));
-        if (fc.showDialog(this, "Вибрати") == JFileChooser.APPROVE_OPTION) {
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             if (Long.valueOf(fc.getSelectedFile().length() / 1024) <= 20L) {
                 try {
                     //bufferedImage = ImageIO.read(new ByteArrayInputStream(pic.getData()));
