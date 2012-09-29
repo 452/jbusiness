@@ -114,7 +114,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
             row.createCell(4).setCellValue(createHelper.createRichTextString("Крупний опт"));
             row.createCell(5).setCellValue(createHelper.createRichTextString("Наявність на складі"));
             row.createCell(6).setCellValue(createHelper.createRichTextString("Курс Валют"));
-            row.createCell(7).setCellValue(settingsService.getExchangeRate());
+            row.createCell(7).setCellValue((double)settingsService.getExchangeRate());
             //
             HSSFCellStyle style = sheet.getWorkbook().createCellStyle();
             style.setFillBackgroundColor(HSSFColor.GREY_25_PERCENT.index);
