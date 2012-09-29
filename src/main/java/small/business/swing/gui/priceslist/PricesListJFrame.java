@@ -98,7 +98,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel document (*.xls)", "xls");
         fc.addChoosableFileFilter(excelFilter);
         fc.setFileFilter(excelFilter);
-        fc.setSelectedFile(new File("PricesList." + excelFilter.getExtensions()[0]));
+        fc.setSelectedFile(new File("PricesList"));
         fc.setAcceptAllFileFilterUsed(false);
         if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -134,7 +134,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
             sheet.autoSizeColumn(1);
             FileOutputStream fileOut = null;
             try {
-                fileOut = new FileOutputStream(fc.getSelectedFile());
+                fileOut = new FileOutputStream(fc.getSelectedFile() + "." + excelFilter.getExtensions()[0]);
                 workbook.write(fileOut);
             } catch (Exception ex) {
                 log.error(ex);
