@@ -4,6 +4,8 @@ import java.text.DateFormat;
 
 import config.AppContext;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import small.business.businesslayer.HistoryService;
 import small.business.dao.entity.History;
@@ -15,26 +17,32 @@ import small.business.dao.entity.History;
 public class HistoryJFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
+    static Logger log = Logger.getLogger(HistoryJFrame.class.getName());
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private HistoryService historyService = (HistoryService) ctx.getBean("historyService");
 
     /**
      * Creates new form HistoryJFrame
      */
-    public HistoryJFrame() {
-        initComponents();
-        DefaultTableModel dataModel = (DefaultTableModel) jTable.getModel();
-        dataModel.setRowCount(0);
+	public HistoryJFrame() {
+		initComponents();
+		try {
+			DefaultTableModel dataModel = (DefaultTableModel) jTable.getModel();
+			dataModel.setRowCount(0);
 
-        for (History history : historyService.getDataList()) {
-            // PrettyTime prettyTime = new PrettyTime(history.getDate());
-            // PrettyTime prettyTime = new PrettyTime(history.getDate(),new
-            // Locale("ua"));
-            Object[] g = new Object[]{DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(history.getDate()), history.getTitle(), history.getInfo()};
-            dataModel.addRow(g);
-        }
-        jTable.setModel(dataModel);
-    }
+			for (History history : historyService.getDataList()) {
+				// PrettyTime prettyTime = new PrettyTime(history.getDate());
+				// PrettyTime prettyTime = new PrettyTime(history.getDate(),new
+				// Locale("ua"));
+				Object[] g = new Object[] { DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(history.getDate()), history.getTitle(), history.getInfo() };
+				dataModel.addRow(g);
+			}
+			jTable.setModel(dataModel);
+		}
+		catch (Exception e) {
+			log.error("Error initialization History window", e);
+		}
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.

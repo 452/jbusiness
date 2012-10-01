@@ -39,6 +39,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
     static Logger log = Logger.getLogger(MainJFrame.class.getName());
+    
+	static {
+		System.setProperty("mail.smtp.starttls.enable", "true");
+		System.setProperty("mail.smtp.quitwait", "false");
+	}
 
     /**
      * Creates new form MainJFrame
@@ -533,6 +538,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     log.debug("Time initialize spring: " + (end - start) + " ms");
                     new MainJFrame().setVisible(true);
                 } catch (Exception e) {
+                	log.error("Error: " + e);
                     JOptionPane.showMessageDialog(null, "Помилка програми:\n" + e, null, JOptionPane.ERROR_MESSAGE);
                 }
             }
