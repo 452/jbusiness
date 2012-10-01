@@ -230,7 +230,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            log.error(e);
+			log.error("Creation prices list error", e);
         }
     }
 }
