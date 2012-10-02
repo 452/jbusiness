@@ -55,8 +55,8 @@ public class NomenclatureService {
                 currentElement = nomenclatureDAO.saveOrUpdate(currentElement);
                 historyService.saveActionOfChange(HistoryService.NOMENCLATURE, currentElement.getTitle() + " №" + currentElement.getId().toString());
             }
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -69,8 +69,8 @@ public class NomenclatureService {
             currentElement.setParentid(selectedElement.getId());
             try {
                 nomenclatureDAO.saveOrUpdate(currentElement);
-            } catch (Exception ex) {
-                log.error(ex);
+            } catch (Exception e) {
+            	log.error(e.getMessage(), e);
             }
             setSelected(false);
         }

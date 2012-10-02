@@ -27,91 +27,6 @@ public class StoreHousesDAO {
     @Resource
     EntityManagerFactory entityManagerFactory;
 
-    /**
-     * Збільшення товару на складах
-     *
-     * @param goods
-     * @param store House
-     */
-    public void updateQuantityIncrease(IGoods element, StoreHouse storeHouse) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Query q = entityManager.createNamedQuery("GoodsOnStoreHouses.findByNomenclatureAndStoreHouse");
-            q.setParameter("nomenclatureid", element.getNomenclature());
-            q.setParameter("storehouseid", storeHouse.getId());
-            GoodsOnStoreHouses goods;
-            try {
-                goods = (GoodsOnStoreHouses) q.getSingleResult();
-                entityManager.getTransaction().begin();
-                goods.getNomenclature().setQuantity(goods.getNomenclature().getQuantity() + element.getQuantity());
-                goods.setQuantity(goods.getQuantity() + element.getQuantity());
-                entityManager.merge(goods);
-                entityManager.flush();
-                entityManager.getTransaction().commit();
-            } catch (NoResultException e) {
-                log.debug(e);
-                goods = new GoodsOnStoreHouses();
-                entityManager.getTransaction().begin();
-                goods.setNomenclature(element.getNomenclature());
-                goods.getNomenclature().setQuantity(goods.getNomenclature().getQuantity() + element.getQuantity());
-                goods.setQuantity(element.getQuantity());
-                goods.setStorehouseid(storeHouse.getId());
-                entityManager.merge(goods);
-                entityManager.flush();
-                entityManager.getTransaction().commit();
-            } catch (Exception e) {
-                log.error(e);
-            }
-
-        } catch (Exception e) {
-            log.error(e);
-        } finally {
-            if (entityManager.isOpen()) {
-                entityManager.close();
-            }
-        }
-    }
-
-    /**
-     * Зменшення товару на складах
-     *
-     * @param goods
-     * @param store House
-     */
-    public void updateQuantityReduce(IGoods element, StoreHouse storeHouse) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            Query q = entityManager.createNamedQuery("GoodsOnStoreHouses.findByNomenclatureAndStoreHouse");
-            q.setParameter("nomenclatureid", element.getNomenclature());
-            q.setParameter("storehouseid", storeHouse.getId());
-            GoodsOnStoreHouses goods;
-            try {
-                goods = (GoodsOnStoreHouses) q.getSingleResult();
-                goods.getNomenclature().setQuantity(goods.getNomenclature().getQuantity() - element.getQuantity());
-                goods.setQuantity(goods.getQuantity() - element.getQuantity());
-                entityManager.merge(goods);
-            } catch (NoResultException e) {
-                log.debug(e);
-                goods = new GoodsOnStoreHouses();
-                goods.setNomenclature(element.getNomenclature());
-                goods.getNomenclature().setQuantity(goods.getNomenclature().getQuantity() - element.getQuantity());
-                goods.setQuantity(element.getQuantity());
-                goods.setStorehouseid(storeHouse.getId());
-                entityManager.persist(goods);
-            } catch (Exception e) {
-                log.error(e);
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            log.error(e);
-        } finally {
-            if (entityManager.isOpen()) {
-                entityManager.close();
-            }
-        }
-    }
-
     public GoodsOnStoreHouses getGoodsFromStoreHouse(IGoods element, StoreHouse storeHouse) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         GoodsOnStoreHouses goods = null;
@@ -131,7 +46,7 @@ public class StoreHousesDAO {
                 entityManager.getTransaction().commit();
             }
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -147,7 +62,7 @@ public class StoreHousesDAO {
         try {
             result = entityManager.createNamedQuery("StoreHouse.findAll").getResultList();
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -163,7 +78,7 @@ public class StoreHousesDAO {
         try {
             result = entityManager.createNamedQuery("GoodsOnStoreHouses.findByStorehouseid").setParameter("storehouseid", 1).getResultList();
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -200,7 +115,7 @@ public class StoreHousesDAO {
 			count = q.getResultList().size();
 		}
 		catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 		finally {
 			if (entityManager.isOpen()) {

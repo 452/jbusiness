@@ -45,8 +45,8 @@ public class CounterPartiesService {
                 currentElement = counterPartiesDAO.saveOrUpdate(currentElement);
                 historyService.saveActionOfChange(HistoryService.COUNTERPARTIES, currentElement.getTitle() + " №" + currentElement.getId().toString());
             }
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }
 
@@ -57,8 +57,8 @@ public class CounterPartiesService {
             currentElement.setParentid(selectedElement.getId());
             try {
                 counterPartiesDAO.saveOrUpdate(currentElement);
-            } catch (Exception ex) {
-                java.util.logging.Logger.getLogger(CounterPartiesService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+            	log.error(e.getMessage(), e);
             }
         }
     }

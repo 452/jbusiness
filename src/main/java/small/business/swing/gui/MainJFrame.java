@@ -516,10 +516,10 @@ public class MainJFrame extends javax.swing.JFrame {
                             TrayMessage trayMessage = new TrayMessage();
                             trayMessage.showTrayMessageInfo("Ініціалізація програми");
                         } catch (AWTException ex) {
-                            System.err.println("Can't add to tray>> " + ex);
+                        	log.debug("Can't add to tray>> " + ex);
                         }
                     } else {
-                        System.err.println("Tray unavailable");
+                    	log.debug("Tray unavailable");
                     }
                     long end = System.currentTimeMillis();
                     log.debug("Time initialize tray: " + (end - start) + " ms");
@@ -531,14 +531,14 @@ public class MainJFrame extends javax.swing.JFrame {
                         // throw new SettingsService();
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Помилка старту програми:\nінформація про помилку знаходиться в logJ.txt", null, JOptionPane.ERROR_MESSAGE);
-                        log.error("Start Error: " + e);
+                        log.error(e.getMessage(), e);
                         System.exit(0);
                     }
                     end = System.currentTimeMillis();
                     log.debug("Time initialize spring: " + (end - start) + " ms");
                     new MainJFrame().setVisible(true);
                 } catch (Exception e) {
-                	log.error("Error: " + e);
+                	log.error(e.getMessage(), e);
                     JOptionPane.showMessageDialog(null, "Помилка програми:\n" + e, null, JOptionPane.ERROR_MESSAGE);
                 }
             }

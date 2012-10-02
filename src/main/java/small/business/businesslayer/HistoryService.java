@@ -36,24 +36,24 @@ public class HistoryService {
     public void saveActionOfAdd(String place, String value) {
         try {
             historyDAO.saveOrUpdate(new History(place, "Створення елементу: " + value));
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }
 
     public void saveActionOfChange(String place, String value) {
         try {
             historyDAO.saveOrUpdate(new History(place, "Зміна елементу: " + value));
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }
 
     public void saveActionOfRemoval(String place, String value) {
         try {
             historyDAO.saveOrUpdate(new History(place, "Видалення елементу: " + value));
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }
 }

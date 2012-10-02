@@ -35,7 +35,7 @@ public class StoreHousesJFrame extends javax.swing.JFrame {
 			getGoodsList();
 		}
 		catch (Exception e) {
-			log.error("Error initialize StoreHouse window", e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

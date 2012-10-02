@@ -40,7 +40,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
         try {
             element = entityManager.find(entityClass, currentElement);
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -61,7 +61,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
             criteriaQuery.where(cb.equal(from.get("parentid"), parentid));
             result = entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -81,7 +81,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
             criteriaQuery.where(cb.or(cb.equal(from.get("id"), parentid), cb.equal(from.get("parentid"), parentid)));
             result = entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -126,7 +126,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
                 criteriaQuery.where(predicateList.toArray(new Predicate[0]));
                 result = entityManager.createQuery(criteriaQuery).getResultList();
             } catch (Exception e) {
-                log.error(e);
+            	log.error(e.getMessage(), e);
             } finally {
                 if (entityManager.isOpen()) {
                     entityManager.close();
@@ -149,7 +149,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
             criteriaQuery.orderBy(cb.desc(from.get("id")));
             result = entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            log.error(e);
+            log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -187,7 +187,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
             entityManager.remove(element);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();

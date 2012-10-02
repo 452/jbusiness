@@ -32,7 +32,7 @@ public class SettingsDAO {
                 resultsMap.put(s.getName(), s);
             }
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
@@ -47,7 +47,7 @@ public class SettingsDAO {
         try {
             entityManager.merge(setting);
         } catch (Exception e) {
-            log.error(e);
+        	log.error(e.getMessage(), e);
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();

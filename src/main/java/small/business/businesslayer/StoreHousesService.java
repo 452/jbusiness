@@ -110,8 +110,8 @@ public class StoreHousesService {
         }
         try {
             result = storeHousesDAO.saveOrUpdate(goodsOnStoreHouse);
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
         return result;
     }
