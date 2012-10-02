@@ -104,7 +104,7 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
 
         jPanelInvoiceInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Інформація накладної"));
 
-        jButtonCounterPartySelect.setText("1 Вибрати постачальника");
+        jButtonCounterPartySelect.setText("1 Вибрати клієнта");
         jButtonCounterPartySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCounterPartySelectActionPerformed(evt);
@@ -136,12 +136,12 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jSpinnerPaidAmount, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 124, Short.MAX_VALUE))
+                .addGap(0, 224, Short.MAX_VALUE))
         );
         jPanelInfoLayout.setVerticalGroup(
             jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInfoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jLabelCounterParty)
                 .addGap(11, 11, 11)
                 .addComponent(jLabelStoreHouse)
@@ -151,9 +151,9 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
                 .addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabelStoreHouseTitle.setText("Склад/для приходу:");
+        jLabelStoreHouseTitle.setText("Склад:");
 
-        jLabelCounterPartyTitle.setText("Контрагент/Покупець:");
+        jLabelCounterPartyTitle.setText("Контрагент:");
 
         jLabel3.setText("Сплачена сума:");
 
@@ -421,15 +421,13 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
             jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelGoodsLayout.createSequentialGroup()
                 .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonAddGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonRemoveGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonsShowPictures))
-                        .addComponent(jButtonEditGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButtonsShowPictures, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAddGoods, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEditGoods, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRemoveGoods, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -550,12 +548,11 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
             JasperPrint jasperPrint = JasperFillManager.fillReport("reports" + File.separator + "OutputInvoice.jasper", parameters, beanCollectionDataSource);
             JasperViewer.viewReport(jasperPrint, false);
         } catch (Exception ex) {
-            log.error(ex);
+            log.error("Try print", ex);
         }
     }//GEN-LAST:event_jButtonPrintActionPerformed
 
     private void jButtonsShowPicturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonsShowPicturesActionPerformed
-        
     }//GEN-LAST:event_jButtonsShowPicturesActionPerformed
 
     /**
@@ -610,8 +607,7 @@ public class OutputInvoiceElementJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonStoreHouseSelect;
     private javax.swing.JButton jButtonsShowPictures;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox jComboBoxStatusOfPayment;
+    private javax.swing.JComboBox jComboBoxStatusOfPayment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

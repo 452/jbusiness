@@ -1,12 +1,10 @@
 package small.business.businesslayer;
 
 import java.util.List;
-import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import small.business.dao.ReturnsOfGoodsDAO;
-import small.business.dao.StoreHousesDAO;
 import small.business.dao.entity.ReturnedGoods;
 import small.business.dao.entity.ReturnsOfGoodsInvoice;
 import small.business.domainmodel.interfaces.IGoods;
@@ -16,66 +14,122 @@ import small.business.domainmodel.interfaces.IGoods;
  * @author root
  */
 @Service
-public class ReturnsOfGoodsService {
+public class ReturnsOfGoodsService extends Invoices<ReturnsOfGoodsService> {
 
     static Logger log = Logger.getLogger(ReturnsOfGoodsService.class.getName());
     @Autowired
     private ReturnsOfGoodsDAO returnsOfGoodsDAO;
-    @Autowired
-    private StoreHousesDAO storeHouseDAO;
-    @Resource
-    private HistoryService historyService;
     private ReturnsOfGoodsInvoice currentElement;
     private ReturnedGoods currentGoodsElement;
-    private boolean canSave = false;
-    private boolean canPrint = false;
-    private boolean canAddGoods = false;
-    private boolean canRemove = false;
-    private boolean canEditInvoice = false;
-    private boolean canEditGoods = false;
-    private boolean canSelectCounterParty = false;
-    private boolean canSelectStoreHouse = false;
+    private boolean canChangeReturnsType = false;
 
     public List<ReturnsOfGoodsInvoice> getDataList() {
         return returnsOfGoodsDAO.getInvoicesList();
     }
 
     public void validate() {
-        setCanRemove(false);
         setCanAddGoods(false);
         setCanEditInvoice(false);
+        setCanRemoveInvoice(false);
         setCanEditGoods(false);
+        setCanRemoveGoods(false);
         setCanSave(false);
+        setCanSaveGoods(false);
         setCanPrint(false);
+        setCanChangeNomenclature(false);
         setCanSelectCounterParty(false);
         setCanSelectStoreHouse(false);
+        setCanChangeReturnsType(true);
         if (currentElement != null) {
-            if (currentElement.getId() == null) {
-                setCanSelectCounterParty(true);
-                setCanSelectStoreHouse(true);
+            if (currentElement.getTypeOfReturns() != -1) {
+                setCanChangeReturnsType(false);
                 setCanAddGoods(true);
             }
-            if (((currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
-                setCanEditGoods(true);
-                setCanRemove(true);
+            if (currentElement.getId() == null) {
+                setCanChangeNomenclature(true);
+                setCanSelectCounterParty(true);
+                setCanSelectStoreHouse(true);
+                if (((currentElement.getId() == null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0))) {
+                    setCanEditGoods(true);
+                    setCanRemoveGoods(true);
+                }
             }
             if ((currentElement.getStoreHouse() != null) && (currentElement.getCounterParty() != null) && (currentElement.getGoods() != null) && (currentElement.getGoods().size() > 0)) {
                 setCanEditInvoice(true);
+                setCanEditGoods(true);
                 setCanSave(true);
+                setCanRemoveGoods(true);
+                setCanRemoveInvoice(true);
+                setCanPrint(true);
+                if (currentGoodsElement != null && currentGoodsElement.getId() == null) {
+                    setCanChangeNomenclature(true);
+                }
+            }
+            if (currentGoodsElement != null && currentGoodsElement.getNomenclature() != null) {
+                if (getValidateQuantityOfGoods() > 0) {
+                    if (currentElement.getTypeOfReturns() == 0) {
+                        if (currentGoodsElement.getNomenclature().getQuantity() != 0) {
+                            int q = currentGoodsElement.getNomenclature().getQuantity() - (getValidateQuantityOfGoods() - currentGoodsElement.getInitialQuantity());
+                            if (q >= 0) {
+                                setCanSaveGoods(true);
+                            }
+                        } else {
+                            if (getValidateQuantityOfGoods() <= currentGoodsElement.getInitialQuantity()) {
+                                setCanSaveGoods(true);
+                            }
+                        }
+                    } else {
+                        if (getValidateQuantityOfGoods() >= (currentGoodsElement.getInitialQuantity() - currentGoodsElement.getNomenclature().getQuantity())) {
+                            setCanSaveGoods(true);
+                        }
+                    }
+                }
             }
         }
     }
 
     public void saveOrUpdate() throws Exception {
         try {
-            if (currentElement.getId() == null) {
-                currentElement = returnsOfGoodsDAO.saveOrUpdate(currentElement);
-                if (currentElement.getTypeOfReturns().equals(0)) {
-                    updateGoodsQuantityToPurveyorOnStoreHouses();
-                    historyService.saveActionOfAdd(HistoryService.RETURN_TO_PURVEYOR_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+            if (currentElement != null) {
+                if (currentElement.getId() == null) {
+                    ReturnsOfGoodsInvoice tmpCurrentElement = returnsOfGoodsDAO.saveOrUpdate(currentElement);
+                    if (currentElement.getTypeOfReturns() == 0) {
+                        for (IGoods goods : currentElement.getGoods()) {
+                            storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        }
+                        currentElement = tmpCurrentElement;
+                        historyService.saveActionOfAdd(HistoryService.RETURN_TO_PURVEYOR_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+                    } else {
+                        for (IGoods goods : currentElement.getGoods()) {
+                            storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        }
+                        currentElement = tmpCurrentElement;
+                        historyService.saveActionOfAdd(HistoryService.RETURN_FROM_CLIENT_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+                    }
                 } else {
-                    updateGoodsQuantityFromClientOnStoreHouses();
-                    historyService.saveActionOfAdd(HistoryService.RETURN_TO_PURVEYOR_INVOICE, HistoryService.NEW_INVOICE + " №" + currentElement.getId().toString());
+                    removeGoodsIfMarked();
+                    ReturnsOfGoodsInvoice tmpCurrentElement = returnsOfGoodsDAO.saveOrUpdate(currentElement);
+                    if (currentElement.getTypeOfReturns() == 0) {
+                        for (IGoods goods : currentElement.getGoods()) {
+                            if (goods.getId() == null) {
+                                storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                            } else {
+                                storeHousesService.changeReduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                            }
+                        }
+                        currentElement = tmpCurrentElement;
+                        historyService.saveActionOfChange(HistoryService.RETURN_TO_PURVEYOR_INVOICE, " №" + currentElement.getId().toString());
+                    } else {
+                        for (IGoods goods : currentElement.getGoods()) {
+                            if (goods.getId() == null) {
+                                storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                            } else {
+                                storeHousesService.changeIncreaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                            }
+                        }
+                        currentElement = tmpCurrentElement;
+                        historyService.saveActionOfChange(HistoryService.RETURN_FROM_CLIENT_INVOICE, " №" + currentElement.getId().toString());
+                    }
                 }
             }
         } catch (Exception e) {
@@ -84,20 +138,69 @@ public class ReturnsOfGoodsService {
         }
     }
 
+    private void removeGoodsIfMarked() {
+        if (goodsToRemove.size() > 0) {
+            for (IGoods goods : goodsToRemove) {
+                if (goods.getId() != null) {
+                    if (currentElement.getTypeOfReturns() == 0) {
+                        storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        historyService.saveActionOfRemoval(HistoryService.RETURN_TO_PURVEYOR_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
+                    } else {
+                        storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        historyService.saveActionOfRemoval(HistoryService.RETURN_FROM_CLIENT_INVOICE, "Накладна №" + currentElement.getId().toString() + " " + goods.getNomenclature().getTitle());
+                    }
+                }
+            }
+            goodsToRemove.clear();
+        }
+    }
+
     private void updateGoodsQuantityFromClientOnStoreHouses() {
         for (IGoods goods : currentElement.getGoods()) {
-            storeHouseDAO.updateQuantityIncrease(goods, currentElement.getStoreHouse());
+            if (goods.getId() == null) {
+                log.debug("DDD");
+                storeHousesService.changeIncreaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+            } else {
+                log.debug("AAA");
+                storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+            }
         }
     }
 
     private void updateGoodsQuantityToPurveyorOnStoreHouses() {
         for (IGoods goods : currentElement.getGoods()) {
-            storeHouseDAO.updateQuantityReduce(goods, currentElement.getStoreHouse());
+            if (goods.getId() == null) {
+                log.debug("CCC");
+                storeHousesService.changeReduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+            } else {
+                log.debug("BBB");
+                storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+            }
         }
     }
 
-    public void removeCurrentElement(ReturnsOfGoodsInvoice selectedObject) {
+    public void removeCurrentElement(ReturnsOfGoodsInvoice selectedObject, boolean alsoChangeQuantityOfGoods) {
         returnsOfGoodsDAO.remove(selectedObject);
+        if (currentElement.getTypeOfReturns() == 0) {
+            if (alsoChangeQuantityOfGoods) {
+                for (IGoods goods : currentElement.getGoods()) {
+                    storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                }
+            }
+            historyService.saveActionOfRemoval(HistoryService.RETURN_TO_PURVEYOR_INVOICE, currentElement.getId().toString());
+        } else {
+            if (alsoChangeQuantityOfGoods) {
+                for (IGoods goods : currentElement.getGoods()) {
+                    storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                }
+            }
+            historyService.saveActionOfRemoval(HistoryService.RETURN_FROM_CLIENT_INVOICE, currentElement.getId().toString());
+        }
+    }
+
+    public void removeGoods(IGoods selectedObject) {
+        goodsToRemove.add(selectedObject);
+        currentElement.getGoods().remove(selectedObject);
     }
 
     public ReturnsOfGoodsInvoice getCurrentElement() {
@@ -116,67 +219,11 @@ public class ReturnsOfGoodsService {
         this.currentGoodsElement = currentGoodsElement;
     }
 
-    public boolean isCanSave() {
-        return canSave;
+    public boolean isCanChangeReturnsType() {
+        return canChangeReturnsType;
     }
 
-    private void setCanSave(boolean canSave) {
-        this.canSave = canSave;
-    }
-
-    public boolean isCanPrint() {
-        return canPrint;
-    }
-
-    private void setCanPrint(boolean canPrint) {
-        this.canPrint = canPrint;
-    }
-
-    public boolean isCanAddGoods() {
-        return canAddGoods;
-    }
-
-    private void setCanAddGoods(boolean canAddGoods) {
-        this.canAddGoods = canAddGoods;
-    }
-
-    public boolean isCanRemove() {
-        return canRemove;
-    }
-
-    private void setCanRemove(boolean canRemove) {
-        this.canRemove = canRemove;
-    }
-
-    public boolean isCanEditInvoice() {
-        return canEditInvoice;
-    }
-
-    private void setCanEditInvoice(boolean canEditInvoice) {
-        this.canEditInvoice = canEditInvoice;
-    }
-
-    public boolean isCanEditGoods() {
-        return canEditGoods;
-    }
-
-    private void setCanEditGoods(boolean canEditGoods) {
-        this.canEditGoods = canEditGoods;
-    }
-
-    public boolean isCanSelectCounterParty() {
-        return canSelectCounterParty;
-    }
-
-    private void setCanSelectCounterParty(boolean canSelectCounterParty) {
-        this.canSelectCounterParty = canSelectCounterParty;
-    }
-
-    public boolean isCanSelectStoreHouse() {
-        return canSelectStoreHouse;
-    }
-
-    private void setCanSelectStoreHouse(boolean canSelectStoreHouse) {
-        this.canSelectStoreHouse = canSelectStoreHouse;
+    private void setCanChangeReturnsType(boolean canChangeReturnsType) {
+        this.canChangeReturnsType = canChangeReturnsType;
     }
 }

@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//reports/NomenclatureForBuy.jrxml=UTF-8
 encoding//reports/NomenclatureTotalAudit.jrxml=UTF-8
 encoding//reports/OutputInvoice.jrxml=UTF-8
+encoding//reports/ReturnsInvoice.jrxml=UTF-8
 encoding//reports/TradeTopNomenclature.jrxml=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8

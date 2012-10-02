@@ -132,12 +132,18 @@ public class ReturnedGoods implements Serializable, IGoods {
         this.nomenclature = nomenclature;
     }
 
+    @Override
     public int getInitialQuantity() {
         return initialQuantity;
     }
 
+    @Override
     public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
+    }
+
+    public String getTitle() {
+        return nomenclature == null ? null : nomenclature.getTitle();
     }
 
     @PostLoad

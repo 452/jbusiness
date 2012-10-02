@@ -45,7 +45,7 @@ public class ReturnsOfGoodsInvoice implements Serializable, IElement<ReturnsOfGo
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     @Column(nullable = false)
-    private Integer typeOfReturns = 0;
+    private int typeOfReturns = -1;
     @Column(nullable = false)
     private String returningDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     @Basic(fetch = FetchType.LAZY)
@@ -122,7 +122,7 @@ public class ReturnsOfGoodsInvoice implements Serializable, IElement<ReturnsOfGo
         return Long.toString(id);
     }
 
-    public Integer getTypeOfReturns() {
+    public int getTypeOfReturns() {
         return typeOfReturns;
     }
 

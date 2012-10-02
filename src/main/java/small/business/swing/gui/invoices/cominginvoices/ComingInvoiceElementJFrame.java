@@ -66,224 +66,402 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     // <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jPanelGoods = new javax.swing.JPanel();
-		jButtonAddGoods = new javax.swing.JButton();
-		jScrollPane = new javax.swing.JScrollPane();
-		jTableGoods = new javax.swing.JTable();
-		jButtonRemoveGoods = new javax.swing.JButton();
-		jPanel1 = new javax.swing.JPanel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel1 = new javax.swing.JLabel();
-		jLabelAllGoodsQuantity = new javax.swing.JLabel();
-		jLabelAllGoodsPrice = new javax.swing.JLabel();
-		jButtonEditGoods = new javax.swing.JButton();
-		jPanelInvoiceInfo = new javax.swing.JPanel();
-		jButtonCounterPartySelect = new javax.swing.JButton();
-		jButtonStoreHouseSelect = new javax.swing.JButton();
-		jPanelInfo = new javax.swing.JPanel();
-		jLabelStoreHouse = new javax.swing.JLabel();
-		jTextFieldComingInvoice = new javax.swing.JTextField();
-		jLabelCounterParty = new javax.swing.JLabel();
-		jSpinnerPaidAmount = new javax.swing.JSpinner();
-		jComboBoxStatusOfPayment = new javax.swing.JComboBox();
-		jPanelLabels = new javax.swing.JPanel();
-		jLabelStoreHouseTitle = new javax.swing.JLabel();
-		jLabelComingInvoiceID = new javax.swing.JLabel();
-		jLabelCounterPartyTitle = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		jLabelInfo = new javax.swing.JLabel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextAreaInfo = new javax.swing.JTextArea();
-		jPanelButtons = new javax.swing.JPanel();
-		jButtonSave = new javax.swing.JButton();
-		jButtonExit = new javax.swing.JButton();
-		jButtonPrint = new javax.swing.JButton();
+        jPanelGoods = new javax.swing.JPanel();
+        jButtonAddGoods = new javax.swing.JButton();
+        jScrollPane = new javax.swing.JScrollPane();
+        jTableGoods = new javax.swing.JTable();
+        jButtonRemoveGoods = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelAllGoodsQuantity = new javax.swing.JLabel();
+        jLabelAllGoodsPrice = new javax.swing.JLabel();
+        jButtonEditGoods = new javax.swing.JButton();
+        jPanelInvoiceInfo = new javax.swing.JPanel();
+        jButtonCounterPartySelect = new javax.swing.JButton();
+        jButtonStoreHouseSelect = new javax.swing.JButton();
+        jPanelInfo = new javax.swing.JPanel();
+        jLabelStoreHouse = new javax.swing.JLabel();
+        jTextFieldComingInvoice = new javax.swing.JTextField();
+        jLabelCounterParty = new javax.swing.JLabel();
+        jSpinnerPaidAmount = new javax.swing.JSpinner();
+        jComboBoxStatusOfPayment = new javax.swing.JComboBox();
+        jPanelLabels = new javax.swing.JPanel();
+        jLabelStoreHouseTitle = new javax.swing.JLabel();
+        jLabelComingInvoiceID = new javax.swing.JLabel();
+        jLabelCounterPartyTitle = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelInfo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaInfo = new javax.swing.JTextArea();
+        jPanelButtons = new javax.swing.JPanel();
+        jButtonSave = new javax.swing.JButton();
+        jButtonExit = new javax.swing.JButton();
+        jButtonPrint = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("Прихідна накладна");
-		setExtendedState(6);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Прихідна накладна");
+        setExtendedState(6);
 
-		jPanelGoods.setBorder(javax.swing.BorderFactory.createTitledBorder("Товари"));
+        jPanelGoods.setBorder(javax.swing.BorderFactory.createTitledBorder("Товари"));
 
-		jButtonAddGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/add.png"))); // NOI18N
-		jButtonAddGoods.setText("3 Додати");
-		jButtonAddGoods.setEnabled(false);
-		jButtonAddGoods.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonAddGoodsActionPerformed(evt);
-			}
-		});
+        jButtonAddGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/add.png"))); // NOI18N
+        jButtonAddGoods.setText("3 Додати");
+        jButtonAddGoods.setEnabled(false);
+        jButtonAddGoods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddGoodsActionPerformed(evt);
+            }
+        });
 
-		jTableGoods.setAutoCreateRowSorter(true);
-		jTableGoods.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+        jTableGoods.setAutoCreateRowSorter(true);
+        jTableGoods.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-		}, new String[] { "id", "Номенклатура", "Кількість", "Ціна", "Сума", "Ціна номенклатури", "Роздріб грн", "Дрібний опт грн", "Крупний опт грн" }) {
-			private static final long	serialVersionUID	= 1L;
-			Class[]						types				= new Class[] { java.lang.Long.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class };
-			boolean[]					canEdit				= new boolean[] { false, false, false, false, false, false, false, false, false };
+            },
+            new String [] {
+                "id", "Номенклатура", "Кількість", "Ціна", "Сума", "Ціна номенклатури", "Роздріб грн", "Дрібний опт грн", "Крупний опт грн"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
 
-			public Class getColumnClass(int columnIndex) {
-				return types[columnIndex];
-			}
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit[columnIndex];
-			}
-		});
-		jTableGoods.getTableHeader().setReorderingAllowed(false);
-		jTableGoods.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTableGoodsMouseClicked(evt);
-			}
-		});
-		jScrollPane.setViewportView(jTableGoods);
-		jTableGoods.getColumnModel().getColumn(0).setPreferredWidth(60);
-		jTableGoods.getColumnModel().getColumn(0).setMaxWidth(60);
-		jTableGoods.getColumnModel().getColumn(2).setPreferredWidth(70);
-		jTableGoods.getColumnModel().getColumn(2).setMaxWidth(70);
-		jTableGoods.getColumnModel().getColumn(3).setPreferredWidth(60);
-		jTableGoods.getColumnModel().getColumn(3).setMaxWidth(60);
-		jTableGoods.getColumnModel().getColumn(4).setPreferredWidth(60);
-		jTableGoods.getColumnModel().getColumn(4).setMaxWidth(60);
-		jTableGoods.getColumnModel().getColumn(5).setPreferredWidth(120);
-		jTableGoods.getColumnModel().getColumn(5).setMaxWidth(120);
-		jTableGoods.getColumnModel().getColumn(6).setPreferredWidth(90);
-		jTableGoods.getColumnModel().getColumn(6).setMaxWidth(90);
-		jTableGoods.getColumnModel().getColumn(7).setPreferredWidth(100);
-		jTableGoods.getColumnModel().getColumn(7).setMaxWidth(100);
-		jTableGoods.getColumnModel().getColumn(8).setPreferredWidth(100);
-		jTableGoods.getColumnModel().getColumn(8).setMaxWidth(100);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableGoods.getTableHeader().setReorderingAllowed(false);
+        jTableGoods.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableGoodsMouseClicked(evt);
+            }
+        });
+        jScrollPane.setViewportView(jTableGoods);
+        jTableGoods.getColumnModel().getColumn(0).setPreferredWidth(60);
+        jTableGoods.getColumnModel().getColumn(0).setMaxWidth(60);
+        jTableGoods.getColumnModel().getColumn(2).setPreferredWidth(70);
+        jTableGoods.getColumnModel().getColumn(2).setMaxWidth(70);
+        jTableGoods.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jTableGoods.getColumnModel().getColumn(3).setMaxWidth(60);
+        jTableGoods.getColumnModel().getColumn(4).setPreferredWidth(60);
+        jTableGoods.getColumnModel().getColumn(4).setMaxWidth(60);
+        jTableGoods.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTableGoods.getColumnModel().getColumn(5).setMaxWidth(120);
+        jTableGoods.getColumnModel().getColumn(6).setPreferredWidth(90);
+        jTableGoods.getColumnModel().getColumn(6).setMaxWidth(90);
+        jTableGoods.getColumnModel().getColumn(7).setPreferredWidth(100);
+        jTableGoods.getColumnModel().getColumn(7).setMaxWidth(100);
+        jTableGoods.getColumnModel().getColumn(8).setPreferredWidth(100);
+        jTableGoods.getColumnModel().getColumn(8).setMaxWidth(100);
 
-		jButtonRemoveGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/delete.png"))); // NOI18N
-		jButtonRemoveGoods.setText("Видалити");
-		jButtonRemoveGoods.setEnabled(false);
-		jButtonRemoveGoods.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonRemoveGoodsActionPerformed(evt);
-			}
-		});
+        jButtonRemoveGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/delete.png"))); // NOI18N
+        jButtonRemoveGoods.setText("Видалити");
+        jButtonRemoveGoods.setEnabled(false);
+        jButtonRemoveGoods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveGoodsActionPerformed(evt);
+            }
+        });
 
-		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-		jLabel2.setText("Всього вартість:");
+        jLabel2.setText("Всього вартість:");
 
-		jLabel1.setText("Всього кількість:");
+        jLabel1.setText("Всього кількість:");
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 0, 0).addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabel1).addComponent(jLabel2)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabelAllGoodsQuantity).addComponent(jLabelAllGoodsPrice)).addContainerGap(107, Short.MAX_VALUE)));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 0, 0).addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel1).addComponent(jLabelAllGoodsQuantity)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel2).addComponent(jLabelAllGoodsPrice)).addGap(0, 0, 0)));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAllGoodsQuantity)
+                    .addComponent(jLabelAllGoodsPrice))
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelAllGoodsQuantity))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelAllGoodsPrice)))
+        );
 
-		jButtonEditGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/edit.png"))); // NOI18N
-		jButtonEditGoods.setText("Редагувати");
-		jButtonEditGoods.setEnabled(false);
-		jButtonEditGoods.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonEditGoodsActionPerformed(evt);
-			}
-		});
+        jButtonEditGoods.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/edit.png"))); // NOI18N
+        jButtonEditGoods.setText("Редагувати");
+        jButtonEditGoods.setEnabled(false);
+        jButtonEditGoods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditGoodsActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout jPanelGoodsLayout = new javax.swing.GroupLayout(jPanelGoods);
-		jPanelGoods.setLayout(jPanelGoodsLayout);
-		jPanelGoodsLayout.setHorizontalGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelGoodsLayout.createSequentialGroup().addContainerGap().addComponent(jButtonAddGoods).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonEditGoods).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonRemoveGoods).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE).addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING));
-		jPanelGoodsLayout.setVerticalGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelGoodsLayout.createSequentialGroup().addGap(0, 0, 0).addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(jButtonRemoveGoods).addComponent(jButtonEditGoods, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButtonAddGoods).addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE).addGap(3, 3, 3)));
+        javax.swing.GroupLayout jPanelGoodsLayout = new javax.swing.GroupLayout(jPanelGoods);
+        jPanelGoods.setLayout(jPanelGoodsLayout);
+        jPanelGoodsLayout.setHorizontalGroup(
+            jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGoodsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonAddGoods)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEditGoods)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRemoveGoods)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanelGoodsLayout.setVerticalGroup(
+            jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGoodsLayout.createSequentialGroup()
+                .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGoodsLayout.createSequentialGroup()
+                        .addGroup(jPanelGoodsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonAddGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRemoveGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEditGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGoodsLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+        );
 
-		jPanelInvoiceInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Інформація накладної"));
+        jPanelInvoiceInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Інформація накладної"));
 
-		jButtonCounterPartySelect.setText("1 Вибрати постачальника");
-		jButtonCounterPartySelect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonCounterPartySelectActionPerformed(evt);
-			}
-		});
+        jButtonCounterPartySelect.setText("1 Вибрати постачальника");
+        jButtonCounterPartySelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCounterPartySelectActionPerformed(evt);
+            }
+        });
 
-		jButtonStoreHouseSelect.setText("2 Вибрати склад");
-		jButtonStoreHouseSelect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonStoreHouseSelectActionPerformed(evt);
-			}
-		});
+        jButtonStoreHouseSelect.setText("2 Вибрати склад");
+        jButtonStoreHouseSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStoreHouseSelectActionPerformed(evt);
+            }
+        });
 
-		jLabelStoreHouse.setText("не вибрано");
+        jLabelStoreHouse.setText("не вибрано");
 
-		jLabelCounterParty.setText("не вибрано");
+        jLabelCounterParty.setText("не вибрано");
 
-		jSpinnerPaidAmount.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), null, null, Double.valueOf(0.01d)));
+        jSpinnerPaidAmount.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), null, null, Double.valueOf(0.01d)));
 
-		jComboBoxStatusOfPayment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Не оплачено", "Частково оплачено", "Оплачено" }));
+        jComboBoxStatusOfPayment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Не оплачено", "Частково оплачено", "Оплачено" }));
 
-		javax.swing.GroupLayout jPanelInfoLayout = new javax.swing.GroupLayout(jPanelInfo);
-		jPanelInfo.setLayout(jPanelInfoLayout);
-		jPanelInfoLayout.setHorizontalGroup(jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabelCounterParty, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE).addComponent(jLabelStoreHouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jTextFieldComingInvoice, javax.swing.GroupLayout.Alignment.TRAILING).addGroup(jPanelInfoLayout.createSequentialGroup().addGroup(jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false).addComponent(jSpinnerPaidAmount, javax.swing.GroupLayout.Alignment.LEADING).addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addGap(0, 0, Short.MAX_VALUE)));
-		jPanelInfoLayout.setVerticalGroup(jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelInfoLayout.createSequentialGroup().addContainerGap().addComponent(jLabelCounterParty).addGap(11, 11, 11).addComponent(jLabelStoreHouse).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jTextFieldComingInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jSpinnerPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(9, 9, 9).addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+        javax.swing.GroupLayout jPanelInfoLayout = new javax.swing.GroupLayout(jPanelInfo);
+        jPanelInfo.setLayout(jPanelInfoLayout);
+        jPanelInfoLayout.setHorizontalGroup(
+            jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelCounterParty, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+            .addComponent(jLabelStoreHouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTextFieldComingInvoice, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanelInfoLayout.createSequentialGroup()
+                .addGroup(jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSpinnerPaidAmount, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanelInfoLayout.setVerticalGroup(
+            jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInfoLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabelCounterParty)
+                .addGap(11, 11, 11)
+                .addComponent(jLabelStoreHouse)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldComingInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinnerPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jComboBoxStatusOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-		jLabelStoreHouseTitle.setText("Склад/для приходу:");
+        jLabelStoreHouseTitle.setText("Склад:");
 
-		jLabelComingInvoiceID.setText("Номер прихідної накладної:");
+        jLabelComingInvoiceID.setText("Номер прихідної накладної:");
 
-		jLabelCounterPartyTitle.setText("Контрагент/Постачальник:");
+        jLabelCounterPartyTitle.setText("Контрагент:");
 
-		jLabel3.setText("Сплачена сума:");
+        jLabel3.setText("Сплачена сума:");
 
-		jLabel4.setText("Статус оплати:");
+        jLabel4.setText("Статус оплати:");
 
-		javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
-		jPanelLabels.setLayout(jPanelLabelsLayout);
-		jPanelLabelsLayout.setHorizontalGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLabelsLayout.createSequentialGroup().addContainerGap().addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabelCounterPartyTitle, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabelStoreHouseTitle, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabelComingInvoiceID, javax.swing.GroupLayout.Alignment.TRAILING)).addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)).addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)).addGap(2, 2, 2)));
-		jPanelLabelsLayout.setVerticalGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLabelsLayout.createSequentialGroup().addGap(10, 10, 10).addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelLabelsLayout.createSequentialGroup().addGap(25, 25, 25).addComponent(jLabelStoreHouseTitle)).addComponent(jLabelCounterPartyTitle)).addGap(12, 12, 12).addComponent(jLabelComingInvoiceID).addGap(14, 14, 14).addComponent(jLabel3).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jLabel4)));
+        javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
+        jPanelLabels.setLayout(jPanelLabelsLayout);
+        jPanelLabelsLayout.setHorizontalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLabelsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCounterPartyTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelStoreHouseTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelComingInvoiceID, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(2, 2, 2))
+        );
+        jPanelLabelsLayout.setVerticalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLabelsLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLabelsLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabelStoreHouseTitle))
+                    .addComponent(jLabelCounterPartyTitle))
+                .addGap(12, 12, 12)
+                .addComponent(jLabelComingInvoiceID)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4))
+        );
 
-		jLabelInfo.setText("Додаткова інформація:");
+        jLabelInfo.setText("Додаткова інформація:");
 
-		jTextAreaInfo.setColumns(20);
-		jTextAreaInfo.setRows(5);
-		jScrollPane1.setViewportView(jTextAreaInfo);
+        jTextAreaInfo.setColumns(20);
+        jTextAreaInfo.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaInfo);
 
-		javax.swing.GroupLayout jPanelInvoiceInfoLayout = new javax.swing.GroupLayout(jPanelInvoiceInfo);
-		jPanelInvoiceInfo.setLayout(jPanelInvoiceInfoLayout);
-		jPanelInvoiceInfoLayout.setHorizontalGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelInvoiceInfoLayout.createSequentialGroup().addContainerGap().addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1).addGroup(jPanelInvoiceInfoLayout.createSequentialGroup().addComponent(jLabelInfo).addGap(0, 0, Short.MAX_VALUE)).addGroup(jPanelInvoiceInfoLayout.createSequentialGroup().addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(3, 3, 3).addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGap(28, 28, 28).addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonCounterPartySelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonStoreHouseSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))).addContainerGap()));
-		jPanelInvoiceInfoLayout.setVerticalGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelInvoiceInfoLayout.createSequentialGroup().addGap(2, 2, 2).addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addGroup(jPanelInvoiceInfoLayout.createSequentialGroup().addGap(29, 29, 29).addComponent(jButtonStoreHouseSelect)).addComponent(jButtonCounterPartySelect).addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jLabelInfo).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+        javax.swing.GroupLayout jPanelInvoiceInfoLayout = new javax.swing.GroupLayout(jPanelInvoiceInfo);
+        jPanelInvoiceInfo.setLayout(jPanelInvoiceInfoLayout);
+        jPanelInvoiceInfoLayout.setHorizontalGroup(
+            jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                        .addComponent(jLabelInfo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                        .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonCounterPartySelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonStoreHouseSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanelInvoiceInfoLayout.setVerticalGroup(
+            jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonStoreHouseSelect))
+                    .addComponent(jButtonCounterPartySelect)
+                    .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-		jPanelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(" "));
+        jPanelButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(" "));
 
-		jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/save.png"))); // NOI18N
-		jButtonSave.setText("5 Зберегти");
-		jButtonSave.setEnabled(false);
-		jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonSaveActionPerformed(evt);
-			}
-		});
+        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/save.png"))); // NOI18N
+        jButtonSave.setText("5 Зберегти");
+        jButtonSave.setEnabled(false);
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
 
-		jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/exit.png"))); // NOI18N
-		jButtonExit.setText("6 Закрити");
-		jButtonExit.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonExitActionPerformed(evt);
-			}
-		});
+        jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/exit.png"))); // NOI18N
+        jButtonExit.setText("6 Закрити");
+        jButtonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExitActionPerformed(evt);
+            }
+        });
 
-		jButtonPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/print.png"))); // NOI18N
-		jButtonPrint.setText("4 Друкувати");
-		jButtonPrint.setEnabled(false);
+        jButtonPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/print.png"))); // NOI18N
+        jButtonPrint.setText("4 Друкувати");
+        jButtonPrint.setEnabled(false);
 
-		javax.swing.GroupLayout jPanelButtonsLayout = new javax.swing.GroupLayout(jPanelButtons);
-		jPanelButtons.setLayout(jPanelButtonsLayout);
-		jPanelButtonsLayout.setHorizontalGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelButtonsLayout.createSequentialGroup().addContainerGap().addGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(jButtonPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		jPanelButtonsLayout.setVerticalGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(jPanelButtonsLayout.createSequentialGroup().addGap(6, 6, 6).addComponent(jButtonPrint).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonSave).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonExit).addGap(6, 6, 6)));
+        javax.swing.GroupLayout jPanelButtonsLayout = new javax.swing.GroupLayout(jPanelButtons);
+        jPanelButtons.setLayout(jPanelButtonsLayout);
+        jPanelButtonsLayout.setHorizontalGroup(
+            jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelButtonsLayout.setVerticalGroup(
+            jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelButtonsLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jButtonPrint)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonExit)
+                .addGap(6, 6, 6))
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanelGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanelInvoiceInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jPanelInvoiceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(jPanelGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelInvoiceInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelInvoiceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelGoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-		getAccessibleContext().setAccessibleParent(this);
+        getAccessibleContext().setAccessibleParent(this);
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         comingsInvoicesService.getCurrentElement().setInvoiceid(jTextFieldComingInvoice.getText());
@@ -395,43 +573,41 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
             }
         });
     }
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton		jButtonAddGoods;
-	private javax.swing.JButton		jButtonCounterPartySelect;
-	private javax.swing.JButton		jButtonEditGoods;
-	private javax.swing.JButton		jButtonExit;
-	private javax.swing.JButton		jButtonPrint;
-	private javax.swing.JButton		jButtonRemoveGoods;
-	private javax.swing.JButton		jButtonSave;
-	private javax.swing.JButton		jButtonStoreHouseSelect;
-	@SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox	jComboBoxStatusOfPayment;
-	private javax.swing.JLabel		jLabel1;
-	private javax.swing.JLabel		jLabel2;
-	private javax.swing.JLabel		jLabel3;
-	private javax.swing.JLabel		jLabel4;
-	private javax.swing.JLabel		jLabelAllGoodsPrice;
-	private javax.swing.JLabel		jLabelAllGoodsQuantity;
-	private javax.swing.JLabel		jLabelComingInvoiceID;
-	private javax.swing.JLabel		jLabelCounterParty;
-	private javax.swing.JLabel		jLabelCounterPartyTitle;
-	private javax.swing.JLabel		jLabelInfo;
-	private javax.swing.JLabel		jLabelStoreHouse;
-	private javax.swing.JLabel		jLabelStoreHouseTitle;
-	private javax.swing.JPanel		jPanel1;
-	private javax.swing.JPanel		jPanelButtons;
-	private javax.swing.JPanel		jPanelGoods;
-	private javax.swing.JPanel		jPanelInfo;
-	private javax.swing.JPanel		jPanelInvoiceInfo;
-	private javax.swing.JPanel		jPanelLabels;
-	private javax.swing.JScrollPane	jScrollPane;
-	private javax.swing.JScrollPane	jScrollPane1;
-	private javax.swing.JSpinner	jSpinnerPaidAmount;
-	private javax.swing.JTable		jTableGoods;
-	private javax.swing.JTextArea	jTextAreaInfo;
-	private javax.swing.JTextField	jTextFieldComingInvoice;
-
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddGoods;
+    private javax.swing.JButton jButtonCounterPartySelect;
+    private javax.swing.JButton jButtonEditGoods;
+    private javax.swing.JButton jButtonExit;
+    private javax.swing.JButton jButtonPrint;
+    private javax.swing.JButton jButtonRemoveGoods;
+    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonStoreHouseSelect;
+    private javax.swing.JComboBox jComboBoxStatusOfPayment;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelAllGoodsPrice;
+    private javax.swing.JLabel jLabelAllGoodsQuantity;
+    private javax.swing.JLabel jLabelComingInvoiceID;
+    private javax.swing.JLabel jLabelCounterParty;
+    private javax.swing.JLabel jLabelCounterPartyTitle;
+    private javax.swing.JLabel jLabelInfo;
+    private javax.swing.JLabel jLabelStoreHouse;
+    private javax.swing.JLabel jLabelStoreHouseTitle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelButtons;
+    private javax.swing.JPanel jPanelGoods;
+    private javax.swing.JPanel jPanelInfo;
+    private javax.swing.JPanel jPanelInvoiceInfo;
+    private javax.swing.JPanel jPanelLabels;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerPaidAmount;
+    private javax.swing.JTable jTableGoods;
+    private javax.swing.JTextArea jTextAreaInfo;
+    private javax.swing.JTextField jTextFieldComingInvoice;
+    // End of variables declaration//GEN-END:variables
     private void svalidate() {
         comingsInvoicesService.validate();
         jButtonAddGoods.setEnabled(comingsInvoicesService.isCanAddGoods());

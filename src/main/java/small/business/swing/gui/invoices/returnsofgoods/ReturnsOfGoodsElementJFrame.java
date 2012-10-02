@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package small.business.swing.gui.invoices.returnsofgoods;
 
 import java.awt.Color;
@@ -33,12 +29,15 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
      */
     public ReturnsOfGoodsElementJFrame() {
         initComponents();
-        if (returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() == null) {
-            jButtonSave.setEnabled(false);
-        } else {
-            jButtonSave.setEnabled(true);
-        }
         updateData();
+        svalidate();
+    }
+
+    private void svalidate() {
+    	returnsOfGoodsService.setValidateQuantityOfGoods((Integer) jSpinnerQuantity.getValue());
+        returnsOfGoodsService.validate();
+        jButtonSave.setEnabled(returnsOfGoodsService.isCanSaveGoods());
+        jButtonNomenclatureSelect.setEnabled(returnsOfGoodsService.isCanChangeNomenclature());
     }
 
     /**
@@ -166,7 +165,7 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNomenclatureSelectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNomenclatureSelectActionPerformed
+    private void jButtonNomenclatureSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNomenclatureSelectActionPerformed
         nomenclatureService.setSelectType(Nomenclature.NOMENCLATURE);
         NomenclatureSelectJFrame ns = new NomenclatureSelectJFrame();
         ns.pack();
@@ -181,29 +180,31 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
         updateData();
         // jSpinnerPrice.setValue(getPrice());
         calcData();
-    }// GEN-LAST:event_jButtonNomenclatureSelectActionPerformed
+    }//GEN-LAST:event_jButtonNomenclatureSelectActionPerformed
 
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         setData();
         returnsOfGoodsService.getCurrentElement().getGoods().add(returnsOfGoodsService.getCurrentGoodsElement());
         dispose();
-    }// GEN-LAST:event_jButtonSaveActionPerformed
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
-    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonExitActionPerformed
+    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         dispose();
-    }// GEN-LAST:event_jButtonExitActionPerformed
+    }//GEN-LAST:event_jButtonExitActionPerformed
 
-    private void jButtonCalcActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCalcActionPerformed
+    private void jButtonCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcActionPerformed
         calcData();
-    }// GEN-LAST:event_jButtonCalcActionPerformed
+        svalidate();
+    }//GEN-LAST:event_jButtonCalcActionPerformed
 
-    private void jSpinnerQuantityStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSpinnerQuantityStateChanged
+    private void jSpinnerQuantityStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerQuantityStateChanged
         calcData();
-    }// GEN-LAST:event_jSpinnerQuantityStateChanged
+        svalidate();
+    }//GEN-LAST:event_jSpinnerQuantityStateChanged
 
-    private void jSpinnerPriceStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSpinnerPriceStateChanged
+    private void jSpinnerPriceStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPriceStateChanged
         calcData();
-    }// GEN-LAST:event_jSpinnerPriceStateChanged
+    }//GEN-LAST:event_jSpinnerPriceStateChanged
 
     /**
      * @param args the command line arguments
@@ -291,8 +292,6 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
             jLabelNomenclaturePrice.setForeground(null);
         }
         jLabelNomenclaturePrice.setText((returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() == null) ? null : returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getPrice().toString());
-        // if (сomingsInvoicesService.getCurrentGoodsElement().getId() != null)
-        // {
         jLabelRetailPrice.setText(Double.valueOf((returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getRetailPrice() * settingsService.getExchangeRate()).toString());
         jLabelSmallWholeSalePrice.setText(Double.valueOf((returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getSmallWholeSalePrice() * settingsService.getExchangeRate()).toString());
         jLabelBigWholeSalePrice.setText(Double.valueOf((returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getBigWholeSalePrice() * settingsService.getExchangeRate()).toString());

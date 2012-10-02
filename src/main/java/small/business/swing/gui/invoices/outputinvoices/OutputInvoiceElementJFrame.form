@@ -114,7 +114,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonCounterPartySelect">
           <Properties>
-            <Property name="text" type="java.lang.String" value="1 &#x412;&#x438;&#x431;&#x440;&#x430;&#x442;&#x438; &#x43f;&#x43e;&#x441;&#x442;&#x430;&#x447;&#x430;&#x43b;&#x44c;&#x43d;&#x438;&#x43a;&#x430;"/>
+            <Property name="text" type="java.lang.String" value="1 &#x412;&#x438;&#x431;&#x440;&#x430;&#x442;&#x438; &#x43a;&#x43b;&#x456;&#x454;&#x43d;&#x442;&#x430;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCounterPartySelectActionPerformed"/>
@@ -140,14 +140,14 @@
                           <Component id="jSpinnerPaidAmount" alignment="0" max="32767" attributes="0"/>
                           <Component id="jComboBoxStatusOfPayment" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="124" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="224" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabelCounterParty" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="jLabelStoreHouse" min="-2" max="-2" attributes="0"/>
@@ -233,12 +233,12 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelStoreHouseTitle">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x43b;&#x430;&#x434;/&#x434;&#x43b;&#x44f; &#x43f;&#x440;&#x438;&#x445;&#x43e;&#x434;&#x443;:"/>
+                <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x43b;&#x430;&#x434;:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelCounterPartyTitle">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x41a;&#x43e;&#x43d;&#x442;&#x440;&#x430;&#x433;&#x435;&#x43d;&#x442;/&#x41f;&#x43e;&#x43a;&#x443;&#x43f;&#x435;&#x446;&#x44c;:"/>
+                <Property name="text" type="java.lang.String" value="&#x41a;&#x43e;&#x43d;&#x442;&#x440;&#x430;&#x433;&#x435;&#x43d;&#x442;:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -381,18 +381,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonAddGoods" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jButtonRemoveGoods" alignment="3" max="32767" attributes="0"/>
-                              <Component id="jButtonsShowPictures" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButtonEditGoods" alignment="0" max="32767" attributes="0"/>
-                      </Group>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jButtonsShowPictures" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonAddGoods" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonEditGoods" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonRemoveGoods" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane" pref="115" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="125" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

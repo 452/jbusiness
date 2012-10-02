@@ -271,7 +271,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNomenclatureSelectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNomenclatureSelectActionPerformed
+    private void jButtonNomenclatureSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNomenclatureSelectActionPerformed
         nomenclatureService.setSelectType(Nomenclature.NOMENCLATURE);
         NomenclatureSelectJFrame ns = new NomenclatureSelectJFrame();
         ns.pack();
@@ -284,7 +284,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
             jSpinnerPrice.setValue(сomingsInvoicesService.getCurrentGoodsElement().getNomenclature().getPrice());
             setData();
         }
-    }
+    }//GEN-LAST:event_jButtonNomenclatureSelectActionPerformed
 
 	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
             setData();
@@ -389,11 +389,8 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
             jLabelNomenclaturePrice.setForeground(null);
         }
         jLabelNomenclaturePrice.setText((сomingsInvoicesService.getCurrentGoodsElement().getNomenclature() == null) ? null : сomingsInvoicesService.getCurrentGoodsElement().getNomenclature().getPrice().toString());
-        // if (сomingsInvoicesService.getCurrentGoodsElement().getId() != null)
-        // {
         jLabelRetailPrice.setText(Double.valueOf((сomingsInvoicesService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : сomingsInvoicesService.getCurrentGoodsElement().getNomenclature().getRetailPrice() * settingsService.getExchangeRate()).toString());
         jLabelSmallWholeSalePrice.setText(Double.valueOf((сomingsInvoicesService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : сomingsInvoicesService.getCurrentGoodsElement().getNomenclature().getSmallWholeSalePrice() * settingsService.getExchangeRate()).toString());
         jLabelBigWholeSalePrice.setText(Double.valueOf((сomingsInvoicesService.getCurrentGoodsElement().getNomenclature() == null) ? 0.0 : сomingsInvoicesService.getCurrentGoodsElement().getNomenclature().getBigWholeSalePrice() * settingsService.getExchangeRate()).toString());
-        // }
     }
 }

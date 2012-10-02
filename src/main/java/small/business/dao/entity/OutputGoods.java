@@ -176,10 +176,12 @@ public class OutputGoods implements Serializable, IGoods {
     /**
      * @return Initial value quantity of goods
      */
+    @Override
     public int getInitialQuantity() {
         return initialQuantity;
     }
 
+    @Override
     public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
     }
