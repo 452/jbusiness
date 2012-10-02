@@ -110,7 +110,11 @@ public class OutputInvoicesService extends Invoices<OutputInvoicesService> {
                     removeGoodsIfMarked();
                     OutputInvoice tmpCurrentElement = outputInvoicesDAO.saveOrUpdate(currentElement);
                     for (OutputGoods goods : currentElement.getGoods()) {
-                        storeHousesService.changeReduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        if (goods.getId() == null) {
+                            storeHousesService.reduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        } else {
+                            storeHousesService.changeReduceGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        }
                     }
                     currentElement = tmpCurrentElement;
                     historyService.saveActionOfChange(HistoryService.OUTPUT_INVOICE, " №" + currentElement.getId().toString());

@@ -72,16 +72,13 @@ public class ComingsInvoicesService extends Invoices<ComingsInvoicesService> {
                     setCanChangeNomenclature(true);
                 }
             }
-			if (currentGoodsElement != null && currentGoodsElement.getNomenclature() != null) {
-				if (getValidateQuantityOfGoods() > 0) {
-					//  5
-					// 15
-					// 16
-					if (getValidateQuantityOfGoods() >= (currentGoodsElement.getInitialQuantity()-currentGoodsElement.getNomenclature().getQuantity())) {
-						setCanSaveGoods(true);
-					}
-				}
-			}
+            if (currentGoodsElement != null && currentGoodsElement.getNomenclature() != null) {
+                if (getValidateQuantityOfGoods() > 0) {
+                    if (getValidateQuantityOfGoods() >= (currentGoodsElement.getInitialQuantity() - currentGoodsElement.getNomenclature().getQuantity())) {
+                        setCanSaveGoods(true);
+                    }
+                }
+            }
         }
     }
 
@@ -99,7 +96,11 @@ public class ComingsInvoicesService extends Invoices<ComingsInvoicesService> {
                     removeGoodsIfMarked();
                     ComingsInvoice tmpCurrentElement = comingInvoicesDAO.saveOrUpdate(currentElement);
                     for (IGoods goods : currentElement.getGoods()) {
-                        storeHousesService.changeIncreaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        if (goods.getId() == null) {
+                            storeHousesService.increaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        } else {
+                            storeHousesService.changeIncreaseGoodsQuantityOnStorehouse(goods, currentElement.getStoreHouse());
+                        }
                     }
                     currentElement = tmpCurrentElement;
                     historyService.saveActionOfChange(HistoryService.COMINGS_INVOICE, " №" + currentElement.getId().toString());
