@@ -136,15 +136,15 @@ public class PricesListJFrame extends javax.swing.JFrame {
             try {
                 fileOut = new FileOutputStream(fc.getSelectedFile() + "." + excelFilter.getExtensions()[0]);
                 workbook.write(fileOut);
-            } catch (Exception ex) {
-                log.error(ex);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
             } finally {
                 try {
                     fileOut.flush();
                     fileOut.close();
                     dispose();
-                } catch (IOException ex) {
-                    log.error(ex);
+                } catch (IOException e) {
+                	log.error(e.getMessage(), e);
                 }
             }
         }
@@ -230,7 +230,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-			log.error("Creation prices list error", e);
+        	log.error(e.getMessage(), e);
         }
     }
 }

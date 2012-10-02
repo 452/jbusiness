@@ -171,8 +171,8 @@ public class ReportsJFrame extends javax.swing.JFrame {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport("reports" + File.separator + "TradeInvoicesCounts.jasper", parameters, beanCollectionDataSource);
             JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -194,8 +194,8 @@ public class ReportsJFrame extends javax.swing.JFrame {
             //JasperPrint jasperPrint = JasperFillManager.fillReport(jre, parameters, beanCollectionDataSource);
             JasperPrint jasperPrint = JasperFillManager.fillReport("reports" + File.separator + "TradeTopNomenclature.jasper", parameters, beanCollectionDataSource);
             JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -209,17 +209,15 @@ public class ReportsJFrame extends javax.swing.JFrame {
             criteriaQuery.multiselect(fromNomenclature.get("id"), fromNomenclature.get("title"), fromNomenclature.get("articleofgoods"), fromNomenclature.get("articleinside"), fromNomenclature.<Integer>get("quantity"), fromNomenclature.<Double>get("price"));
             criteriaQuery.where(cb.equal(fromNomenclature.get("isgroup"), Nomenclature.NOMENCLATURE));
             criteriaQuery.orderBy(cb.asc(fromNomenclature.get("title")), cb.desc(fromNomenclature.<Integer>get("quantity")), cb.asc(fromNomenclature.<Double>get("price")));
-
             //System.out.println(entityManager.createQuery(criteriaQuery).unwrap(JpaQuery.class).getDatabaseQuery().getSQLString());
             //System.out.println(entityManager.createQuery(criteriaQuery).unwrap(JpaQuery.class).getDatabaseQuery().getEJBQLString());
-
             JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(entityManager.createQuery(criteriaQuery).getResultList());
             //JasperReport jre = JasperCompileManager.compileReport("src" + File.separator + "small" + File.separator + "reports" + File.separator + "NomenclatureTotalAudit.jrxml");
             //JasperPrint jasperPrint = JasperFillManager.fillReport(jre, parameters, beanCollectionDataSource);
             JasperPrint jasperPrint = JasperFillManager.fillReport("reports" + File.separator + "NomenclatureTotalAudit.jasper", parameters, beanCollectionDataSource);
             JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -238,8 +236,8 @@ public class ReportsJFrame extends javax.swing.JFrame {
             //JasperPrint jasperPrint = JasperFillManager.fillReport(jre, parameters, beanCollectionDataSource);
             JasperPrint jasperPrint = JasperFillManager.fillReport("reports" + File.separator + "NomenclatureForBuy.jasper", parameters, beanCollectionDataSource);
             JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception ex) {
-            log.error(ex);
+        } catch (Exception e) {
+        	log.error(e.getMessage(), e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
