@@ -48,6 +48,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
      */
     public PricesListJFrame() {
         initComponents();
+        jButtonCreatePricesList.setEnabled(true);
     }
 
     /**
@@ -101,6 +102,7 @@ public class PricesListJFrame extends javax.swing.JFrame {
         fc.setSelectedFile(new File("PricesList"));
         fc.setAcceptAllFileFilterUsed(false);
         if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+        	jButtonCreatePricesList.setEnabled(false);
             HSSFWorkbook workbook = new HSSFWorkbook();
             CreationHelper createHelper = workbook.getCreationHelper();
             HSSFSheet sheet = workbook.createSheet("Прайс лист");
@@ -197,7 +199,6 @@ public class PricesListJFrame extends javax.swing.JFrame {
             criteriaQuery.multiselect(fromNomenclature.get("id"), fromNomenclature.get("isgroup"), fromNomenclature.get("title"), fromNomenclature.get("articleofgoods"), fromNomenclature.get("articleinside"), fromNomenclature.<Integer>get("quantity"), fromNomenclature.<Double>get("price"), fromNomenclature.<Integer>get("priceretail"), fromNomenclature.<Integer>get("pricesmallwholesale"), fromNomenclature.<Integer>get("pricebigwholesale"));
             criteriaQuery.where(cb.equal(fromNomenclature.get("parentid"), id));
             criteriaQuery.orderBy(cb.asc(fromNomenclature.get("title")), cb.asc(fromNomenclature.<Double>get("price")));
-            //
             for (Tuple n : entityManager.createQuery(criteriaQuery).getResultList()) {
                 if (String.valueOf(n.get(1)).equals(Nomenclature.GROUP) && nomenclatureDAO.isHaveRecordsHierarchicalData(id)) {
 

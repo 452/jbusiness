@@ -39,7 +39,7 @@ public class SettingsService {
         settings = null;
     }
 
-    public Double getExchangeRate() {
+    public double getExchangeRate() {
         return Double.valueOf(getSetting("exchangerate").toString());
     }
 
