@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package small.business.swing.gui.invoices.returnsofgoods;
 
 import config.AppContext;
@@ -80,22 +76,22 @@ public class ReturnsOfGoodsJFrame extends javax.swing.JFrame {
 		getAccessibleContext().setAccessibleDescription("");
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}//</editor-fold>//GEN-END:initComponents
 
-    private void jButtonNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewInvoiceActionPerformed
+    private void jButtonNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewInvoiceActionPerformed
         returnsOfGoodsService.setCurrentElement(new ReturnsOfGoodsInvoice());
         ReturnsElementJFrame re = new ReturnsElementJFrame();
         re.pack();
         ModalFrameUtil.showAsModal(re, this);
         this.dispose();
-    }// GEN-LAST:event_jButtonNewInvoiceActionPerformed
+    }//GEN-LAST:event_jButtonNewInvoiceActionPerformed
 
-    private void jButtonInvoicesListActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonInvoicesListActionPerformed
+    private void jButtonInvoicesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvoicesListActionPerformed
         ReturnsOfGoodsListJFrame returnsOfGoodsList = new ReturnsOfGoodsListJFrame();
         returnsOfGoodsList.pack();
         ModalFrameUtil.showAsModal(returnsOfGoodsList, this);
         this.dispose();
-    }// GEN-LAST:event_jButtonInvoicesListActionPerformed
+    }//GEN-LAST:event_jButtonInvoicesListActionPerformed
 
     /**
      * @param args the command line arguments

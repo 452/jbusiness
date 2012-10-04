@@ -34,7 +34,7 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
     }
 
     private void svalidate() {
-    	returnsOfGoodsService.setValidateQuantityOfGoods((Integer) jSpinnerQuantity.getValue());
+    	returnsOfGoodsService.setValidateQuantityOfGoods((int) jSpinnerQuantity.getValue());
         returnsOfGoodsService.validate();
         jButtonSave.setEnabled(returnsOfGoodsService.isCanSaveGoods());
         jButtonNomenclatureSelect.setEnabled(returnsOfGoodsService.isCanChangeNomenclature());
@@ -175,15 +175,14 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
             jButtonSave.setEnabled(false);
         } else {
             jButtonSave.setEnabled(true);
-            jSpinnerPrice.setValue(returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getPrice());
         }
         updateData();
-        // jSpinnerPrice.setValue(getPrice());
         calcData();
     }//GEN-LAST:event_jButtonNomenclatureSelectActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-        setData();
+        returnsOfGoodsService.getCurrentGoodsElement().setQuantity((Integer) jSpinnerQuantity.getValue());
+        returnsOfGoodsService.getCurrentGoodsElement().setPrice((Double) jSpinnerPrice.getValue());
         returnsOfGoodsService.getCurrentElement().getGoods().add(returnsOfGoodsService.getCurrentGoodsElement());
         dispose();
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -271,20 +270,19 @@ public class ReturnsOfGoodsElementJFrame extends javax.swing.JFrame {
 
 	// End of variables declaration//GEN-END:variables
     private void calcData() {
-        jLabelSumValue.setText(Double.valueOf((Double) jSpinnerPrice.getValue() * (Integer) jSpinnerQuantity.getValue()).toString());
-    }
-
-    private void setData() {
-        returnsOfGoodsService.getCurrentGoodsElement().setQuantity((Integer) jSpinnerQuantity.getValue());
-        returnsOfGoodsService.getCurrentGoodsElement().setPrice((Double) jSpinnerPrice.getValue());
-        updateData();
+        jLabelSumValue.setText(Double.valueOf((double) jSpinnerPrice.getValue() * (int) jSpinnerQuantity.getValue()).toString());
     }
 
     private void updateData() {
-        jLabelNomenclatureTitle.setText(returnsOfGoodsService.getCurrentGoodsElement().toString());
+    	jLabelNomenclatureTitle.setText(returnsOfGoodsService.getCurrentGoodsElement().toString());
         jSpinnerQuantity.setValue(returnsOfGoodsService.getCurrentGoodsElement().getQuantity());
-        jSpinnerPrice.setValue(returnsOfGoodsService.getCurrentGoodsElement().getPrice());
-
+        if (returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() != null){
+	        if(returnsOfGoodsService.getCurrentGoodsElement().getId() == null){
+	        	jSpinnerPrice.setValue(returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getPrice());
+	        } else {
+	        	jSpinnerPrice.setValue(returnsOfGoodsService.getCurrentGoodsElement().getPrice());
+	        }
+        }
         jLabelSumValue.setText(returnsOfGoodsService.getCurrentGoodsElement().getSum().toString());
         if (returnsOfGoodsService.getCurrentGoodsElement().getNomenclature() != null && returnsOfGoodsService.getCurrentGoodsElement().getPrice() > returnsOfGoodsService.getCurrentGoodsElement().getNomenclature().getPrice()) {
             jLabelNomenclaturePrice.setForeground(Color.red);

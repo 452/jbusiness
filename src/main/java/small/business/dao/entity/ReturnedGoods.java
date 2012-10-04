@@ -108,7 +108,6 @@ public class ReturnedGoods implements Serializable, IGoods {
 
     @Override
     public Double getPrice() {
-
         return price;
     }
 
