@@ -1,11 +1,12 @@
 package small.business.swing.gui.counterparties;
 
 import config.AppContext;
+import java.net.URL;
 import javax.swing.table.DefaultTableModel;
 import org.springframework.context.ApplicationContext;
 import small.business.businesslayer.CounterPartiesService;
 import small.business.dao.entity.CounterParties;
-import small.business.dao.entity.Nomenclature;
+import small.business.swing.gui.utils.GroupImageRenderer;
 import small.business.swing.gui.utils.ModalFrameUtil;
 
 /**
@@ -24,8 +25,9 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
      */
     public CounterPartiesSelectJFrame() {
         initComponents();
+        jTable.getColumnModel().getColumn(0).setCellRenderer(new GroupImageRenderer());
         counterPartiesService.setSelectedElement(null);
-        if (counterPartiesService.getSelectType().equals(Nomenclature.GROUP)) {
+        if (counterPartiesService.getSelectType().equals(CounterParties.GROUP)) {
             jButtonSelectToRooT.setEnabled(true);
         } else {
             jButtonSelectToRooT.setEnabled(false);
@@ -37,7 +39,8 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
         DefaultTableModel dataModel = (DefaultTableModel) jTable.getModel();
         dataModel.setRowCount(0);
         for (CounterParties goods : counterPartiesService.getDataList()) {
-            Object[] g = new Object[]{goods.isGroup(), goods};
+            URL image = goods.isGroup().equals(CounterParties.GROUP) ? goods.getId().equals(counterPartiesService.getCurrentCategoryId()) ? getClass().getResource("/small/business/swing/gui/images/up.png") : getClass().getResource("/small/business/swing/gui/images/group.png") : getClass().getResource("/small/business/swing/gui/images/counterparty.png");
+            Object[] g = new Object[]{image, goods};
             dataModel.addRow(g);
         }
         jTable.setModel(dataModel);
@@ -64,6 +67,7 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Вибір");
+        setExtendedState(6);
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,8 +95,8 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
             }
         });
         jScrollPane.setViewportView(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(0).setMaxWidth(60);
 
         jButtonSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/save.png"))); // NOI18N
         jButtonSelect.setText("Вибрати");
@@ -193,8 +197,14 @@ public class CounterPartiesSelectJFrame extends javax.swing.JFrame {
                 if (counterPartiesService.isCanSelect() && counterPartiesService.getSelectType().equals(CounterParties.COUNTERPARTY)) {
                     counterPartiesService.setSelectedElement(selectedObject);
                     counterPartiesService.setSelected(true);
+                    dispose();
                 } else {
-                    if (!counterPartiesService.getCurrentElement().getId().equals(counterPartiesService.getSelectedElement().getId())) {
+                    if (counterPartiesService.getSelectType().equals(CounterParties.GROUP)) {
+                        if (!counterPartiesService.getCurrentElement().getId().equals(counterPartiesService.getSelectedElement().getId())) {
+                            counterPartiesService.setCurrentCategory(selectedObject);
+                            getList();
+                        }
+                    } else {
                         counterPartiesService.setCurrentCategory(selectedObject);
                         getList();
                     }

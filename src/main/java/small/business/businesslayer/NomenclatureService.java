@@ -70,7 +70,7 @@ public class NomenclatureService {
             try {
                 nomenclatureDAO.saveOrUpdate(currentElement);
             } catch (Exception e) {
-            	log.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
             setSelected(false);
         }
@@ -103,10 +103,11 @@ public class NomenclatureService {
                 setCanSaveGroup(true);
             }
         }
-        // || (selectedElement != null && currentElement != null &&
-        // !selectedElement.getId().equals(currentElement.getId()))
-        if (selectedElement != null && currentElement != null && selectedElement.isGroup().equals(getSelectType()) && !selectedElement.getId().equals(currentElement.getId())) {
+        if (selectedElement != null && selectedElement.isGroup().equals(getSelectType())) {
             setCanSelect(true);
+            if (currentElement != null && getSelectType().equals(Nomenclature.GROUP) && selectedElement.getId().equals(currentElement.getId())) {
+                setCanSelect(false);
+            }
         }
         if (currentPicture != null) {
             setCanEditPicture(true);
@@ -115,6 +116,10 @@ public class NomenclatureService {
                 setCanSavePicture(true);
             }
         }
+    }
+
+    public long getCurrentCategoryId() {
+        return groupSelector.getNavigationGroupId();
     }
 
     public void setCurrentCategory(Nomenclature currentCategory) {

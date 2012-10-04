@@ -49,7 +49,7 @@ public class CounterPartiesService {
                 historyService.saveActionOfChange(HistoryService.COUNTERPARTIES, currentElement.getTitle() + " №" + currentElement.getId().toString());
             }
         } catch (Exception e) {
-        	log.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -59,7 +59,7 @@ public class CounterPartiesService {
             try {
                 counterPartiesDAO.saveOrUpdate(currentElement);
             } catch (Exception e) {
-            	log.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
             setSelected(false);
         }
@@ -83,9 +83,16 @@ public class CounterPartiesService {
         if ((currentElement != null) && (currentElement.getTitle() != null) && (currentElement.getInfo() != null) && (currentElement.getTitle().length() > 0) && !currentElement.getTitle().endsWith(" ") && !currentElement.getInfo().endsWith(" ")) {
             setCanSave(true);
         }
-        if (selectedElement != null && currentElement != null && selectedElement.isGroup().equals(getSelectType()) && !selectedElement.getId().equals(currentElement.getId())) {
+        if (selectedElement != null && selectedElement.isGroup().equals(getSelectType())) {
             setCanSelect(true);
+            if (currentElement != null && getSelectType().equals(CounterParties.GROUP) && selectedElement.getId().equals(currentElement.getId())) {
+                setCanSelect(false);
+            }
         }
+    }
+
+    public long getCurrentCategoryId() {
+        return groupSelector.getNavigationGroupId();
     }
 
     public void setCurrentCategory(CounterParties currentCategory) {
@@ -104,9 +111,8 @@ public class CounterPartiesService {
 
     public CounterParties getValidateElement() {
         if (currentElement == null) {
-        	currentElement = new CounterParties();
+            currentElement = new CounterParties();
         }
-
         return currentElement;
     }
 
@@ -158,19 +164,19 @@ public class CounterPartiesService {
         this.selectType = g;
     }
 
-	public boolean isSelected() {
-		return selected;
-	}
+    public boolean isSelected() {
+        return selected;
+    }
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
-	public boolean isCanSelect() {
-		return canSelect;
-	}
+    public boolean isCanSelect() {
+        return canSelect;
+    }
 
-	public void setCanSelect(boolean canSelect) {
-		this.canSelect = canSelect;
-	}
+    public void setCanSelect(boolean canSelect) {
+        this.canSelect = canSelect;
+    }
 }

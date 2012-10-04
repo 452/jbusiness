@@ -45,7 +45,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelSearch" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane" pref="112" max="32767" attributes="0"/>
+              <Component id="jScrollPane" pref="115" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -324,7 +324,7 @@
             <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="11" rowCount="0">
-                <Column editable="false" title="&#x413;&#x440;&#x443;&#x43f;&#x430;" type="java.lang.String"/>
+                <Column editable="false" title="&#x413;&#x440;&#x443;&#x43f;&#x430;" type="java.lang.Object"/>
                 <Column editable="false" title="id" type="java.lang.Long"/>
                 <Column editable="false" title="&#x41d;&#x430;&#x439;&#x43c;&#x435;&#x43d;&#x443;&#x432;&#x430;&#x43d;&#x43d;&#x44f;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x417;&#x430;&#x432;&#x43e;&#x434;&#x441;&#x44c;&#x43a;&#x438;&#x439; &#x430;&#x440;&#x442;&#x438;&#x43a;&#x443;&#x43b;" type="java.lang.String"/>
@@ -339,7 +339,7 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="50" minWidth="-1" prefWidth="50" resizable="true">
+                <Column maxWidth="60" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

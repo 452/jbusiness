@@ -13,6 +13,7 @@ import config.AppContext;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import org.apache.log4j.Logger;
 import small.business.businesslayer.SettingsService;
 import small.business.dao.entity.Pictures;
+import small.business.swing.gui.utils.GroupImageRenderer;
 
 /**
  *
@@ -41,6 +43,7 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
      */
     public NomenclatureSelectJFrame() {
         initComponents();
+        jTable.getColumnModel().getColumn(0).setCellRenderer(new GroupImageRenderer());
         nomenclatureService.setSelectedElement(null);
         if (nomenclatureService.getSelectType().equals(Nomenclature.GROUP)) {
             jButtonSelectToRooT.setEnabled(true);
@@ -61,10 +64,11 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
         }
         for (Nomenclature goods : dataList) {
             Object[] g;
+            URL image = goods.isGroup().equals(Nomenclature.GROUP) ? goods.getId().equals(nomenclatureService.getCurrentCategoryId()) ? getClass().getResource("/small/business/swing/gui/images/up.png") : getClass().getResource("/small/business/swing/gui/images/group.png") : getClass().getResource("/small/business/swing/gui/images/element.png");
             if (jCheckBoxShowTheCalculationOf.isSelected()) {
-                g = new Object[]{goods.isGroup(), goods.getId(), goods, goods.getArticleofgoods(), goods.getArticleinside(), goods.getQuantity(), null, goods.getRetailPrice() == null ? null : (goods.getRetailPrice() * settingsService.getExchangeRate()), goods.getSmallWholeSalePrice() == null ? null : (goods.getSmallWholeSalePrice() * settingsService.getExchangeRate()), goods.getBigWholeSalePrice() == null ? null : (goods.getBigWholeSalePrice() * settingsService.getExchangeRate())};
+                g = new Object[]{image, goods.getId(), goods, goods.getArticleofgoods(), goods.getArticleinside(), goods.getQuantity(), null, goods.getRetailPrice() == null ? null : (goods.getRetailPrice() * settingsService.getExchangeRate()), goods.getSmallWholeSalePrice() == null ? null : (goods.getSmallWholeSalePrice() * settingsService.getExchangeRate()), goods.getBigWholeSalePrice() == null ? null : (goods.getBigWholeSalePrice() * settingsService.getExchangeRate())};
             } else {
-                g = new Object[]{goods.isGroup(), goods.getId(), goods, goods.getArticleofgoods(), goods.getArticleinside(), goods.getQuantity(), goods.getPrice(), goods.getPriceretail(), goods.getPricesmallwholesale(), goods.getPricebigwholesale()};
+                g = new Object[]{image, goods.getId(), goods, goods.getArticleofgoods(), goods.getArticleinside(), goods.getQuantity(), goods.getPrice(), goods.getPriceretail(), goods.getPricesmallwholesale(), goods.getPricebigwholesale()};
             }
             dataModel.addRow(g);
         }
@@ -335,7 +339,7 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Long.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Long.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
@@ -359,8 +363,8 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
             }
         });
         jScrollPane.setViewportView(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+        jTable.getColumnModel().getColumn(0).setMaxWidth(60);
         jTable.getColumnModel().getColumn(1).setPreferredWidth(50);
         jTable.getColumnModel().getColumn(1).setMaxWidth(50);
         jTable.getColumnModel().getColumn(2).setPreferredWidth(267);
@@ -401,7 +405,7 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
                     .add(jPanelSearch, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jCheckBoxShowTheCalculationOf))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jSplitPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                .add(jSplitPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
         );
 
         pack();
@@ -446,7 +450,12 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
                     nomenclatureService.setSelected(true);
                     dispose();
                 } else {
-                    if (!nomenclatureService.getCurrentElement().getId().equals(nomenclatureService.getSelectedElement().getId())) {
+                    if (nomenclatureService.getSelectType().equals(Nomenclature.GROUP)) {
+                        if (!selectedObject.getId().equals(nomenclatureService.getCurrentElement().getId())) {
+                            nomenclatureService.setCurrentCategory(selectedObject);
+                            getList();
+                        }
+                    } else {
                         nomenclatureService.setCurrentCategory(selectedObject);
                         getList();
                     }
