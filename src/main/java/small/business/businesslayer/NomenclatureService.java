@@ -105,7 +105,7 @@ public class NomenclatureService {
         }
         // || (selectedElement != null && currentElement != null &&
         // !selectedElement.getId().equals(currentElement.getId()))
-        if (selectedElement != null && selectedElement.isGroup().equals(getSelectType())) {
+        if (selectedElement != null && currentElement != null && selectedElement.isGroup().equals(getSelectType()) && !selectedElement.getId().equals(currentElement.getId())) {
             setCanSelect(true);
         }
         if (currentPicture != null) {

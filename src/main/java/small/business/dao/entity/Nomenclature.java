@@ -104,6 +104,11 @@ public class Nomenclature implements Serializable, IElement<Nomenclature>, IGrou
         this.id = id;
     }
 
+    public Nomenclature(Long id, String isgroup) {
+        this.id = id;
+        this.isgroup = isgroup;
+    }
+
     public Nomenclature(String isgroup) {
         this.isgroup = isgroup;
     }
