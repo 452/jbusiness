@@ -34,7 +34,7 @@ public class SettingsService {
     }
 
     public void setSetting(String name, String value) {
-        settingsDao.setSetting(name, value);
+        settingsDao.saveSetting(name, value);
         historyService.saveActionOfChange(HistoryService.SETTINGS, name + " - " + value);
         settings = null;
     }
@@ -43,8 +43,8 @@ public class SettingsService {
         return Double.valueOf(getSetting("exchangerate").toString());
     }
 
-    public void setExchangeRate(String value) {
-        setSetting("exchangerate", value);
+    public void setExchangeRate(double exchangeRate) {
+        setSetting("exchangerate", Double.valueOf(exchangeRate).toString());
     }
 
     public void setNameData(String value) {

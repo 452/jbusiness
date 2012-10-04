@@ -85,7 +85,7 @@ public class SettingsJDialog extends javax.swing.JDialog {
     }// GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
-        settingsService.setExchangeRate(jSpinnerExchangeRate.getValue().toString());
+        settingsService.setExchangeRate((double)jSpinnerExchangeRate.getValue());
         settingsService.setNameData(jTextAreaInfo.getText());
         dispose();
     }// GEN-LAST:event_jButtonSaveActionPerformed
