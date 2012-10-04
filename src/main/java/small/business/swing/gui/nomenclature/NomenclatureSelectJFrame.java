@@ -43,9 +43,9 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
         initComponents();
         nomenclatureService.setSelectedElement(null);
         if (nomenclatureService.getSelectType().equals(Nomenclature.GROUP)) {
-        	jButtonSelectToRooT.setEnabled(true);
+            jButtonSelectToRooT.setEnabled(true);
         } else {
-        	jButtonSelectToRooT.setEnabled(false);
+            jButtonSelectToRooT.setEnabled(false);
         }
         getList();
     }
@@ -446,10 +446,10 @@ public class NomenclatureSelectJFrame extends javax.swing.JFrame {
                     nomenclatureService.setSelected(true);
                     dispose();
                 } else {
-                	if (!nomenclatureService.getCurrentElement().getId().equals(nomenclatureService.getSelectedElement().getId())) {
-	                    nomenclatureService.setCurrentCategory(selectedObject);
-	                    getList();
-                	}
+                    if (!nomenclatureService.getCurrentElement().getId().equals(nomenclatureService.getSelectedElement().getId())) {
+                        nomenclatureService.setCurrentCategory(selectedObject);
+                        getList();
+                    }
                 }
             }
         }

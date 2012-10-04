@@ -65,6 +65,15 @@ public class CounterParties implements Serializable, IElement<CounterParties>, I
         this.id = id;
     }
 
+    public CounterParties(Long id, String groupType) {
+        this.id = id;
+        this.isgroup = groupType;
+    }
+
+    public CounterParties(String groupType) {
+        this.isgroup = groupType;
+    }
+
     public CounterParties(Long id, String title, String isgroup, Long parentid) {
         this.id = id;
         this.title = title;
@@ -89,12 +98,8 @@ public class CounterParties implements Serializable, IElement<CounterParties>, I
         this.title = title;
     }
 
-    public String getIsgroup() {
+    public String isGroup() {
         return isgroup;
-    }
-
-    public void setIsgroup(String isgroup) {
-        this.isgroup = isgroup;
     }
 
     public Long getParentid() {

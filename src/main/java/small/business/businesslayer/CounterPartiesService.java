@@ -1,11 +1,13 @@
 package small.business.businesslayer;
 
 import java.util.List;
-import java.util.logging.Level;
+
 import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import small.business.dao.CounterPartiesDAO;
 import small.business.dao.entity.CounterParties;
 
@@ -23,12 +25,13 @@ public class CounterPartiesService {
     private HistoryService historyService;
     private CounterParties currentElement;
     private CounterParties selectedElement;
-    private CounterParties validateElement;
     private boolean canSave = false;
     private boolean canRemove = false;
     private boolean canMove = false;
     private boolean canEdit = false;
     private GroupSelector groupSelector = new GroupSelector();
+    private boolean canSelect = false;
+    private boolean selected = false;
     private String selectType;
 
     public List<CounterParties> getDataList() {
@@ -51,15 +54,14 @@ public class CounterPartiesService {
     }
 
     public void move() {
-        log.debug("move");
-        if (selectedElement != null) {
-            log.debug(currentElement.getTitle() + " selectedCategory=" + selectedElement.getId());
+        if (selectedElement != null && isSelected()) {
             currentElement.setParentid(selectedElement.getId());
             try {
                 counterPartiesDAO.saveOrUpdate(currentElement);
             } catch (Exception e) {
             	log.error(e.getMessage(), e);
             }
+            setSelected(false);
         }
     }
 
@@ -72,20 +74,22 @@ public class CounterPartiesService {
         setCanEdit(false);
         setCanMove(false);
         setCanRemove(false);
-
-        if ((validateElement != null) && (validateElement.getId() != null) && (!validateElement.getId().equals(groupSelector.getNavigationGroupId()))) {
+        setCanSelect(false);
+        if ((currentElement != null) && (currentElement.getId() != null) && (!currentElement.getId().equals(groupSelector.getNavigationGroupId()))) {
             setCanEdit(true);
-            // setCanMove(true);
+            setCanMove(true);
             //setCanRemove(true);
         }
-        if ((validateElement != null) && (validateElement.getTitle() != null) && (validateElement.getInfo() != null) && (validateElement.getTitle().length() > 0) && !validateElement.getTitle().endsWith(" ") && !validateElement.getInfo().endsWith(" ")) {
+        if ((currentElement != null) && (currentElement.getTitle() != null) && (currentElement.getInfo() != null) && (currentElement.getTitle().length() > 0) && !currentElement.getTitle().endsWith(" ") && !currentElement.getInfo().endsWith(" ")) {
             setCanSave(true);
         }
-        setValidateElement(null);
+        if (selectedElement != null && currentElement != null && selectedElement.isGroup().equals(getSelectType()) && !selectedElement.getId().equals(currentElement.getId())) {
+            setCanSelect(true);
+        }
     }
 
     public void setCurrentCategory(CounterParties currentCategory) {
-        if (currentCategory.getIsgroup().equals(CounterParties.GROUP) && (currentCategory.getId() != null)) {
+        if (currentCategory.isGroup().equals(CounterParties.GROUP) && (currentCategory.getId() != null)) {
             groupSelector.setСurrentCategory(currentCategory);
         }
     }
@@ -99,11 +103,11 @@ public class CounterPartiesService {
     }
 
     public CounterParties getValidateElement() {
-        if (validateElement == null) {
-            validateElement = new CounterParties();
+        if (currentElement == null) {
+        	currentElement = new CounterParties();
         }
 
-        return validateElement;
+        return currentElement;
     }
 
     public CounterParties getSelectedElement() {
@@ -146,10 +150,6 @@ public class CounterPartiesService {
         this.canEdit = canEdit;
     }
 
-    public void setValidateElement(CounterParties validateElement) {
-        this.validateElement = validateElement;
-    }
-
     public String getSelectType() {
         return selectType;
     }
@@ -157,4 +157,20 @@ public class CounterPartiesService {
     public void setSelectType(String g) {
         this.selectType = g;
     }
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public boolean isCanSelect() {
+		return canSelect;
+	}
+
+	public void setCanSelect(boolean canSelect) {
+		this.canSelect = canSelect;
+	}
 }

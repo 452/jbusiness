@@ -1,13 +1,14 @@
 package small.business.swing.gui.counterparties;
 
-import config.AppContext;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import org.springframework.context.ApplicationContext;
+
 import small.business.businesslayer.CounterPartiesService;
-import small.business.businesslayer.HistoryService;
 import small.business.dao.entity.CounterParties;
 import small.business.swing.gui.utils.ModalFrameUtil;
+import config.AppContext;
 
 /**
  *
@@ -18,7 +19,6 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private CounterPartiesService counterPartiesService = (CounterPartiesService) ctx.getBean("counterPartiesService");
-    private HistoryService historyService = (HistoryService) ctx.getBean("historyService");
     private final static int OBJECT_COLUMN = 1;
 
     public CounterPartiesListJFrame() {
@@ -31,7 +31,7 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
         DefaultTableModel dataModel = (DefaultTableModel) jTable.getModel();
         dataModel.setRowCount(0);
         for (CounterParties goods : counterPartiesService.getDataList()) {
-            Object[] g = new Object[]{(goods.getIsgroup().equals(CounterParties.GROUP)) ? "Група" : "-", goods};
+            Object[] g = new Object[]{(goods.isGroup().equals(CounterParties.GROUP)) ? "Група" : "-", goods};
             dataModel.addRow(g);
         }
         jTable.setModel(dataModel);
@@ -200,25 +200,19 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        CounterParties c = new CounterParties();
-        c.setIsgroup(CounterParties.COUNTERPARTY);
-        counterPartiesService.setCurrentElement(c);
+        counterPartiesService.setCurrentElement(new CounterParties(CounterParties.COUNTERPARTY));
         CounterPartyElementJFrame counterPartyElement = new CounterPartyElementJFrame();
         counterPartyElement.pack();
         ModalFrameUtil.showAsModal(counterPartyElement, this);
         getList();
-        historyService.saveActionOfAdd("Контрагенти", counterPartiesService.getCurrentElement().getTitle());
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonAddGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddGroupActionPerformed
-        CounterParties c = new CounterParties();
-        c.setIsgroup(CounterParties.GROUP);
-        counterPartiesService.setCurrentElement(c);
+        counterPartiesService.setCurrentElement(new CounterParties(CounterParties.GROUP));
         CounterPartyElementJFrame counterPartyElement = new CounterPartyElementJFrame();
         counterPartyElement.pack();
         ModalFrameUtil.showAsModal(counterPartyElement, this);
         getList();
-        historyService.saveActionOfAdd("Контрагенти", counterPartiesService.getCurrentElement().getTitle());
     }//GEN-LAST:event_jButtonAddGroupActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
@@ -236,7 +230,7 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
             counterPartiesService.setCurrentElement(selectedObject);
-            if (selectedObject.getIsgroup().contentEquals(CounterParties.GROUP)) {
+            if (selectedObject.isGroup().contentEquals(CounterParties.GROUP)) {
                 counterPartiesService.setCurrentCategory(selectedObject);
                 getList();
             } else {
@@ -251,8 +245,8 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
     private void jButtonMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMoveActionPerformed
         if (jTable.getSelectedRow() >= 0) {
             counterPartiesService.setSelectType(CounterParties.GROUP);
-            CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-            counterPartiesService.setCurrentElement(selectedObject);
+            //CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+            //counterPartiesService.setCurrentElement(selectedObject);
             CounterPartiesSelectJFrame counterPartiesSelect = new CounterPartiesSelectJFrame();
             counterPartiesSelect.pack();
             ModalFrameUtil.showAsModal(counterPartiesSelect, this);
@@ -266,7 +260,6 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
         if ((jTable.getSelectedRow() >= 0) && (confirm == JOptionPane.YES_OPTION)) {
             CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
             counterPartiesService.removeCurrentElement(selectedObject);
-            historyService.saveActionOfRemoval("Контрагенти", selectedObject.getTitle());
             getList();
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
@@ -323,10 +316,11 @@ public class CounterPartiesListJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void svalidate() {
+    	CounterParties validateElement = null;
         if (jTable.getSelectedRow() >= 0) {
-            CounterParties selectedObject = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
-            counterPartiesService.setValidateElement(selectedObject);
+            validateElement = (CounterParties) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
         }
+        counterPartiesService.setCurrentElement(validateElement);
         counterPartiesService.validate();
         jButtonEdit.setEnabled(counterPartiesService.getCanEdit());
         jButtonMove.setEnabled(counterPartiesService.getCanMove());
