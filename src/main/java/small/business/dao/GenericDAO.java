@@ -71,7 +71,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
     }
 
     public List<E> getHierarchicalDataList(Long parentid) {
-        long start = System.currentTimeMillis();
+        //long start = System.currentTimeMillis();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<E> result = Collections.emptyList();
         try {
@@ -86,8 +86,8 @@ public abstract class GenericDAO<E extends IElement<?>> {
             if (entityManager.isOpen()) {
                 entityManager.close();
             }
-            long end = System.currentTimeMillis();
-            log.debug("Time " + entityClass.getSimpleName() + " : " + (end - start) + " ms");
+            //long end = System.currentTimeMillis();
+            //log.debug("Time " + entityClass.getSimpleName() + " : " + (end - start) + " ms");
         }
         return result;
     }
@@ -101,7 +101,7 @@ public abstract class GenericDAO<E extends IElement<?>> {
      * @return list of found nomenclature
      */
     public List<E> getNomenclatureSearchDataList(long id, String title, String factorySerialArticul, String additionalArticul) {
-        long start = System.currentTimeMillis();
+        //long start = System.currentTimeMillis();
         List<E> result = Collections.emptyList();
         if (id != 0 || !title.isEmpty() || !factorySerialArticul.isEmpty() || !additionalArticul.isEmpty()) {
             EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -133,13 +133,13 @@ public abstract class GenericDAO<E extends IElement<?>> {
                 }
             }
         }
-        long end = System.currentTimeMillis();
-        log.debug("Time " + entityClass.getSimpleName() + " : " + (end - start) + " ms");
+        //long end = System.currentTimeMillis();
+        //log.debug("Time " + entityClass.getSimpleName() + " : " + (end - start) + " ms");
         return result;
     }
 
     public List<E> getInvoicesList() {
-        long start = System.currentTimeMillis();
+        //long start = System.currentTimeMillis();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<E> result = Collections.emptyList();
         try {
@@ -154,8 +154,8 @@ public abstract class GenericDAO<E extends IElement<?>> {
             if (entityManager.isOpen()) {
                 entityManager.close();
             }
-            long end = System.currentTimeMillis();
-            log.debug("Time getInvoicesList: " + (end - start) + " ms");
+            //long end = System.currentTimeMillis();
+            //log.debug("Time getInvoicesList: " + (end - start) + " ms");
         }
         return result;
     }
