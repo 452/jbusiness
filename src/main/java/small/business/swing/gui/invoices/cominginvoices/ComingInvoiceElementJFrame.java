@@ -229,7 +229,7 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
                 .addComponent(jButtonEditGoods)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveGoods)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -247,11 +247,12 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
         );
 
         jPanelInvoiceInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Інформація накладної"));
 
+        jButtonCounterPartySelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/counterparty.png"))); // NOI18N
         jButtonCounterPartySelect.setText("1 Вибрати постачальника");
         jButtonCounterPartySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,12 +378,12 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
             .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addGroup(jPanelInvoiceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButtonStoreHouseSelect))
                     .addComponent(jButtonCounterPartySelect)
                     .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelInvoiceInfoLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonStoreHouseSelect)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -582,8 +583,7 @@ public class ComingInvoiceElementJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRemoveGoods;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonStoreHouseSelect;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox jComboBoxStatusOfPayment;
+    private javax.swing.JComboBox jComboBoxStatusOfPayment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -100,6 +100,7 @@ public class ReturnsElementJFrame extends javax.swing.JFrame {
 
         jPanelInvoiceInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("Інформація накладної"));
 
+        jButtonCounterPartySelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/counterparty.png"))); // NOI18N
         jButtonCounterPartySelect.setText("1 Вибрати постачальника");
         jButtonCounterPartySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -114,6 +114,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonCounterPartySelect">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/small/business/swing/gui/images/counterparty.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1 &#x412;&#x438;&#x431;&#x440;&#x430;&#x442;&#x438; &#x43a;&#x43b;&#x456;&#x454;&#x43d;&#x442;&#x430;"/>
           </Properties>
           <Events>
@@ -389,7 +392,7 @@
                           <Component id="jButtonRemoveGoods" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane" pref="125" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="127" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
