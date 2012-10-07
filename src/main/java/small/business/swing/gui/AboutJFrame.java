@@ -50,8 +50,10 @@ public class AboutJFrame extends javax.swing.JFrame {
         jTextAreaInfo.setColumns(20);
         jTextAreaInfo.setLineWrap(true);
         jTextAreaInfo.setRows(5);
-        jTextAreaInfo.setText("Small business це безкоштовне програмне забезпечення з відкритим кодом що розповсюджується за ліцензією LGPLv3.\nВи також можете підтримати проект матеріально чи фінансово:\nНам потрібні: додаткове обладнання для тестування програмного забезпечення та фінанси на оплату електроенергії та інших послуг.\n\nНа даний момент програмне забезпечення працює в слідуючих операційних системах:\nWindows XP/7/8, Linux, MacOS.\nDonate/фінансова допомога розвитку проекту\nWebMoney\nU109404091269 - UAN\nZ410354728000 - $\nE332626717591 - Euro");
+        jTextAreaInfo.setText("Small business це вільне програмне забезпечення з відкритим кодом що розповсюджується за ліцензією LGPLv3 та АБСОЛЮТНО БЕЗ ЖОДНИХ ГАРАНТІЙ.\n\nВи також можете підтримати проект матеріально чи фінансово:\nНам потрібні: додаткове обладнання для тестування програмного забезпечення.\n\nНа даний момент програмне забезпечення працює в слідуючих операційних системах:\nWindows XP/7/8, Linux, MacOS.\nDonate/фінансова допомога розвитку проекту\nWebMoney\nU109404091269 - UAN\nZ410354728000 - $\nE332626717591 - Euro");
         jTextAreaInfo.setWrapStyleWord(true);
+        jTextAreaInfo.setCaretPosition(0);
+        jTextAreaInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTextAreaInfo.setFocusable(false);
         jTextAreaInfo.setRequestFocusEnabled(false);
         jScrollPane.setViewportView(jTextAreaInfo);
