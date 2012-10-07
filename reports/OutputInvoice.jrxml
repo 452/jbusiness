@@ -4,11 +4,7 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="3"/>
-	<import value="static net.sf.jasperreports.expressions.functions.LogicalFunctions.*"/>
-	<import value="static net.sf.jasperreports.expressions.functions.TextFunctions.*"/>
-	<import value="static net.sf.jasperreports.expressions.functions.MathFunctions.*"/>
 	<import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<import value="static net.sf.jasperreports.expressions.functions.DateTimeFunctions.*"/>
 	<style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 	<style name="Arial_Bold" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 	<style name="Arial_Italic" fontName="Arial" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -224,11 +220,11 @@
                 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="0" y="30" width="69" height="13"/>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="0" y="30" width="71" height="10"/>
 				<textElement>
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfEncoding="Cp1251"/>
 				</textElement>
-				<text><![CDATA[Відвантажив:
+				<text><![CDATA[Постачальник:
                 ]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -239,18 +235,19 @@
 				<textFieldExpression><![CDATA[$V{QUANTITY_SUM}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="270" y="30" width="50" height="13"/>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="260" y="30" width="56" height="10"/>
 				<textElement>
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfEncoding="CP1251 (Cyrillic)"/>
 				</textElement>
-				<text><![CDATA[Отримав:
+				<text><![CDATA[Одержувач:
                 ]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="17623fc9-3a7d-438c-a859-fb09abda9c74" x="320" y="39" width="193" height="1"/>
+				<reportElement uuid="17623fc9-3a7d-438c-a859-fb09abda9c74" x="316" y="39" width="193" height="1"/>
 			</line>
-			<line>
-				<reportElement uuid="19b0302e-4aa4-407f-9433-7894eff965dd" x="69" y="39" width="188" height="1"/>
+			<line direction="BottomUp">
+				<reportElement uuid="19b0302e-4aa4-407f-9433-7894eff965dd" positionType="FixRelativeToBottom" x="71" y="39" width="180" height="1"/>
+				<graphicElement fill="Solid"/>
 			</line>
 			<staticText>
 				<reportElement uuid="e6a0da8a-6b13-4619-8454-20bced9b3402" x="373" y="9" width="82" height="13"/>

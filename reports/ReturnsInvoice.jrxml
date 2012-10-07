@@ -209,11 +209,11 @@
 				<text><![CDATA[Загальна кількість одиниць товару:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="0" y="30" width="69" height="13"/>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="0" y="30" width="71" height="10"/>
 				<textElement>
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfEncoding="Cp1251"/>
 				</textElement>
-				<text><![CDATA[Відвантажив:]]></text>
+				<text><![CDATA[Постачальник:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="b000bcb9-4d73-4913-9bf2-c74578083520" x="180" y="9" width="100" height="13"/>
@@ -223,17 +223,17 @@
 				<textFieldExpression><![CDATA[$V{QUANTITY_SUM}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="270" y="30" width="50" height="13"/>
+				<reportElement uuid="40c8bff2-ee64-4ee4-89ec-870cfe36b65c" x="259" y="30" width="56" height="10"/>
 				<textElement>
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfEncoding="CP1251 (Cyrillic)"/>
 				</textElement>
-				<text><![CDATA[Отримав:]]></text>
+				<text><![CDATA[Одержувач:]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="17623fc9-3a7d-438c-a859-fb09abda9c74" x="320" y="39" width="193" height="1"/>
+				<reportElement uuid="17623fc9-3a7d-438c-a859-fb09abda9c74" x="315" y="39" width="206" height="1"/>
 			</line>
 			<line>
-				<reportElement uuid="19b0302e-4aa4-407f-9433-7894eff965dd" x="69" y="39" width="188" height="1"/>
+				<reportElement uuid="19b0302e-4aa4-407f-9433-7894eff965dd" x="71" y="39" width="185" height="1"/>
 			</line>
 			<staticText>
 				<reportElement uuid="e6a0da8a-6b13-4619-8454-20bced9b3402" x="373" y="9" width="82" height="13"/>
