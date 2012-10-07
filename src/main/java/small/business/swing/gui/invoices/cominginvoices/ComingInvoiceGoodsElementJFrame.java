@@ -52,19 +52,20 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelMain = new javax.swing.JPanel();
         jPanelButtons = new javax.swing.JPanel();
         jButtonSave = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
         jButtonCalc = new javax.swing.JButton();
         jPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelQuantity = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonNomenclatureSelect = new javax.swing.JButton();
         jSpinnerQuantity = new javax.swing.JSpinner();
         jLabelSum = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelReatil = new javax.swing.JLabel();
         jSpinnerPrice = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -126,7 +127,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel2.setText("Кількість:");
+        jLabelQuantity.setText("Кількість:");
 
         jLabel7.setText("Дрібний опт грн:");
 
@@ -151,7 +152,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Крупний опт грн:");
 
-        jLabel6.setText("Роздріб грн:");
+        jLabelReatil.setText("Роздріб грн:");
 
         jSpinnerPrice.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 999999.0d, 0.01d));
 
@@ -160,6 +161,8 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
         jLabel3.setText("Ціна:");
 
         jLabelSumValue.setText("0");
+
+        jLabelNomenclatureTitle.setText("1");
 
         jLabelNomenclaturePrice.setText("0");
 
@@ -175,15 +178,14 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabelSum))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabelReatil)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelQuantity)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelSum)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +193,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
                         .addComponent(jLabelNomenclatureTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonNomenclatureSelect))
-                    .addComponent(jSpinnerQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jSpinnerQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                     .addComponent(jSpinnerPrice)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,17 +209,13 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jButtonNomenclatureSelect))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                        .addComponent(jLabelNomenclatureTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButtonNomenclatureSelect)
+                    .addComponent(jLabelNomenclatureTitle)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelQuantity)
                     .addComponent(jSpinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,7 +231,7 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
                     .addComponent(jLabelNomenclaturePrice))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(jLabelReatil)
                     .addComponent(jLabelRetailPrice))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,6 +241,27 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabelBigWholeSalePrice))
+                .addGap(1, 1, 1))
+        );
+
+        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
+        jPanelMain.setLayout(jPanelMainLayout);
+        jPanelMainLayout.setHorizontalGroup(
+            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanelMainLayout.setVerticalGroup(
+            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -251,19 +270,16 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(0, 0, 0)
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -352,21 +368,22 @@ public class ComingInvoiceGoodsElementJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNomenclatureSelect;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelBigWholeSalePrice;
     private javax.swing.JLabel jLabelNomenclaturePrice;
     private javax.swing.JLabel jLabelNomenclatureTitle;
+    private javax.swing.JLabel jLabelQuantity;
+    private javax.swing.JLabel jLabelReatil;
     private javax.swing.JLabel jLabelRetailPrice;
     private javax.swing.JLabel jLabelSmallWholeSalePrice;
     private javax.swing.JLabel jLabelSum;
     private javax.swing.JLabel jLabelSumValue;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanelButtons;
+    private javax.swing.JPanel jPanelMain;
     private javax.swing.JSpinner jSpinnerPrice;
     private javax.swing.JSpinner jSpinnerQuantity;
     // End of variables declaration//GEN-END:variables
