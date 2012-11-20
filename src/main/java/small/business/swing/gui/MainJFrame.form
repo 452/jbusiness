@@ -310,7 +310,6 @@
               <Image iconType="3" name="/small/business/swing/gui/images/repair.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x420;&#x435;&#x43c;&#x43e;&#x43d;&#x442;"/>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

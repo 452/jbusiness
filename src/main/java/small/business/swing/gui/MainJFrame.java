@@ -30,6 +30,7 @@ import small.business.swing.gui.utils.TrayMessage;
 import small.business.u18n.Languages;
 import config.ApplicationConfig;
 import small.business.swing.gui.priceslist.PricesListJFrame;
+import small.business.swing.gui.repair.RepairListJFrame;
 
 /**
  *
@@ -201,7 +202,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jButtonRepair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/repair.png"))); // NOI18N
         jButtonRepair.setText("Ремонт");
-        jButtonRepair.setEnabled(false);
         jButtonRepair.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jButtonRepair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRepair.setMaximumSize(new java.awt.Dimension(175, 161));
@@ -397,6 +397,9 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTradeActionPerformed
 
     private void jButtonRepairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRepairActionPerformed
+        RepairListJFrame repairList = new RepairListJFrame();
+        repairList.pack();
+        ModalFrameUtil.showAsModal(repairList, this);
     }//GEN-LAST:event_jButtonRepairActionPerformed
 
     private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportsActionPerformed
