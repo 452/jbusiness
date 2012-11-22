@@ -102,7 +102,7 @@ public class CounterParties implements Serializable, IElement<CounterParties>, I
         return isgroup;
     }
 
-    public Long getParentid() {
+    public Long getParentId() {
         return parentid;
     }
 
@@ -127,7 +127,6 @@ public class CounterParties implements Serializable, IElement<CounterParties>, I
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CounterParties)) {
             return false;
         }

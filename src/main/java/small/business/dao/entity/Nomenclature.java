@@ -140,7 +140,7 @@ public class Nomenclature implements Serializable, IElement<Nomenclature>, IGrou
         return isgroup;
     }
 
-    public Long getParentid() {
+    public Long getParentId() {
         return parentid;
     }
 
@@ -270,7 +270,6 @@ public class Nomenclature implements Serializable, IElement<Nomenclature>, IGrou
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Nomenclature)) {
             return false;
         }

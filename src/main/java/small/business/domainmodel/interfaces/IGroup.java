@@ -8,5 +8,5 @@ public interface IGroup {
 
     public Long getId();
 
-    public Long getParentid();
+    public Long getParentId();
 }

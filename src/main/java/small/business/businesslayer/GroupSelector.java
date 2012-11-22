@@ -18,10 +18,10 @@ public class GroupSelector {
 
     public void setСurrentCategory(IGroup сurrentCategory) {
         if (сurrentCategory.getId().equals(lastGroupNo)) {
-            currentGroupId = сurrentCategory.getParentid();
-            lastGroupNo = сurrentCategory.getParentid();
+            currentGroupId = сurrentCategory.getParentId();
+            lastGroupNo = сurrentCategory.getParentId();
         } else {
-            if (!сurrentCategory.getId().equals(сurrentCategory.getParentid())) {
+            if (!сurrentCategory.getId().equals(сurrentCategory.getParentId())) {
                 currentGroupId = сurrentCategory.getId();
                 lastGroupNo = сurrentCategory.getId();
             }

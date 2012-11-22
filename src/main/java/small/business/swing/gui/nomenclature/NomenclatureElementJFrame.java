@@ -94,6 +94,7 @@ public class NomenclatureElementJFrame extends javax.swing.JFrame {
         jSpinnerPriceBigWholeSale.setValue(nomenclatureService.getCurrentElement().getPricebigwholesale());
         jSpinnerMinQuantity.setValue(nomenclatureService.getCurrentElement().getQuantitymin());
         jLabelAllQuantityInAllStoreHouses.setText(nomenclatureService.getCurrentElement().getQuantity().toString());
+        nomenclatureService.setCurrentPicture(null);
         showPictures();
         svalidate();
     }

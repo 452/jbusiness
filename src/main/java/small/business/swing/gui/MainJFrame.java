@@ -30,7 +30,7 @@ import small.business.swing.gui.utils.TrayMessage;
 import small.business.u18n.Languages;
 import config.ApplicationConfig;
 import small.business.swing.gui.priceslist.PricesListJFrame;
-import small.business.swing.gui.repair.RepairListJFrame;
+import small.business.swing.gui.repair.RepairMenuJFrame;
 
 /**
  *
@@ -397,9 +397,9 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTradeActionPerformed
 
     private void jButtonRepairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRepairActionPerformed
-        RepairListJFrame repairList = new RepairListJFrame();
-        repairList.pack();
-        ModalFrameUtil.showAsModal(repairList, this);
+        RepairMenuJFrame jframe = new RepairMenuJFrame();
+        jframe.pack();
+        ModalFrameUtil.showAsModal(jframe, this);
     }//GEN-LAST:event_jButtonRepairActionPerformed
 
     private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportsActionPerformed
@@ -519,13 +519,13 @@ public class MainJFrame extends javax.swing.JFrame {
                             TrayMessage trayMessage = new TrayMessage();
                             trayMessage.showTrayMessageInfo("Ініціалізація програми");
                         } catch (AWTException ex) {
-                        	log.debug("Can't add to tray>> " + ex);
+                        	log.error("Can't add to tray>> " + ex);
                         }
                     } else {
                     	log.debug("Tray unavailable");
                     }
-                    long end = System.currentTimeMillis();
-                    log.debug("Time initialize tray: " + (end - start) + " ms");
+                    //long end = System.currentTimeMillis();
+                    //log.debug("Time initialize tray: " + (end - start) + " ms");
                     start = System.currentTimeMillis();
                     try {
                         ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
@@ -537,7 +537,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         log.error(e.getMessage(), e);
                         System.exit(0);
                     }
-                    end = System.currentTimeMillis();
+                    long end = System.currentTimeMillis();
                     log.debug("Time initialize spring: " + (end - start) + " ms");
                     new MainJFrame().setVisible(true);
                 } catch (Exception e) {
