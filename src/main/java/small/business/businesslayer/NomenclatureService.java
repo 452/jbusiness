@@ -46,9 +46,9 @@ public class NomenclatureService {
     }
 
     public void saveUpdate() {
-        currentElement.setParentid(groupSelector.getNavigationGroupId());
         try {
             if (currentElement.getId() == null) {
+                currentElement.setParentid(groupSelector.getNavigationGroupId());
                 currentElement = nomenclatureDAO.saveOrUpdate(currentElement);
                 historyService.saveActionOfAdd(HistoryService.NOMENCLATURE, currentElement.getTitle() + " №" + currentElement.getId().toString());
             } else {

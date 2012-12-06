@@ -23,6 +23,7 @@ import small.business.domainmodel.interfaces.IGroup;
 
 @Entity
 @Table(name = "DeviceInRepair")
+@TableGenerator(name = "DeviceInRepair", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", allocationSize = 1, initialValue = 0)
 public class DeviceInRepair implements Serializable, IElement<DeviceInRepair>, IGroup {
 
     @Transient
@@ -32,7 +33,6 @@ public class DeviceInRepair implements Serializable, IElement<DeviceInRepair>, I
     private static final long serialVersionUID = 1L;
 
     @Id
-    @TableGenerator(name = "DeviceInRepair", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", allocationSize = 1, initialValue = 0)
     @GeneratedValue(generator = "DeviceInRepair", strategy = GenerationType.TABLE)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;

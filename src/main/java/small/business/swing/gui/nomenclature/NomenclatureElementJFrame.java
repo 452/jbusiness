@@ -32,6 +32,23 @@ public class NomenclatureElementJFrame extends javax.swing.JFrame {
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private NomenclatureService nomenclatureService = (NomenclatureService) ctx.getBean("nomenclatureService");
 
+    private void picturesValidate() {
+        nomenclatureService.setCurrentPicture(null);
+        if (jTable.getSelectedRow() >= 0) {
+            Pictures selectedPicture = (Pictures) jTable.getValueAt(jTable.getSelectedRow(), 0);
+            nomenclatureService.setCurrentPicture(selectedPicture);
+        }
+        svalidate();
+    }
+
+    private void svalidate() {
+        setDataFields();
+        nomenclatureService.validate();
+        jButtonSave.setEnabled(nomenclatureService.isCanSave());
+        jButtonEditPicture.setEnabled(nomenclatureService.isCanEditPicture());
+        jButtonRemovePicture.setEnabled(nomenclatureService.isCanRemovePicture());
+    }
+
     private void setDataFields() {
         nomenclatureService.getCurrentElement().setTitle(jTextFieldTitle.getText());
         nomenclatureService.getCurrentElement().setInfo(jTextAreaInfo.getText());
@@ -679,21 +696,4 @@ public class NomenclatureElementJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldArticleInside;
     private javax.swing.JTextField jTextFieldTitle;
     // End of variables declaration//GEN-END:variables
-
-    private void picturesValidate() {
-        nomenclatureService.setCurrentPicture(null);
-        if (jTable.getSelectedRow() >= 0) {
-            Pictures selectedPicture = (Pictures) jTable.getValueAt(jTable.getSelectedRow(), 0);
-            nomenclatureService.setCurrentPicture(selectedPicture);
-        }
-        svalidate();
-    }
-
-    private void svalidate() {
-        setDataFields();
-        nomenclatureService.validate();
-        jButtonSave.setEnabled(nomenclatureService.isCanSave());
-        jButtonEditPicture.setEnabled(nomenclatureService.isCanEditPicture());
-        jButtonRemovePicture.setEnabled(nomenclatureService.isCanRemovePicture());
-    }
 }

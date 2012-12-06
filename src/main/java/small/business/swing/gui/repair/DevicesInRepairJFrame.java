@@ -9,6 +9,7 @@ import small.business.businesslayer.DevicesInRepairService;
 import small.business.businesslayer.NomenclatureService;
 import small.business.dao.entity.Nomenclature;
 import small.business.dao.entity.PartsForRepairDevices;
+import small.business.swing.gui.nomenclature.NomenclatureElementJFrame;
 import small.business.swing.gui.nomenclature.NomenclatureSelectJFrame;
 import small.business.swing.gui.utils.ModalFrameUtil;
 import small.business.u18n.Languages;
@@ -24,6 +25,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
     private ApplicationContext ctx = AppContext.getApplicationContext();
     private DevicesInRepairService devicesInRepairService = (DevicesInRepairService) ctx.getBean("devicesInRepairService");
     private NomenclatureService nomenclatureService = (NomenclatureService) ctx.getBean("nomenclatureService");
+    private final static int OBJECT_COLUMN = 0;
 
     /**
      * Creates new form DevicesInRepairJFrame
@@ -41,7 +43,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
         DefaultTableModel dataModel = (DefaultTableModel) jTable.getModel();
         dataModel.setRowCount(0);
         for (PartsForRepairDevices e : devicesInRepairService.getCurrentElement().getPartsForRepairDevices()) {
-            Object[] g = new Object[]{e, e.getNomenclature().getTitle()};
+            Object[] g = new Object[]{e, e.getNomenclature().getTitle(), e.getNomenclature().getArticleinside(), e.getNomenclature().getArticleofgoods()};
             dataModel.addRow(g);
         }
         jTable.setModel(dataModel);
@@ -50,7 +52,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
     private void partsValidate() {
         devicesInRepairService.setCurrentParts(null);
         if (jTable.getSelectedRow() >= 0) {
-            PartsForRepairDevices selected = (PartsForRepairDevices) jTable.getValueAt(jTable.getSelectedRow(), 0);
+            PartsForRepairDevices selected = (PartsForRepairDevices) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
             devicesInRepairService.setCurrentParts(selected);
         }
         svalidate();
@@ -62,6 +64,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
         devicesInRepairService.validate();
         jButtonSave.setEnabled(devicesInRepairService.getCanSave());
         jButtonRemoveParts.setEnabled(devicesInRepairService.isCanRemoveParts());
+        jButtonShowNomenclature.setEnabled(devicesInRepairService.isCanRemoveParts());
     }
 
     /**
@@ -84,6 +87,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
         jButtonRemoveParts = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jButtonShowNomenclature = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(Languages.getTranslatedText("createEditCaption"));
@@ -145,11 +149,11 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", ""
+                "id", "", "", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -168,8 +172,18 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
         jTable.getColumnModel().getColumn(0).setPreferredWidth(60);
         jTable.getColumnModel().getColumn(0).setMaxWidth(60);
-        jTable.getColumnModel().getColumn(1).setResizable(false);
         jTable.getColumnModel().getColumn(1).setHeaderValue(Languages.getTranslatedText("title"));
+        jTable.getColumnModel().getColumn(2).setHeaderValue(Languages.getTranslatedText("articleInside"));
+        jTable.getColumnModel().getColumn(3).setHeaderValue(Languages.getTranslatedText("articleOfGoods"));
+
+        jButtonShowNomenclature.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small/business/swing/gui/images/element.png"))); // NOI18N
+        jButtonShowNomenclature.setText(Languages.getTranslatedText("showNomenclature"));
+        jButtonShowNomenclature.setEnabled(false);
+        jButtonShowNomenclature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowNomenclatureActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,13 +199,18 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
                         .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonCancel))
-                    .addComponent(jLabelTitle)
-                    .addComponent(jLabelInfo)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRemoveParts))
-                    .addComponent(jScrollPane1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTitle)
+                            .addComponent(jLabelInfo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonRemoveParts)
+                                .addGap(6, 6, 6)
+                                .addComponent(jButtonShowNomenclature)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -208,9 +227,10 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAdd)
-                    .addComponent(jButtonRemoveParts))
+                    .addComponent(jButtonRemoveParts)
+                    .addComponent(jButtonShowNomenclature, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
@@ -267,6 +287,15 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
         partsValidate();
     }//GEN-LAST:event_jTableMouseReleased
 
+    private void jButtonShowNomenclatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowNomenclatureActionPerformed
+        PartsForRepairDevices selected = (PartsForRepairDevices) jTable.getValueAt(jTable.getSelectedRow(), OBJECT_COLUMN);
+        nomenclatureService.setCurrentElement(selected.getNomenclature());
+        NomenclatureElementJFrame nomenclatureElement = new NomenclatureElementJFrame();
+        nomenclatureElement.pack();
+        ModalFrameUtil.showAsModal(nomenclatureElement, this);
+        getPartsOfDevice();
+    }//GEN-LAST:event_jButtonShowNomenclatureActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,6 +335,7 @@ public class DevicesInRepairJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonRemoveParts;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonShowNomenclature;
     private javax.swing.JLabel jLabelInfo;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane1;
